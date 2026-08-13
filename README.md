@@ -6,17 +6,29 @@ Preserving validated sample metadata through Galaxy analysis and exporting it as
 
 Project page: https://niaid-brc-codeathons.github.io/projects/sample-metadata-galaxy/
 
-## Goal
+---
+
+> **This is a draft pitch, not a plan.**
+>
+> What follows is a one-slide proposal from the organizing team. It exists
+> to seed a team, not to constrain one. Scope, methods, target organism,
+> and success criteria are all still open — expect them to change
+> substantially. Turning this into a real plan is the team's first job, and
+> it lands in the project charter due August 28, 2026.
+
+---
+
+## Goal (proposed)
 
 Preserve validated sample metadata from authoritative repositories through Galaxy analysis and export it as a portable, standards-based record that another scientist can independently audit and reproduce.
 
-## Three-Day MVP
+## Three-Day MVP (proposed)
 
 Build bidirectional conversion between ISA-Tab and Galaxy typed sample collections; ingest BioProject/BioSample/SRA metadata into ready-to-run collections, using Metadata Rescue outputs where available; and create a checker that identifies workflow steps where typed metadata is lost.
 
 Run the workflow in an MCP-native agentic environment with guardrails against unresolved data-selection ambiguities.
 
-## Evaluation
+## Evaluation (proposed)
 
 ISA-API and Galaxy validation, metadata round-trip fidelity, registry-wide metadata-loss rate, and an independent reproducibility test in which a new team member audits and reruns a completed analysis from the exported record.
 
@@ -29,8 +41,8 @@ A longer write-up is available at <https://gist.github.com/dannon/bc321e5b8d2084
 - Danielle Callan
 - Dannon Baker
 
-Team assignments are being finalized ahead of the codeathon. Participants can review their project, and request a reassignment, in the participant spreadsheet circulated by the organizing team.
+Team assignments are still being finalized. Participants can review their project, and request a reassignment, in the participant spreadsheet circulated by the organizing team.
 
 ## Working here
 
-This repository is the team's working space for the codeathon — code, notebooks, data pointers, and notes. Team members get access through the [NIAID-BRC-Codeathons](https://github.com/NIAID-BRC-Codeathons) organization; accept the invitation if you have not already.
+This repository is the team's working space for the codeathon — code, notebooks, data pointers, and notes. Replace this README with the real thing once the charter is written. Team members get access through the [NIAID-BRC-Codeathons](https://github.com/NIAID-BRC-Codeathons) organization; accept the invitation if you have not already.
