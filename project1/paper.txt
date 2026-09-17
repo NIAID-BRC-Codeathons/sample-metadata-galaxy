@@ -1,0 +1,813 @@
+                              RESEARCH ARTICLE      | MICROBIOLOGY
+
+Perturbation-­specific transcriptional mapping for unbiased
+target elucidation of antibiotics
+Keith P. Romanoa,b,c,1 , Josephine Bagnalla,1 , Thulasi Warriera,b,2, Jaryd Sullivana,b,d,2, Kristina Ferraraa,b, Marek Orzechowskia, Phuong H. Nguyena,b,d         ,
+Kyra Rainesa,b, Jonathan Livnya, Noam Shoresha, and Deborah T. Hunga,b,d,3
+
+Affiliations are included on p. 12.
+
+Edited by Marvin Whiteley, Georgia Institute of Technology, Atlanta, GA; received June 10, 2024; accepted September 23, 2024 by
+Editorial Board Member Caroline S. Harwood
+
+
+The rising prevalence of antibiotic resistance threatens human health. While more sophis-
+ticated strategies for antibiotic discovery are being developed, target elucidation of new                         Significance
+chemical entities remains challenging. In the postgenomic era, expression profiling can
+play an important role in mechanism-­of-­action (MOA) prediction by reporting on the                               New antibiotics are critically
+cellular response to perturbation. However, the broad application of transcriptomics has                           needed in the face of increasing
+yet to fulfill its promise of transforming target elucidation due to challenges in identifying                     antibiotic resistance. However,
+the most relevant, direct responses to target inhibition. We developed an unbiased strategy                        mechanism-of-action (MOA)
+for MOA prediction, called perturbation-­specific transcriptional mapping (PerSpecTM),                             elucidation remains challenging
+in which large-­throughput expression profiling of wild-­type or hypomorphic mutants,                              and imposes a major bottleneck
+depleted for essential targets, enables a computational strategy to address this challenge.                        in antibiotic discovery and
+We applied PerSpecTM to perform reference-­based MOA prediction based on the principle                             development. Building on the
+that similar perturbations, whether chemical or genetic, will elicit similar transcriptional                       principle that molecules with
+responses. Using this approach, we elucidated the MOAs of three molecules with activity                            similar MOAs elicit similar
+against Pseudomonas aeruginosa by comparing their expression profiles to those of a refer-                         transcriptional responses, we
+ence set of antimicrobial compounds with known MOAs. We also show that transcriptional                             have developed a highly scalable
+responses to small-­molecule inhibition resemble those resulting from genetic depletion of                         strategy for MOA prediction in
+essential targets by clustered regularly interspaced short palindromic repeats interference                        the important bacterial pathogen
+(CRISPRi) by PerSpecTM, demonstrating proof of concept that correlations between                                   ﻿Pseudomonas aeruginosa based
+expression profiles of small-­molecule and genetic perturbations can facilitate MOA pre-                            on correlations between the
+diction when no chemical entities exist to serve as a reference. Empowered by PerSpecTM,                            expression profiles of molecules
+this work lays the foundation for an unbiased, readily scalable, systematic reference-­based                        having an unknown MOA and the
+strategy for MOA elucidation that could transform antibiotic discovery efforts.                                     expression profiles resulting from
+                                                                                                                    known perturbations, either
+antibiotics | RNAseq | gene expression | mechanism-­of-­action | transcriptomics                                    small-molecule inhibition by
+                                                                                                                    known antibiotics or
+ ﻿Pseudomonas aeruginosa and other gram-negative bacteria pose a major threat to human health                       transcriptional repression of
+  due to the growing prevalence of antibiotic resistance in healthcare settings. Surging                            essential targets by CRISPRi. By
+  multidrug-resistant bacterial infections threaten to outpace our ability to develop novel anti­                   rapidly assigning MOAs to three
+  biotics (1). Antibiotic discovery campaigns have failed to deliver new antibiotic classes, includ­                molecules with antipseudomonal
+  ing extensive efforts in the postgenomic era. As recently reviewed, new strategies are being                      activity, we provide proof of
+  developed to address the looming antibiotic shortage, including novel approaches to mine                          concept for a rapid, comprehensive,
+  the natural products space (2–4), to apply AI (5, 6), and to leverage genetic engineering of                      systematic, reference-based
+  strains in a chemical systems biology approach (7, 8). Most of these novel approaches differ                      approach to MOA prediction with
+  from standard in vitro, target based strategies in which the target is known by design, as they                   the potential to transform
+  prioritize the identification of new molecules with whole-cell antibacterial activity. While                      antibiotic discovery efforts.
+  accelerating the discovery of new chemical entities, these modern approaches highlight the
+  downstream challenge of mechanism-of-action (MOA) determination and the need for better,
+  more systematic methods to tackle this problem to enable candidate development. Currently,                   The authors declare no competing interest.
+  extensive biochemical and genetic efforts are required for target and MOA elucidation, which                 This article is a PNAS Direct Submission M.W. is a guest
+  impose a major bottleneck in antibiotic discovery and development pipelines (9). Indeed,                     editor invited by the Editorial Board.
+
+  early MOA assignment for antibacterial small-molecule candidates would provide mechanistic                   Copyright © 2024 the Author(s). Published by PNAS.
+                                                                                                               This article is distributed under Creative Commons
+  and biological insights to guide their prioritization, medicinal chemistry optimization, and                 Attribution-­NonCommercial-­NoDerivatives License 4.0
+  eventual hit-to-lead transition.                                                                             (CC BY-­NC-­ND).
+     Transcriptional profiling has long been used to explore the MOA of antimicrobial                          1
+                                                                                                               K.P.R. and J.B. contributed equally to this work.
+agents, first described in yeast using microarrays to delineate the MOA of the inhibitor                       2
+                                                                                                               T.W. and J.S. contributed equally to this work.
+dyclonine (10), and later performed in a wide array of bacteria, including Bacillus subtilis,                  3
+                                                                                                                To whom correspondence may be addressed. Email:
+                                                                                                               hung@molbio.mgh.harvard.edu.
+﻿Mycobacterium tuberculosis, Staphylococcus aureus, Escherichia coli, and P. aeruginosa (11–
+                                                                                                               This article contains supporting information online at
+  17). Work in B. subtilis generated the first antimicrobial reference set based on gene                       https://www.pnas.org/lookup/suppl/doi:10.1073/pnas.​
+  expression using microarrays to characterize the transcriptional responses to 37 antibiotics                 2409747121/-­/DCSupplemental.
+  (16). More recently, work in E. coli also included a reference set of 37 antibiotics, from                   Published October 28, 2024.
+
+
+
+PNAS     2024     Vol. 121     No. 45   e2409747121                                                      https://doi.org/10.1073/pnas.2409747121 1 of 12
+    which the authors chose gene sets based on differential gene                 the face of the looming shortage of antibiotics in healthcare sys­
+    expression analysis of compound treatment relative to negative               tems worldwide.
+    control, and used correlation coefficients to predict MOAs (12).
+    Then, Espinoza et al. furthered this work by developing a machine            Results
+    learning approach for transcriptomics-based MOA prediction in
+    ﻿E. coli, which involved a reference set of 41 antibiotics and a             Developing PerSpecTM. We set out to generate in large-­thro­ugh­
+     feature selection algorithm called Clairvoyance (13).                       put, an antimicrobial reference set of chemical treatments of the P.
+         Despite these advances, transcriptomics-based MOA prediction            aeruginosa laboratory strain UCBPP-­PA14 (abbreviated hereafter
+     remains limited by the challenge of extracting meaningful signals           as PA14) and related mutant strains. To enable such scale, we
+     that distinguish the relevant gene responses to target inhibition from      worked to determine the optimal assay conditions in 384-­well
+     less specific transcriptional changes (18, 19). Ideally, transcriptomics-   format and analysis strategy in a manner that would not require
+     based MOA prediction should be rooted in gene expression                    tailoring conditions for each individual compound.
+     responses specific to the given chemical or genetic perturbation.               All expression profiling experiments were performed in 384-well
+     However, during perturbation, bacteria also change the expression           format with 60 μL per well of bacterial culture at an inoculum of
+     of a plethora of background genes, which may be far downstream              ~1 × 108 colony-forming unit (CFU) per milliliter (mL), used to
+     from the perturbed pathway or unrelated altogether, which obfus­            ensure that sufficient cells were available to guarantee the generation
+     cate the perturbation-specific signals. For example, nonspecific gene       of a high-quality ribonucleic acid sequencing (RNAseq) library. Each
+     responses, relating to cellular stress or impending cell death, can be      compound was dosed in triplicate at threefold the minimum-inhibitory
+     shared across antimicrobial compounds with disparate MOAs.                  concentrations (MICs), with the MIC determined by conventional
+     Meanwhile, differences in measured expression programs can also             broth microdilution at a much lower inoculum of ~5 × 105 CFU/
+     be related to growth phase differences between treated and untreated        mL (21). Plates were arrayed with a diverse set of active compounds
+     cells as they grow or divide at different rates, rather than a direct       across multiple MOA classes, as well as dimethylsulfoxide (DMSO)
+     effect of antimicrobial activity. To manage these effects, treatments       and water controls. Resulting gene expression data for each gene of
+     with sublethal concentrations of compound are often used to min­            each sample were standardized (transformed to z-scores) with respect
+     imize the growth arrest or death of treated populations and match           to all samples in the same batch, where each batch is defined as
+     growth rates of treated and untreated samples; however, these low           samples on the same 384-well plate sharing the same strain and time
+     treatment concentrations often yield weak transcriptional responses,        point. The z-score provides a measure of how unusually high or low
+     thereby obscuring informative, relevant changes that occur with             the expression of a given gene is after a specific chemical (or genetic)
+     compound exposure (11–17).                                                  perturbation relative to its expression across the entire population of
+         To address this challenge, we developed a systematic method called      samples within a batch. Provided the batch consists of a diverse set
+     perturbation-specific transcriptional mapping (PerSpecTM) that              of active antimicrobial agents (or genetic perturbations), z-scores
+     combines experimental and analytic methods that leverage its                highlight transcriptional changes that are unique to a given pertur­
+     large-throughput scale to accentuate changes in gene expression that        bation, and deemphasize common gene responses across the popu­
+     are specific to and a direct consequence of target inhibition. By using     lation, such as those relating nonspecifically to growth, cellular stress,
+     a diverse set of perturbed transcriptomes for normalization, an             or impending cell death. Thus, the relevant signals are accentuated
+     approach adapted from large-scale gene profiling in human cancer            in an unbiased manner, without needing to subset genes based on
+     cell lines (20), PerSpecTM emphasizes perturbation-specific tran­           computational approaches or a priori knowledge of expected gene
+     scriptional signatures while deemphasizing common, nonspecific              responses. The ability to calculate z-scores across a variety of treat­
+     responses. It then assigns target and MOA in a reference-based man­         ments, rather than just assessing differential expression between a
+     ner by correlating the pattern of changes with the transcriptional          particular sample and negative control samples, was made possible
+     responses of a reference set, thus avoiding biases that might occur by      by the large-throughput scale of PerSpecTM. To then assess overall
+     assigning MOA based on the response of specific, predetermined              strength of the transcriptional signals, differential gene expression
+     genes.                                                                      was orthogonally assessed using DESeq2 (22). A “transcriptionally
+         We applied PerSpecTM to the important bacterial pathogen                weak signal” was ascribed to a treatment condition when no gene
+     ﻿P. aeruginosa, building two complementary reference sets: 1) an            was differentially expressed (compared to vehicle control) with an
+      antimicrobial reference set comprising 37 antimicrobial com­               adjusted P﻿-value below 10−20 [i.e., no gene had a −log10(padj) > 20],
+      pounds and 2) a genetic depletion reference set comprising 14               which represents the minimum adjusted P﻿-value across all differen­
+      strains, each exhibiting tunable transcriptional repression of a            tially expressed genes of PA14 in water versus PA14 in DMSO.
+      different essential gene target using CRISPRi. Querying against            Therefore, all differentially expressed genes in transcriptionally weak
+      the antimicrobial reference set, we rapidly elucidated the targets         samples were less statistically significant than the most significant
+      and MOAs of three molecules with antipseudomonal activity,                 differentially expressed genes across vehicle controls. Although weak
+      while demonstrating the value of using genetically engineered,             signals may reflect meaningful biological changes, we wanted to only
+      hypersensitized strains depleted for essential targets to yield more       include robust signals in the antimicrobial reference set to facilitate
+      robust transcriptional responses to perturbation. Because of the           reliable target predictions. Similarities between perturbations were
+      limited number of chemical entities with known unique targets,             then calculated using the Pearson correlation coefficients between
+      and thereby MOAs, that can serve as an antimicrobial reference,            transcriptional signatures of two conditions, where each gene’s
+      we applied PerSpecTM to the transcriptional repression reference           expression is represented as a z-score, with replicates having been
+      set to demonstrate proof of concept that genetically repressing            combined using a weighted average (Materials and Methods).
+      target expression can phenocopy its chemical inhibition, thus                  We first set out to determine the optimal incubation time and
+      affording target and MOA prediction when no chemical entities              compound concentration yielding robust transcriptional responses
+      exist to serve as a reference. Empowered by PerSpecTM and                  across many different compound treatments, without individual
+      mutant strains depleted in essential targets, this work enables an         compound optimization. We profiled a set of 21 antimicrobial
+      unbiased and highly scalable reference-based strategy for target           compounds at 30, 60, 90, or 120 min, depicted in bold in
+      and MOA elucidation to assist antimicrobial discovery efforts in           ﻿SI Appendix, Table S1, which collectively targeted four distinct
+
+2 of 12   https://doi.org/10.1073/pnas.2409747121                                                                                               pnas.org
+cellular mechanisms: inhibitors of DNA synthesis, protein synthe­          cases, the highest possible concentrations were limited by solubility.
+sis, cell wall (defined as the structural elements of the cell envelope,   These data confirmed that all compounds dosed above their MICs
+excluding the cell membranes), and membrane integrity. After               demonstrated robust transcriptional responses (SI Appendix, Fig. S1B﻿).
+calculating z-scores for each gene and determining the Pearson             In contrast, antimicrobials that were inactive (nonlethal) at the applied
+distances [√(1 − Pearson Correlation)] between adjacent time               concentrations yielded variable transcriptional responses. In some
+points over the 120-min time trial (SI Appendix, Fig. S1A﻿), we            cases, such as for DNA synthesis inhibitors and membrane disruptors,
+found that the transcriptional responses to treatment by inhibitors        robust gene expression signals were generated even under subinhibi­
+of DNA synthesis, protein synthesis, and membrane integrity con­           tory concentrations, suggesting that bacteria are primed to detect
+verged on transcriptional endpoints by 90 min within each MOA.             nonlethal perturbations of certain cellular processes. In the case of
+The transcriptional responses to treatment with cell wall synthesis        some of the β–lactam antibiotics, such as piperacillin, ceftazidime,
+inhibitors were more heterogeneous as reflected in their larger            and aztreonam, robust transcriptional responses could not be elicited
+Pearson distances, which never fully converged by 120 min.                 due to compound insolubility at concentrations necessary to over­
+   We wondered whether the lack of transcriptional convergence             come the inoculum effect (SI Appendix, Fig. S1C﻿). In fact, because
+of cell wall inhibitors by 120 min related to the inoculum effect,         aztreonam treatment yielded a transcriptionally weak response across
+a phenomenon observed in β-lactams causing loss of activity at             all treatment conditions, it was removed from the reference set moving
+high bacterial densities (23). We measured the MICs of com­                forward. Taken together, these results demonstrate that antimicrobial
+pounds at higher inoculum (i.e., 1 × 108 CFU/mL used in RNAseq             activity at the high experimental inoculum (i.e., 1 × 108 CFU/mL)
+experiments) compared to the lower convention of ~5 × 105 CFU/mL           was necessary to ensure a robust transcriptional response to all anti­
+(21). SI Appendix, Table S1 denotes the antimicrobial compounds            biotics in this large-throughput assay format, even while some com­
+exhibiting strong inoculum effects (≥fourfold shift in MIC at the          pounds are still able to generate robust signals despite sublethal dosing.
+high bacterial density) with an asterisk, which comprise all of the        We thus settled on the general use of 2 to 4× the MIC measured at a
+cell wall synthesis inhibitors, except imipenem, due to upregula­          high inoculum for compound treatments.
+tion of the beta lactamase AmpC at high bacterial density (24).
+Smaller inoculum effects were also observed for tobramycin and             Transcriptional Responses to Antimicrobial Compounds with
+several antimicrobial peptides, which have been previously                 Similar MOAs Are Correlated. As expected, our large-­throughput
+reported through various proposed mechanisms, including growth             gene expression dataset confirmed that lethal antimicrobial
+phase changes, stress responses, outer membrane vesicle produc­            treatments elicited transcriptional responses that correlated by MOA.
+tion, and inactivating enzymes (25–27). Interestingly, the Pearson         The Pearson correlations of z-­scores of pairwise combinations of
+distances for imipenem across the time trial also converge by 90           90-­min treatments, at the highest dose for each compound, are
+min, comparable to inhibitors of protein synthesis, DNA synthe­            shown as a similarity matrix in Fig. 1A. Compounds with limited
+sis, and membrane integrity (SI Appendix, Fig. S1A﻿). Taken                antipseudomonal activity, comprising doxorubicin, radicicol,
+together, these data suggested that for antimicrobial compounds            hydroxyurea, piperacillin, and rifampicin, had positive correlation
+which are active at the experimental inoculum, an incubation time          values with vehicle treatment. Of the remaining antimicrobial
+of 90 min yielded a stable transcriptional endpoint.                       compounds, Pearson correlations were strongest between compounds
+   After establishing an optimal 90-min incubation time, we sought         sharing the same cellular mechanism. Not only did compounds
+to determine the optimal antimicrobial concentration that elicits a        correlate by MOAs, but stronger correlations were observed within
+strong transcriptional response. Here, we used an expanded set of 39       antibiotic subclasses. For example, based on the strength of their
+antimicrobial compounds, shown in SI Appendix, Table S1, spanning          correlations, protein synthesis inhibitors grouped into macrolides
+the same four MOAs but through inhibition of more diverse targets.         (clarithromycin and erythromycin), tetracyclines (tetracycline,
+We added several compounds with known antipseudomonal activity,            minocycline, and doxycycline), and aminoglycosides (amikacin
+but not yet approved for human use. For example, we included cell          and gentamicin). Likewise, fluoroquinolones (ciprofloxacin and
+wall-related compounds, such as inhibitors of LpxC, LptD, BamA,            levofloxacin) formed a clear subgroup within the larger class of
+and MreB that disrupt lipopolysaccharide (LPS) biosynthesis, LPS           DNA synthesis inhibitors. Finally, the transcriptional responses to
+transport, outer membrane protein assembly, and cell shape, respec­        LptD inhibitors (POL-­7001 and POL-­7080) and LpxC inhibitors
+tively. We also included the nonpseudomonal antimicrobial com­             (PF-­5081090 and PF-­04753299), which block LPS synthesis and
+pound nitrofurantoin, which works through a complex mechanism              transport to the cell surface, respectively, tightly correlated within
+involving reactive oxygen species that interfere nonspecifically with      the group of membrane integrity inhibitors. Meanwhile, despite the
+DNA synthesis, as well as protein and cell wall metabolism (28). We        resolution obtained for some subclasses, inhibitors of membrane
+also added 1) the antibacterial agent fosmidomycin, which inhibits         integrity and cell wall synthesis elicited transcriptional responses that
+Dxr to block isoprenoid synthesis (29); 2) the Hsp90 inhibitor radici­     cross-­correlated, pointing to a shared cellular response to defects in
+col, an antifungal agent that likely interferes with gyrase-related pro­   membrane disruption and cell wall synthesis.
+teins with a conserved Bergerat fold (30–32); 3) the antistaphylococcal       Finally, to verify that the transcriptional responses to compound
+agent fusidic acid, an inhibitor of the elongation factor FusA1 that       treatment corresponded with known biology, we determined the
+blocks translation (33); 4) the antibiotic rifampicin, which blocks        most up-regulated and down-regulated genes that emerged from
+transcription through the inhibition of the DNA-dependent RNA              calculating z-scores in response to three of the most well-studied
+polymerase RpoB (34); 5) the fatty acid synthesis inhibitor thiolac­       antibiotic classes: aminoglycosides, fluoroquinolones, and poly­
+tomycin; and 6) the membrane pore former LL-37 (35). Finally, we           myxins. SI Appendix, Table S2 shows the top 25 up-regulated and
+included several anticancer agents, such as cisplatin, doxorubicin, and    down-regulated genes with known annotations in PA14 in
+hydroxyurea, which exhibit antimicrobial activity by inhibiting DNA        response to treatment with aminoglycosides, fluoroquinolone, and
+synthesis through DNA alkylation, DNA depletion, and DNA inter­            polymyxins. Indeed, previously reported gene expression signa­
+calation, respectively (36–42).                                            tures were readily apparent for each antibiotic class, providing a
+   Compounds were tested at 0.5-fold, twofold, and fourfold their          sanity check that the PerSpecTM approach indeed highlights
+adjusted MICs as determined in broth microdilution experiments at          changes in gene expression directly related to each specific chem­
+high inoculum, thereby accounting for any inoculum effects. In some        ical perturbation.
+
+PNAS     2024    Vol. 121   No. 45    e2409747121                                               https://doi.org/10.1073/pnas.2409747121 3 of 12
+                           A
+
+
+
+
+                            B                                                               C
+
+
+
+
+    Fig. 1.   Correlating antimicrobial gene expression profiles of the antimicrobial reference set. (A) Heat map of Pearson correlations of the replicate-­collapsed,
+    z-­score expression profiles of PA14 treated with all 37 compounds in the antimicrobial reference set at the highest concentration at 90 min. Rows and columns
+    are organized and color-­coded by MOA. All correlation values below zero were set to zero for visualization purposes. (B) UMAP visualization of all compound
+    treatments (at the highest dose) of wild-­type PA14 and seven engineered hypomorphs at 90 min. Colors correspond to antibiotic MOA classes: DNA synthesis
+    (red), membrane integrity (blue), cell wall synthesis (green), and protein synthesis (magenta). Closed circles indicate wild-­type PA14 treatments, whereas all
+    other markers indicate treatment of a hypomorphic strain, as indicated. Antimicrobial compounds with robust activity at the experimental inoculum group
+    by MOA, agnostic of the genetic strain. Protein synthesis inhibitors form subgroups that separate tetracyclines, macrolides, and aminoglycosides. Except for
+    novobiocin, compounds that are not active against PA14, such as fosmidomycin, piperacillin, rifampicin, doxorubicin, and hydroxyurea, appear close to DMSO
+    vehicle. Treatments that were deemed transcriptionally weak based on DESeq2 analysis were not included in the visualization. (C) Confusion matrix showing
+    the number of compounds in each query target category that were predicted to have indicated targets in the leave-­one-­out cross-­validation (LOOCV), using
+    the method of calculating the target correlation prediction score (rpredict). Compounds with correctly predicted target fall along the diagonal, while those with
+    correctly predicted MOA fall within the colored boxes. Note that query target categories that only contain one compound (the column sums to one) could not
+    be predicted correctly, due to the LOO approach.
+
+
+    Transcriptional Responses to Treatment of Hypersusceptible                         compounds could be used in place of wild-­type strains to obtain
+    Strains Correlate with Wild-­Type Treatments. The requirement                      robust transcriptional signals for compounds with limited wild-­
+    that compounds have potent wild-­type activity to elicit a reliable,               type activity. While an efflux pump mutant could serve as a
+    robust, informative transcriptional response poses a barrier to the                hypersusceptible strain to some compounds, not all compounds have
+    early integration of transcriptomics-­based MOA prediction for                     increased sensitivity in such a strain. We thus selected an alternative
+    newly discovered compounds which might not yet have highly                         strategy involving the engineering of hypomorphic mutants that
+    potent antimicrobial activity. To address this concern, we sought                  are hypersensitized to inhibitors by depleting their cognate gene
+    to determine whether mutant strains that are hypersusceptible to                   products (8).
+
+4 of 12   https://doi.org/10.1073/pnas.2409747121                                                                                                         pnas.org
+       To test this concept, we sought to create hypomorphs and compare        inhibits Dxr, an essential reductoisomerase in the 2-C-methyl-D-
+their transcriptional responses to antimicrobial compounds with                erythritol 4-phosphate pathway of isoprenoid precursor biosynthesis
+those of wild-type bacteria. We genetically engineered seven hypo­             (49). While fosmidomycin exhibited an MIC of 12.5 μM at low
+morphic strains using a regulated promoter replacement strategy to             inoculum, it showed no activity against PA14 at the high inoculum
+deplete essential gene targets corresponding to a set of known anti­           used for expression profiling experiments. In contrast, fosmidomycin
+microbial agents (SI Appendix, Additional Methods for details of strain        caused a significant growth delay of the dxr﻿-hypomorph at high inoc­
+construction). As summarized in SI Appendix, Table S3, the panel of            ulum, causing 50% growth inhibition at about 25 μM (SI Appendix,
+hypomorphic strains compromised gene target depletions of the LPS              Fig. S3). While the expression response of wild-type PA14 to fosmi­
+transporter protein LptD, the isoprenoid synthesis protein Dxr, the            domycin treatment grouped near vehicle controls, the response of the
+peptidoglycan synthesis protein MurA, DNA gyrase GyrA, the LPS                 ﻿dxr﻿-hypomorph grouped with inhibitors of membrane integrity,
+biosynthesis enzyme LpxC, the dihydrofolate reductase DhfR                      accurately reflecting the cellular mechanism of fosmidomycin
+involved in folate biosynthesis, and the outer membrane protein                 (Fig. 1B).
+assembly protein BamA. The growth phenotypes were unchanged
+for most engineered hypomorphs, but reduced in the case of gyrA,               MOA and Target Prediction Using the Antimicrobial Reference
+﻿dxr, and lptD hypomorphs (SI Appendix, Fig. S2). We then measured             Set. The antimicrobial reference set was curated to include robust
+ the MICs of compounds targeting each depleted gene product:                    transcriptional profiles of all aforementioned treatments across various
+ POL7080 against LptD (43), fosmidomycin against Dxr (29), fos­                 time points, doses, and hypomorphic strains. Treatment conditions
+ fomycin against MurA (44), ciprofloxacin against GyrA (45),                    eliciting weak transcriptional signals were excluded, which fully
+ PF-04753299 against LpxC (46), trimethoprim against DhfR (47),                 excluded aztreonam from the reference set, as described earlier. In
+ and MRL-494 against BamA (48). Except for the lptD﻿-hypomorph                  addition, any treatment condition having a z-­score transcriptional
+ against doxycycline, the hypomorphs did not show appreciable hyper­            profile that correlated more highly to negative control samples than
+ sensitivity to inhibitors whose MOA were unrelated to the specific             to any other condition in the dataset, including other treatment
+ target depleted in each strain. By comparison, the lptD, murA, dxr,            conditions of the same compound, was also removed. This resulted
+ and bamA hypomorphs were 4 to 20-fold more susceptible to their                in the exclusion of fusidic acid from the reference set. In total, 37
+   cognate inhibitors, whereas the gyrA, lpxC, and dhfR hypomorphs              compounds were retained in the antimicrobial reference set.
+   showed no significant shifts in MIC relative to the wild-type                   We next set out to evaluate the ability of PerSpecTM to per­
+   (SI Appendix, Table S3). Of note, the gyrA and dhfR hypomorphs               form reference-based target and MOA predictions for novel
+   also showed no reduced transcription of their respective genes               chemical entities using an antimicrobial reference set, with target
+   (SI Appendix, Table S3) consistent with the hypothesis that their            referring to the biomolecule engaged by a given compound, and
+   respective replaced promoters did not achieve the desired goal of            MOA referring to the cellular function disrupted by target
+   decreasing gene expression and thus target depletion. We did never­          engagement. We hypothesized that the predicted target for a
+   theless include them in all subsequent studies to maximize the statis­       query compound could be determined by the highest overall
+   tical power of the studies, treating them like the wild-type.                Pearson correlation between the query compound and all other
+       We measured the gene expression profile of each hypomorph                treatments within the reference set, similar to methods described
+ treated with vehicle, one on-target compound (i.e., compound whose             previously (12). In practice, to arrive at a single target prediction
+ activity is due to inhibition of the corresponding target), and two            for a given compound, in cases where there are multiple treat­
+ off-target compounds (i.e., compound whose activity is not related             ment conditions (e.g., multiple doses or time points), we first
+ to the corresponding target). Hypomorphic strains were incubated               determined the maximal Pearson correlation (rmax) between each
+ with compounds at twofold their MICs (determined at high inocu­                query treatment and every individual treatment within each
+ lum against each hypomorph), or vehicle. Z-scores were calculated              reference target category. We removed query treatments in which
+ across each hypomorph, rather than across all hypomorphs, to                   the highest rmax values derived from negative control samples.
+ dampen background transcriptional changes related to strain-specific           Then, we averaged the rmax values from all remaining query treat­
+ repression in gene expression. Fig. 1B shows a combined uniform                ments for a given compound to define a target correlation score,
+ manifold approximation and projection (UMAP) showing wild-type                ﻿r max . In the case where there is only one treatment condition for
+ and all mutants with their corresponding treatments. The changes in            a query compound, r max = rmax . The final target prediction was
+ gene expression of hypomorphs to chemical perturbation correlated              assigned based on the highest r max across all target categories in
+ with wild-type treatment responses. For example, treatment of the              the reference set, which we termed the target correlation predic­
+ gyrA﻿-hypomorph with its on-target inhibitor, ciprofloxacin, grouped           tion score, rpredict. In the case where there is only one treatment
+ with PA14 treatment with ciprofloxacin, as was the case for                    condition for a query compound, rpredict is the equivalent to the
+ l﻿pxC﻿-hypomorph treated with PF-04753299, bamA﻿-hypomorph                     highest overall Pearson correlation between the query compound
+  treated with MRL-494, dhfR﻿-hypomorph treated with trimethoprim,              and all reference treatments. The predicted MOA of the query
+  ﻿murA﻿-hypomorph treated with fosfomycin, and lptD﻿-hypomorph                 compound was then assigned as the known cellular pathway
+   treated with POL7080. Meanwhile, grouping of mutant and                      associated with the predicted target.
+   wild-type responses was agnostic of whether a compound’s molecular              To evaluate the performance of PerSpecTM, we performed a
+   target related to the underlying genetic alteration in a strain, as exem­    leave-one-out cross-validation (LOOCV) (Fig. 1C), wherein the
+   plified by the treatment response of the gyrA﻿-hypomorph to doxycy­          expression profiles for each individual antimicrobial compound in
+   cline, a protein synthesis inhibitor unrelated to GyrA, grouping             the reference set were queried against the expression profiles of all
+   together with PA14 in response to doxycycline.                               other compounds in the reference set. The correlation analysis was
+       The correlation between (separately standardized) responses of           carried out as described above, correctly assigning MOAs for 34 of
+   hypersusceptible mutants and the wild-type enabled the characteri­           the 37 antimicrobial compounds (92%), and correctly assigning tar­
+   zation of expression responses of compounds without wild-type activ­         gets for 22 of the compounds (60%). Of note, 10 compounds (27%)
+   ity. Indeed, the transcriptional response of the dxr-hypomorph to            were the only representatives of their respective target categories, and
+   fosmidomycin provides proof of concept for the utility of using genet­       thus LOOCV had no chance of correct target prediction. Removing
+   ically depleted strains to facilitate MOA prediction. Fosmidomycin           those ten singleton compounds from the query, the correct MOAs
+
+PNAS     2024     Vol. 121    No. 45    e2409747121                                                 https://doi.org/10.1073/pnas.2409747121 5 of 12
+    were assigned for 25 out of 27 compounds (94%), and correct targets        correctly predicted all six MOAs, and 4 of the 6 targets (Fig. 2A and
+    were predicted for 22 of the compounds (81%).                             ﻿SI Appendix, Table S4), including gentamycin, neomycin, peroxide,
+       Next, to assess confidence in each MOA and target prediction,             and ciprofloxacin. PerSpecTM predicted bleach to target DNA based
+    we obtained positive predictive values (PPVs) for both MOA and               on its highest similarity to nitrofurantoin, a known inducer of ROS
+    target assignments, respectively. The PPV is the percent of com­             production in bacteria. Interestingly, bleach also correlated to many
+    pounds in the LOOCV whose prediction was correct for rpredict                of the inhibitors of membrane integrity, consistent with bleach
+    values above a given threshold. Of note, the distributions of rpredict       imparting generalized oxidative damage on both DNA and mem­
+    are different for different MOAs, and thus may merit different               branes across diverse active treatments (50). Polymyxin’s target was
+    levels of confidence depending on the predicted MOA                          misassigned by a slim margin, as its third highest r max corresponded
+    (SI Appendix, Fig. S4). However, due to the limited number of              to LPS, its known target (Fig. 2A).
+    compounds per category, the PPVs were calculated across the                      The prediction accuracy decreased for the remaining six com­
+    entire dataset for both MOA and target. For each target and MOA            pounds with lower rpredict values, with PerSpecTM correctly pre­
+    prediction in the subsequent sections, we report the respective            dicting four MOAs and one target. Of note, all of these lower six
+    PPVs that are associated with the final prediction score, rpredict.        compounds elicited weak transcriptional responses, formally fit­
+       Finally, given PerSpecTM’s ability to highlight transcriptional           ting our defined criteria for “weak transcriptional signal” (i.e., the
+    changes unique to a perturbation while deemphasizing common                  maximal −log10(padj) < 20). Thus, higher confidence predictions
+    responses relies on a diverse set of active antimicrobial agents with      can be made for compounds with a higher rpredict value, as previ­
+    differing MOAs in a queried batch to enable z-score standardization,         ously shown in the internal LOOCV analysis. Lower rpredict values
+    we sought to assess the degree of diversity of MOAs required to still      and maximal −log10(P﻿-values) < 20 tended to erode confidence in
+    achieve accurate MOA prediction. We performed an in silico rare­             the PerSpecTM prediction.
+    faction experiment where we subset the antimicrobial reference set               To obtain some sense of the uncertainty in the ranking of r max
+    into a query set and a new, smaller reference set (which excluded all        values, which is pertinent to the predicted target and MOA as the
+    samples from the same batch as the query set). We constructed dif­           prediction is made based on the highest r max  , we assessed the robust­
+    ferent query sets with different numbers of MOAs represented in          ness of target predictions to fluctuations in the underlying data. We
+    them, but always including vehicle control, and used them to calcu­          randomly subsampled 50% of the antimicrobial reference dataset and
+    late z-scores before calculating correlations between the query com­         recalculated the correlation (r max and rpredict) and thus predicted a
+    pounds and the reference treatments (SI Appendix, Additional             target and MOA for the 12 compounds for which predictions could
+    Methods). The correlations of the query compounds to their matching      be made from the external query dataset. We repeated this 1,000
+    MOAs consistently declined and became noisier as the number of           times, each time randomly selecting a different 50% of the reference
+    MOAs represented in the query set decreased (SI Appendix, Fig. S5).      set and noted the percent of times the same target was predicted as
+    While the MOAs were predicted correctly in the tested cases, the         when the full reference set was used (SI Appendix, Fig. S6 and
+    targets were not always predicted correctly when there was only vehi­    ﻿Additional Methods﻿). In general, the target predictions were quite
+    cle control with the query compound in the same batch (SI Appendix,       robust, especially for higher values of rpredict, which correspond to
+    Fig. S5). Thus, more diversity of MOAs represented in the queried            higher PPVs. For example, the same target prediction of “DNA” was
+    batch generally provided stronger correlations to the reference set.         made for peroxide in 99% of the simulations (SI Appendix, Fig. S6).
+                                                                                 This in silico exercise thus further confirms that target predictions are
+    External Validation of the Antimicrobial Reference Set. To                   more robust for higher rpredict values and less stable for lower rpredict
+    test PerSpecTM’s performance on external data, we queried the                values.
+    largest publicly available gene expression dataset in response                   Despite the ability to predict MOA on external data by com­
+    to antibiotic and antiseptic treatments in P. aeruginosa (15).               paring z-scored expression profiles, the PPV of such predictions
+    Of note, the experimental design of the external query dataset             is lower than from the LOOCV analysis of internal reference data,
+    was highly divergent from the methods employed in our                      as evidenced by the overall lower distributions of rpredict values for
+    study, most notably in their use of sublethal treatments in                the external data than the internal data, as well as the lower rpredict
+    contrast to treatments used to generate the reference set. The               values for the same compounds present in both the internal and
+    external dataset was generated in duplicate for 14 antimicrobial             external datasets (Fig. 2B). We attributed these differences to dis­
+    compounds, including one fluoroquinolone (ciprofloxacin),                    parities in experimental format, including sublethal dosing and
+    three aminoglycosides (gentamicin, neomycin, and tobramycin),              short incubation times that yielded weaker transcriptional signals.
+    three β–lactams (ampicillin, carbenicillin, and cefoperazone),             Indeed, eight out of the 14 compounds had weak transcriptional
+    one membrane disruptor (polymyxin B), one cell wall synthesis              signals, where the most extreme adjusted P﻿-value, based on anal­
+    inhibitor (aztreonam) and five antiseptics (benzalkonium                   ysis with DESeq2, did not exceed that of the comparison between
+    chloride, bleach, peroxide, povidone-­iodine, and silver nitrate).         negative control samples. In fact, compounds causing less signif­
+    The size and chemical diversity of the query dataset allowed us            icant gene expression changes generally corresponded to lower
+    to standardize gene expression with respect to the entire query            ﻿rpredict values (SI Appendix, Table S4). Overall, however, these
+    dataset. SI Appendix, Table S4 summarizes the MOA and target               results indicate that the standardization method was able to com­
+    predictions of the external chemical treatments queried against            pensate for the technical differences between the datasets.
+    the reference set.                                                               Finally, we compared the performance of this approach using
+       We applied PerSpecTM to the external transcriptional data of the         z-scores calculated across a diverse set of query compound treatments,
+    14 compounds. We could not make predictions for two compounds,              to using what we termed “nz-scores,” which refers to standardizing
+    aztreonam and benzylalkonium chloride, because their responses              gene expression relative only to negative control samples. Specifically,
+    most highly correlated with negative control. Of the remaining 12           we compared the distribution of rpredict values of the external data using
+    compounds, PerSpecTM correctly predicted MOAs of 10 com­                    z-scores, calculated across the diverse sample set, versus nz-scores
+    pounds (and the targets of five compounds) (SI Appendix, Table S4).         calculated only by comparing to negative controls. Not only was the
+    The prediction accuracy was dependent on rpredict values. Considering       ﻿rpredict distribution of the nz-score analysis much lower, but the
+    the six compounds with largest rpredict values (≥0.26), PerSpecTM            nz-score analysis failed to make any meaningful confident predictions
+
+6 of 12   https://doi.org/10.1073/pnas.2409747121                                                                                             pnas.org
+A
+
+
+
+
+                                                                                                    Fig. 2.   PerSpecTM analysis of external dataset
+                                                                                                    by mapping to the antimicrobial reference set.
+                                                                                                    (A) Target correlation scores ( r max ) of the top six
+                                                                                                    external query compounds against the target
+                                                                                                    categories indicated in the antimicrobial reference
+                                                                                                    set. The highest r max score is the target correlation
+                                                                                                    prediction score (rpredict) and identifies the predicted
+                                                                                                    target. Colors correspond to MOA classes: DNA
+                                                                                                    synthesis (red), membrane integrity (blue), cell wall
+                                                                                                    synthesis (green), and protein synthesis (magenta).
+                                                                                                    (B and C) Distribution of rpredict for all compounds in
+                                                                                                    B the internal reference set in the LOOCV compared
+B                                                    C                                              to the external query set using z-­scores and (C) the
+                                                                                                    external query set using z-­scores compared to
+                                                                                                    nz-­scores. Each point represents a compound. Points
+                                                                                                    of the same color identify the same compound
+                                                                                                    in both the reference and external query sets, as
+                                                                                                    shown. Dotted lines indicate three rpredict thresholds,
+                                                                                                    labeled with approximate target PPVs determined
+                                                                                                    from the LOOCV z-­score analysis (with MOA PPVs
+                                                                                                    in parentheses). Target prediction scores are not
+                                                                                                    indicated for compounds that were most correlated
+                                                                                                    to negative control.
+
+
+(Fig. 2C). Indeed, in a similar analysis, nz-scores calculated from         the wild-­type. PA-­69180 had no wild-­type activity, however,
+within our internal antibiotic reference set, when used as query data,      and therefore, we performed gene expression profiling with the
+also had a lower distribution of rpredict values and lower confidence in    oprL-­hypomorph.
+target predictions than when using z-scores, albeit to a lesser extent         PerSpecTM predicted PA-0918 to be an inhibitor of membrane
+than for the external dataset (SI Appendix, Fig. S7). Of note, the exter­   integrity with LPS as the predicted target based on an rpredict of
+nal dataset only included two negative control samples, which could         0.74 (100% target PPV, 100% MOA PPV) (Fig. 3A and SI Appendix,
+in part account for the poor performance using nz-scores. Taken             Table S4). PA-0918 was most highly correlated with colistin, a
+together, these results demonstrate that by calculating z-scores across     polymyxin antibiotic known to target LPS along the outer mem­
+a sample set representing diverse mechanisms, PerSpecTM can yield           brane of gram-negative bacteria (53). To test whether PA-0918
+accurate MOA and target predictions despite highly divergent                shares a similar MOA with colistin as a direct membrane disruptor,
+methodologies.                                                              we utilized an ethidium bromide uptake assay in which membrane
+                                                                            disruption is detected by increased flux of ethidium bromide into
+MOA and Target Determination of Antipseudomonal Compounds                   the cells. We found that indeed, PA-0918 phenocopies colistin’s
+Using PerSpecTM and the Antimicrobial Reference Set. To test                ability to promote rapid uptake of ethidium bromide into cells
+whether PerSpecTM could predict MOAs of molecules, we focused               (Fig. 3B), consistent with PA-0918 disrupting the outer mem­
+on three small molecules we had previously identified using a               brane to increase permeability.
+multiplexed chemical genetic-­based strategy termed PROSPECT                   Using the oprL﻿-hypomorph, PerSpecTM predicted PA-69180
+(primary screening of strains to prioritize expanded chemistry and          to be a cell wall synthesis inhibitor with MreB, the major Rod
+targets). PROSPECT is an antimicrobial discovery platform that              protein responsible for the rod shape of gram-negative bacteria, as
+identifies active small molecules based on their activity against           the predicted target based on an rpredict of 0.38 (68% target PPV,
+one or a few bacterial hypomorphic mutants, each depleted                   94% MOA PPV) (Fig. 3C and SI Appendix, Table S4). To test
+of a different essential protein target (7). All three compounds            whether PA-69180 could be an MreB inhibitor, we used a mecil­
+were identified based on their specific activity against certain            linam rescue assay described previously (54), which leverages over­
+hypomorphs in which we had depleted essential outer membrane                expression of the cell-division protein FtsZ in E. coli (strain
+targets of PA14: PA-­0918 against the lptD-­hypomorph; PA-­69180            MG1655/FtsZup) to render the Rod system nonessential, thus
+against oprL-­hypomorph; and PA-­5750 against lptE-­hypomorph               conferring resistance to MreB inhibition. Meanwhile, MreB inhi­
+(SI Appendix, Table S5). LptD and LptE form the LPS transport               bition in this strain reverses the lethal effects of the penicillin bind­
+complex that shuttles LPS across the outer membrane, while                  ing protein 2 inhibitor, mecillinam, which otherwise causes a toxic
+OprL is a scaffolding protein involved in cell-­division (51, 52).          malfunctioning of the Rod machinery leading to cell death. We
+In the case of PA-­0918 and PA-­5750, we performed expression               found that PA-69180 phenocopies the known MreB inhibitor A22,
+profiling using PA14 because both compounds were active against             with MG1655/FtsZup being both resistant to PA-69180 killing
+
+PNAS     2024    Vol. 121    No. 45   e2409747121                                                https://doi.org/10.1073/pnas.2409747121 7 of 12
+    and resistant to mecillinam killing upon the addition of PA-69180      Correlating the Transcriptional Responses of Hypomorphic
+    (Fig. 3D), which was not the case for the negative control cipro­      Strains. While we demonstrated the ability of PerSpecTM to
+    floxacin (SI Appendix, Fig. S8). We also generated resistant mutants      predict small-­molecule MOAs using an antimicrobial reference
+    to PA-69180 in the efflux-deficient strain PAO397 and performed         set, the limited number of known inhibitors and their small set of
+    whole-genome sequencing to reveal two mutants, PAO397-r1 and            targets and MOAs could restrict the utility of such an approach,
+    PAO397-r2, revealing mutations at distinct amino acid positions         particularly with respect to assigning MOA to compounds with
+    adjacent to the ATP binding pocket of MreB (55) that conferred          completely novel targets and MOAs. We thus sought to test
+    high-level resistance to PA-69180 and cross-resistance to A22,          whether the transcriptional responses of hypomorphic strains, in
+    thereby confirming MreB as the target (SI Appendix, Table S6).          which essential targets have been depleted, correlate with chemical
+       Finally, PA-5750 was assigned as a DNA synthesis inhibitor           inhibition of the corresponding targets. If so, PerSpecTM could be
+    with GyrA as the predicted target based on an rpredict value of 0.56    used in a reference-­based manner to correlate responses between
+    (88% target PPV, 96% MOA PPV) (Fig. 3E and SI Appendix,                 small-­molecule inhibition to genetic depletion of the same target,
+    Table S4). Based on this prediction, we moved to immediately            thereby providing a comprehensive map of all targetable pathways.
+    test PA-5750’s ability to both intercalate DNA and inhibit DNA               We initially analyzed expression data from the seven hypo­
+    gyrase. We found no evidence of DNA intercalation by PA-5750            morphs we had previously engineered using a regulated promoter
+    based on its inability to stimulate supercoiling activity of topoi­     replacement strategy to deplete essential gene targets. However,
+    somerase I or to displace ethidium bromide from purified plasmid,       the transcriptional changes in these strains relative to wild-type
+    in contrast to the known DNA intercalator m-amsacrine                   bacteria were minimal. Based on our findings with small mole­
+    (SI Appendix, Fig. S9 A and B). Instead, we found that PA-5750          cules, we wondered whether the transcriptional changes in these
+    inhibited E. coli DNA gyrase’s ability to supercoil DNA while the       strains relative to wild-type bacteria could be minimal due to
+    inactive enantiomer of PA-5750 failed to do so (SI Appendix,            insufficient strength of knockdown provided by the promoter
+    Fig. S9C﻿). Finally, using two ciprofloxacin-resistant mutants of       replacement system. We therefore shifted strategies to use CRISPRi
+    E. coli J53 strain, which each harbor different GyrA point muta­        technology to create an inducible gene repression system. We con­
+    tions, we demonstrated cross-resistance to PA-5750 (Fig. 3F), but       structed 19 CRISPRi strains encoding arabinose-induced dCas9
+    not to the GyrB inhibitor novobiocin (SI Appendix, Fig. S10).           and constitutively expressing guide RNAs targeting dhfR, dxr,
+    Taken together, these results support PerSpecTM’s prediction that       ﻿g yrA/gyrA-2 (two different strains with different guides), gyrB,
+    PA-5750 targets gyrase, and overall, validate its ability to predict     l﻿euS, lptA, lptD, lptE, lpxC, mreB, murA, parC, pbpA, ssb, rplJ,
+    MOA for novel compounds.                                               ﻿rpoB, rpsL, and a no gene control (referred to as CRISPRi-C26),
+
+
+    A                                                    B
+
+
+
+
+                                                                                                      Fig. 3.   MOA determination of antipseudomonal
+                                                                                                      compounds. (A) Target correlation scores ( r max )
+                                                                                                      of PA14 treated with PA-­0918 against the target
+                                                                                                      categories indicated in the antimicrobial refer-
+                                                                                                      ence set. PA-­0918 is predicted to be a direct
+                                                                                                      LPS binder, similar to colistin, based on a target
+    C                                                    D                                            correlation prediction score (rpredict) of 0.74 (tar-
+                                                                                                      get PPV of 100%). (B) Ethidium bromide uptake
+                                                                                                      in cells treated with PA-­0918 and colistin, with
+                                                                                                      ciprofloxacin as a negative control. PA-­0918
+                                                                                                      treatment phenocopies colistin with rapid up-
+                                                                                                      take of ethidium bromide suggestive of mem-
+                                                                                                      brane disruption. In all experiments, error bars
+                                                                                                      represent SEM of three biological replicates
+                                                                                                      (n = 3). (C) r max scores of oprL-­hypomorph treat-
+                                                                                                      ed with PA-­69180 against the target categories
+                                                                                                      indicated in the antimicrobial reference set.
+                                                                                                      PA-­69180 is predicted to be an MreB inhibitor,
+                                                                                                      similar to A22, based on an rpredict of 0.38 (tar-
+                                                                                                      get PPV of 68%). (D) MG1655 overexpressing
+     E                                                    F                                           ftsZ (MG1655/ FtsZup) is resistant to both A22
+                                                                                                      and PA-­69180 and is rescued from mecillinam
+                                                                                                      killing (mec-­and mec+ denote 0 μg/mL and 2.5
+                                                                                                      μg/mL mecillinam, respectively) by both com-
+                                                                                                      pounds, implicating MreB as the target. (E) r max
+                                                                                                      scores of PA14 treated with PA-­5750 against
+                                                                                                      the target categories indicated in the antimicro-
+                                                                                                      bial reference set. PA-­5750 is predicted to be
+                                                                                                      a GyrA/ParC inhibitor, similar to ciprofloxacin,
+                                                                                                      based on a rpredict of 0.56 (target PPV 88%). (F)
+                                                                                                      Two ciprofloxacin-­resistant E. coli J53 mutant
+                                                                                                      strains, each containing single point mutations
+                                                                                                      (G81D or S83L) in GyrA, are cross-­resistant to
+                                                                                                      PA-­5750, implicating DNA gyrase at the target.
+
+
+
+
+8 of 12   https://doi.org/10.1073/pnas.2409747121                                                                                             pnas.org
+ summarized in SI Appendix, Table S7 and Additional Methods﻿for            aminoglycoside amikacin mapped to ribosomal subunit rpsL
+    details of strain construction). In each CRISPRi strain, the addi­     depletion. Of note, strains depleted for parC (a topoisomerase)
+ tion of arabinose-induced dCas9 expression and subsequent tran­           and lptA (part of the LPS transport complex), which showed some
+ scriptional repression of the target gene of interest. We characterized   of the greatest fitness defects, yielded the strongest rpredict values of
+ the arabinose-dependent growth phenotypes of each CRISPRi                 0.56 and 0.46 upon inhibition with ciprofloxacin and POL7080,
+ strain (SI Appendix, Fig. S11). The CRISPRi-C26 control strain            respectively. When the target was not correctly predicted, in most
+ showed no significant growth delay over an arabinose range of 0           cases PerSpecTM accurately predicted the MOAs. For example,
+ to 0.5% (w/v), indicating no appreciable dCas9-mediated toxicity          all protein synthesis inhibitors (amikacin, clarithromycin, and
+ in PA14. Mutants targeting dhfR, lptA, lpxC, mreB, murA, and              rifampicin) correlated most strongly with the two CRISPRi strains
+﻿parC all demonstrated severe arabinose dose-dependent growth              depleted of targets which interfere with protein synthesis (rpsL,
+ delays, whereas mutants targeting dxr, gyrA, gyrB, leuS, lptD, lptE,      ﻿rplJ, and rpoB). Similarly, fosmidomycin, which was misassigned
+ ﻿rplJ, rpoB, and rpsL exhibited more moderate growth delays at             as an LptA inhibitor, was correctly predicted to disrupt membrane
+  higher arabinose concentrations. By comparison, mutants target­           integrity. Indeed, the role of its target Dxr in the synthesis of
+  ing pbpA and ssb showed no growth delay.                                  isoprenoid precursors is required for maintenance of the cell wall
+       We performed transcriptional profiling of all 19 CRISPRi             and thus membrane integrity. Of the two compounds with mis­
+  strains in 384-well format at 360 min in 0%, 0.125%, and 0.5%             assigned MOAs altogether, the cell wall synthesis inhibitors A22
+  arabinose before chemical lysis, RNA extraction, and RNAseq               and imipenem, both were predicted to be membrane disruptors
+  library construction. Z-scores were calculated across all strains and     while correlating to a lesser extent with CRISPRi strains disrupting
+  arabinose doses, thereby accentuating strain-specific transcrip­          cell wall synthesis. In general, like the small-molecule reference
+  tional changes. Additionally, we used DESeq2 to assess the level          set, there is significant overlap in transcriptional changes between
+  of knock-down of the targeted genes in each condition, as sum­            inhibitors of membrane integrity and cell wall synthesis with com­
+  marized in SI Appendix, Table S7. In general, CRISPRi strains             pounds tending to correlate with gene depletions across both
+  demonstrated an arabinose-dependent decrease in the expected              mechanistic classes, suggesting a shared transcriptional response
+  target mRNA levels compared to levels in the CRISPRi-C26 con­             to disruptors of both cellular processes. Together, these data
+  trol strain, ranging from 1.5 to 174-fold in 0.125% or 0.5%               demonstrate that the transcriptional response of chemical inhibi­
+  arabinose for conditions yielding significant on-target gene expres­      tion of a given target correlates with that of CRISPRi-induced
+  sion changes (adjusted P﻿-value < 0.05). Of note, no statistically        repression of the same target.
+ significant expression changes in the target gene were detected
+  even at the highest arabinose concentrations for mutants carrying        Discussion
+  guides targeting lptE, ssb, and rpoB, indicating that appropriate,
+    effective guides were not utilized for these genes.                    Target identification is central to any antibiotic discovery pipeline
+       To form a genetic depletion reference set using robust transcrip­   to guide candidate prioritization and development. The advancement
+  tional profiles from the CRISPRi strains, we compiled all treat­         of more sophisticated approaches to antibiotic discovery is working
+  ment conditions with greater than 0% arabinose. We again                 to expand the chemical space and increase the number of primary
+  removed treatment conditions yielding transcriptionally weak             candidates discovered with antibacterial activity. Meanwhile, these
+  responses, defined as the differential expression between arabinose      novel platforms highlight the bottleneck that target identification
+  treatment and control guide C26 wherein no gene had an adjusted          imposes on antibiotic development efforts. While measuring the
+  ﻿P﻿-value that was more significant than the minimum adjusted            transcriptional response to small-molecule perturbation has now
+   ﻿P﻿-value defined previously by comparing PA14 in water versus          become quite a standard step in characterizing a new antibiotic can­
+    DMSO control (i.e., padj < 10−20). Applying this filter, mutants       didate, its value in MOA elucidation is often supportive at best,
+ carrying guides targeting dhfR, leuS, lptE, and gyrA-2 (i.e., the         despite the anticipation that it could yield valuable insights into the
+ CRISPRi-gyrA-2 strain) were removed from analysis, leaving 14             biology of how target disruption leads to killing, thus leading to a
+    strains in the genetic depletion reference set, with some comprising   MOA. To date, the interpretation of transcriptional responses has
+    multiple levels of knockdown induced by different arabinose            been confounded by background changes in gene expression that
+    doses, in addition to the control strain.                              are secondary or even unrelated to the immediate, direct effect of
+       Finally, we applied PerSpecTM using the genetic depletion           target inhibition—such as those relating to growth, general stress,
+    reference set to assess whether the transcriptional profiles of the    or cell death. These changes can drown out perturbation-specific
+    CRISPRi strains could serve as a reference. The target correlation     gene responses. The major approach that has been taken to mitigate
+    scores r max were calculated between the z-scored gene expression      these confounders is to tailor experimental designs to control for
+    profiles of CRISPRi strains (as the reference set) and those of        background gene expression by treating with subinhibitory concen­
+    compound treatments (the query samples) of PA14, except for            trations while carefully trying to match growth rates; these
+    fosmidomycin, which was tested in the dxr﻿-hypomorph strain due        approaches, however, limit the strength of the elicited transcriptional
+    to its inactivity against PA14. As shown in Fig. 4, the transcrip­     responses. An alternative approach has been to develop computa­
+    tional responses of antibiotic treatments generally correlated to      tional algorithms that select the most informative genes, which in
+    transcriptional responses of the corresponding CRISPRi strains         some implementations may be at risk of overfitting the reference
+    depleted for the cognate gene targets, or their associated riboso­     dataset if the selected genes are optimized based on their ability to
+    mal/protein complexes. The target was predicted correctly in some      predict the MOAs of the compounds in the reference set.
+    cases. Ciprofloxacin treatment correlated strongest with parC             Here, we developed a unique strategy, PerSpecTM, that works
+    depletion, followed by gyrA, accurately mapping to its known           by leveraging the ability to scale the measurement of expression
+    targets of GyrA and ParC. Similarly, the GyrB inhibitor novobi­        profiles across a large set of active, diverse perturbations, thereby
+    ocin correlated most strongly to depletion of gyrB, the LpxC           enabling a standardization (calculation of z-scores) that deempha­
+ inhibitor PF-04753299 mapped to lpxC depletion, the LPS trans­            sizes the background changes to highlight perturbation-specific
+ port inhibitor POL7080 mapped to lptA depletion, the MurA                 changes as the basis for more accurate target and MOA prediction.
+ inhibitor fosfomycin mapped to murA depletion, and the                    We demonstrate proof of principle that by applying PerSpecTM’s
+
+PNAS     2024    Vol. 121   No. 45    e2409747121                                               https://doi.org/10.1073/pnas.2409747121 9 of 12
+                                                                                     difference between mutant and wild-type bacteria, even while the
+                                                                                     level of knockdown required to generate these differing responses
+                                                                                     will vary from gene to gene. This is supported by the fact that the
+                                                                                     least fit CRISPRi strains – with growth impairment reflecting
+                                                                                     sufficient target depletion to impact cellular physiology—yielded
+                                                                                     the strongest Pearson correlations to chemical inhibition of their
+                                                                                     corresponding gene targets. Thus, the more impaired a strain’s
+                                                                                     fitness is, the more informative its transcriptional profile can be.
+                                                                                        We applied PerSpecTM to predict MOA for three active
+                                                                                     antipseudomonal compounds that we had identified—PA-0918,
+                                                                                     PA-69180, and PA-5750—to highlight its power in MOA deter­
+                                                                                     mination early in the antibiotic discovery process. All three com­
+                                                                                     pounds originated directly from chemical libraries and therefore
+                                                                                     had not yet undergone extensive structure–activity relationship
+                                                                                     studies or optimization. PerSpecTM predicted PA-0918 to be a
+                                                                                     membrane disruptor, PA-69180 to be an MreB inhibitor, and
+                                                                                     PA-5750 to be an inhibitor of DNA gyrase, all of which we sub­
+                                                                                     sequently confirmed with supporting experimental validation. The
+                                                                                     case of PA-69180, which lacked significant wild-type activity,
+                                                                                     highlights the advantage of leveraging the hypersusceptibility of
+                                                                                     the oprL﻿-hypomorph to generate a robust transcriptional signal,
+                                                                                     which enabled a correct, high-confidence MOA prediction.
+    Fig. 4.   PerSpecTM analysis of antimicrobial treatments queried against the     Interestingly, it also suggests a potential functional interaction
+    genetic depletion reference set. Heatmap intensities show target correlation     between OprL and MreB, relating cell shape and structure to cell
+    scores ( r max ) of 90-­min antibiotic treatments when queried against CRISPRi
+    strains in the genetic depletion reference set treated with 0.125% or 0.5%       wall integrity. The case of PA-5750 adeptly highlights the advan­
+    arabinose to induce dCas9 expression. PA14 was treated with all query            tage of integrating MOA prediction tools early in the discovery
+    compounds except fosmidomycin, which lacked wild-­type activity, and thus        process, as PerSpecTM’s prediction immediately focused our
+    the dxr-­hypomorph was used. White dots indicate the target correlation
+    prediction score (rpredict) for each query compound. Colored boxes indicate
+                                                                                     efforts on the hypothesis that PA-5750 inhibits DNA synthesis.
+    the MOA relating to each target gene or query compound. Note that from           Taken together, these data lend credence to the ability of tran­
+    the genetic depletion reference set, only those that have corresponding          scriptional profiling to expedite the incorporation of MOA pre­
+    compound treatments targeting the same gene targets, or the associated
+    ribosomal/protein complexes, are shown.
+                                                                                     diction into antibiotic discovery processes, aiding in prioritization
+                                                                                     before any chemical optimization.
+                                                                                        Referenced-based MOA prediction by expression profile mapping
+    reference-based approach, either to a set of known antimicrobial                 to a collection of known antimicrobial compounds is inherently
+    compounds with known MOA or a set of strains which are genet­                    limited by the diversity of the reference set, which poses a barrier to
+    ically engineered to be depleted of different essential targets, a               discovering inhibitors of novel biological pathways without known
+    compound’s MOA and even target can be reasonably predicted.                      chemical inhibitors to anchor predictions. We therefore explored a
+    We validated PerSpecTM’s performance on both internal and                        complementary approach of mapping to genetic perturbations by
+    external small-molecule datasets relative to an antimicrobial ref­               constructing a transcriptionally repressed reference set using
+    erence set, as well as proof of principle using a collection of 14               CRISPRi technology. While chemical inhibition of a series of gene
+    CRISPRi depletion strains.                                                       targets correlated strongest with their corresponding CRISPRi
+       Importantly, we found that eliciting a strong transcriptional                 knockdown strains and the best correlations were made when the
+    response was critical to PerSpecTM’s ability to predict MOA in                   level of knockdown was strong enough to impair fitness, some strains
+    the case of both chemical and genetic perturbations. Reasonably                  without impaired fitness nevertheless provided informative expres­
+    potent antimicrobial activity (i.e., being able to treat with                    sion changes. In future iterations of this approach, generating strains
+    above-MIC concentrations) was necessary to ensure a robust tran­                 in which bacterial fitness is compromised as part of a larger, more
+    scriptional response to chemical treatments; this however poses a                comprehensive library of CRISPRi strains, potentially guided by
+    barrier for early MOA prediction of new compounds that have                      genome-wide fitness studies as have been reported for M. tuberculosis
+    not yet been optimized to have potent wild-type activity. For                    (56), would yield a stronger genetic perturbation reference set from
+    weakly active molecules, their solubility limits could prevent treat­            which one can generate more robust correlations for MOA predic­
+    ment of wild-type bacteria at twofold to fourfold above the MIC.                 tion. Nevertheless, these data provide proof of concept that a ded­
+    Meanwhile, such weak inhibitors could be of significant value                    icated genetic perturbation reference set could facilitate accurate
+    either as early antibiotic candidates or as chemical biological                  MOA prediction, including for gene targets without known chem­
+    probes, particularly if they work by a novel MOA. In such cases,                 ical inhibitors. In theory, a comprehensive library of CRISPRi strains
+    we show that hypersusceptible strains can be substituted for                     could be used to define the transcriptional map of all essential genes
+    wild-type bacteria, with the changes in such strains mapping to                  of a certain bacterial species, serving as a reference set for completely
+    the same changes in wild-type bacteria, dose adjusted. Thus, engi­               unbiased MOA predictions.
+    neered, hypersensitive hypomorphs can enable PerSpecTM’s abil­                      Nevertheless, several caveats in the PerSpecTM approach war­
+    ity to predict MOA in the case of weak inhibitors. Meanwhile, we                 rant comment. PerSpecTM remains a reference-based strategy;
+    also found that not all genetically engineered hypomorphs have                   therefore, by relying on an antimicrobial reference set as the basis
+    transcriptional profiles that differ significantly from those of                 for MOA prediction, PerSpecTM will inherently be limited to
+    wild-type bacteria. Sufficiently strong knockdown, for example                   predicting MOA for novel compounds which work by known,
+    in the engineered CRISPRi strains versus the promoter replace­                   established mechanisms or targets for which there are preexisting
+    ment strains, is critical to eliciting a robust transcriptional                  inhibitors. This limitation can be circumvented by constructing
+
+10 of 12   https://doi.org/10.1073/pnas.2409747121                                                                                                 pnas.org
+reference sets of hypomorphic mutants, based on the assumption               prediction accuracy. Finally, further effort to optimize standardi­
+that gene depletion phenocopies target inhibition. While this                zation with respect to negative controls (nz-scores) would be
+assumption is often true, it is not universally so. For example,             needed to enable accurate prediction as an alternative application
+differences in the timescale of loss of function between                     of PerSpecTM, without the need for balanced representation of
+small-molecule inhibition and gene depletion can yield different             diverse control inhibitors in each batch.
+transcriptional responses as cells adapt with differing compensa­               Here, we present a strategy for increasing the ability for transcription-
+tory mechanisms. Alternatively, complete absence of a protein                based mapping to predict MOA as well as to increase confidence in
+may not phenocopy inhibition of a particular protein function,               predictions with the goal of elevating gene expression profiling to be
+particularly when a protein target has multiple functions.                   a driver for primary MOA prediction rather than just as an approach
+   Relying on a genetic depletion reference set as the basis for MOA         to provide ancillary data supportive of an MOA. As such, in a
+prediction also has limitations. First, as not all antibacterial com­        reference-based manner, the expression response to a small-molecule
+pounds work via a protein target depletion (e.g., membrane disruptors,       perturbation can serve as a phenotype and can be used in conjunction
+DNA intercalators, free radical producers), and transcriptional              with other phenotypic measurements, including microscopy (57–
+response of depleted essential protein targets may not always pheno­         59), chemical–genetic interaction profiles (7, 60, 61), and phenomic
+copy the response from queried compounds. Second, the specific               profiling using gene deletion libraries or transposon libraries for
+cellular response to some small-molecule or genetic perturbations may        network mapping of gene interactions in response to chemical treat­
+not be well reflected in strong, canonical transcriptional responses,        ments for MOA prediction (15, 62, 63). As we look to the future,
+instead resulting in other changes (e.g., metabolic or structural changes    the development of a comprehensive suite of complementary phe­
+that lead to death). β-lactams are such a case where fewer changes in        notypic measurements resulting from small-molecule perturbation
+gene expression occur on a relatively slow timescale compared to other       will hopefully enable more rapid and efficient MOA elucidation,
+antibiotic classes. Finally, whether using an antimicrobial or genetic       thereby accelerating the development of antibiotic candidates to
+depletion reference dataset, the MOA prediction resolution of                address the growing problem of antibiotic resistance.
+PerSpecTM can be compromised by the complexity of cellular net­
+works which have significant interactions and cross talk, as evidenced
+                                                                             Materials and Methods
+by the overlapping transcriptional profiles of disruption of the cell wall
+and membrane integrity; inhibition of targets which share common             Bacterial Strain Construction. P. aeruginosa strains were derived from the
+functions or that are highly interactive can generate similar, overlap­      UCBPP-­PA14 lab strain described previously (64). SI Appendix, Tables S8–S10
+ping transcriptional responses. Meanwhile, off-target effects of small       describe all plasmids, strains, and primers used in this study. Detailed methods
+molecules, particularly of weakly potent ones, can similarly generate        of strain construction are available in the SI Appendix, Additional Methods.
+complex, noisy transcriptional programs that are uninterpretable and
+do not map to inhibitors of single targets or single gene depletions.        Gene Expression Experiments and Library Construction. Gene expression
+
+   At the same time, we note an important caveat to PerSpecTM’s              experiments were carried out in biological triplicate in 384-­well microplates
+z-score-based approach. The power of the z-score metric is both in           (Thermo Fisher Scientific, Waltham MA). Stock solutions of compounds were
+                                                                             dissolved fresh in DMSO or water, and 30 μL of compound solutions were mixed
+its simplicity as well as its ability to emphasize the informative,
+                                                                             with 30 μL of mid-­log culture to yield 1 × 108 CFU/mL bacteria and compounds
+relevant signal while deemphasizing the noise that is common to all
+                                                                             in 0.5% (v/v) water (or DMSO) in Lysogeny Broth. Cells were treated at 37 °C
+death-inducing perturbations. This work demonstrates the reason­             without shaking in a humidity chamber for 30, 60, 90, and 120 min. In the case
+ably good performance of such an approach. However, the ability              of the CRISPRi strains, cells were treated for 360 min. At the end of the incubation
+to statistically remove the common noise without losing informative          period, samples were then mixed with 30 μL of 3× RNAgem Blue Buffer (Custom
+signal in this manner relies on the unbiased representation of a             Science, New Zealand) and chemically lysed by incubation in a thermocycler at
+balanced, diverse, distinct set of perturbations analyzed within a           75 °C for 10 min. Total RNA was extracted using the Direct-­zol kit (Zymo Research,
+batch. Biased MOA representation within the batch might allow a              Irvin CA), and RNA quality and quantity were analyzed using the RNA ScreenTape
+single MOA to dominate, resulting in a z-score analysis dampening            with the 2200 TapeStation (Agilent, Santa Clara CA). Illumina complementary
+signals that are common to, but also potentially meaningful across,          DNA (cDNA) libraries were generated using a modified version of the RNAtag-­seq
+a large number of samples. In the rarefaction analysis we performed          protocol (65), as outlined in more detail in the SI Appendix, Additional Methods.
+on the internal reference set, we found that at a minimum, one                   Illumina cDNA libraries were generated using a modified version of the
+reference compound with a differing MOA, as well as one negative             RNAtag-­seq protocol (65). 250 ng of extracted RNA was fragmented, dephos-
+control, is required in a batch with a query compound to yield a             phorylated, and ligated to DNA adapters carrying 5′-­AN8-­3′ barcodes of known
+highly accurate prediction. However, correlations of the query com­          sequence with a 5′ phosphate and a 3′ blocking group. Barcoded RNAs were
+pounds to their matching MOAs consistently declined and became               pooled and depleted of rRNA using the Pan-­Bacteria riboPOOL depletion kit
+noisier as the number of MOAs represented in the query set                   (siTOOLs Biotech, Galen Laboratories). Pools of barcoded RNAs were converted
+decreased; thus, having more compounds with greater MOA diver­               to Illumina cDNA libraries in two main steps: i) RT of the RNA using a primer
+sity within a query set will yield stronger correlations.                    designed to the constant region of the barcoded adaptor with addition of an
+   In this work, we tried to minimize bias by ensuring that min­             adapter to the 3′ end of the cDNA by template switching using SMARTScribe
+imally, each queried batch included control perturbations resulting          (Clontech) as described (66) and ii) PCR amplification using primers whose 5′
+                                                                             ends target the constant regions of the 3′ or 5′ adaptors and whose 3′ ends
+from inhibition of DNA synthesis, protein synthesis, and either
+                                                                             contain the full Illumina P5 or P7 sequences. cDNA libraries were sequenced on
+cell wall or membrane integrity (or both), along with negative
+                                                                             the Illumina (NovaSeq SP 100) platform to generate paired-­end reads.
+control samples. With this representation, PerSpecTM performed
+well for these datasets, including an external dataset with slightly         Computational Analyses, Scripts, and Data Accessibility. Computational
+different MOA composition than the antimicrobial reference set,              analyses of gene expression profiling are detailed in the SI Appendix, Additional
+particularly for conditions that exhibited a robust transcriptional          Methods. Scripts for calculating z-­scores, nz-­scores, and predicting com-
+response. Further work would be needed to determine whether                  pound targets were written in R and stored in GitHub (https://github.com/
+the set of control inhibitors we used are sufficiently balanced and          broadinstitute/psa_rnaseq_manuscript_rproject). Raw sequencing data and
+unbiased, such that analysis of data using a different albeit still          z-­score values can be found on the Gene Expression Omnibus (GEO accession
+diverse set of controls in a new query set would replicate this MOA          GSE251671) (67).
+
+PNAS     2024    Vol. 121    No. 45    e2409747121                                                  https://doi.org/10.1073/pnas.2409747121 11 of 12
+    Biochemical Characterization of Screening Hits. Growth kinetics, MIC                                               Platform, respectively. We thank Nirmalya Bandyopadhyay, James Gomez, and
+    experiments, resistance selection, as well as assays quantifying ethidium bro-                                     Roby Bhattacharyya for their helpful discussions. We declare that we have no
+    mide uptake and displacement, mecillinam rescue, DNA intercalation, and DNA                                        conflicts of interest. All figures were created with BioRender.com.
+    gyrase activity, are described in detail in the SI Appendix, Additional Methods.
+
+    Data, Materials, and Software Availability. Gene expression data have been
+    deposited in GEO Database (GSE251671) (67). All study data are included in the                                     Author affiliations: aThe Broad Institute of Massachusetts Institute of Technology and
+                                                                                                                       Harvard, Cambridge, MA 02142; bCenter for Computational and Integrative Biology,
+    article and/or supporting information.                                                                             Massachusetts General Hospital, Boston, MA 02114; cDivision of Pulmonary and Critical
+                                                                                                                       Care Medicine, Brigham and Women’s Hospital, Boston, MA 02115; and dDepartment of
+    ACKNOWLEDGMENTS. This work was supported by NIH-­U19AI142780 (D.T.H.)                                              Genetics, Harvard Medical School, Boston, MA 02115
+
+    and NIH-­K08AI148581 (K.P.R.) and by a generous gift from Anita and Josh                                           Author contributions: K.P.R., J.B., T.W., J.S., J.L., N.S., and D.T.H. designed research; K.P.R.,
+                                                                                                                       T.W., J.S., K.F., P.H.N., and K.R. performed research; K.P.R., T.W., J.L., N.S., and D.T.H.
+    Bekenstein. Gene expression libraries were constructed and sequenced at the                                        contributed new reagents/analytic tools; K.P.R., J.B., M.O., N.S., and D.T.H. analyzed data;
+    Broad Institute of MIT and Harvard by the Microbial ‘Omics Core and Genomics                                       and K.P.R., J.B., and D.T.H. wrote the paper.
+
+
+
+
+    1.     C. Willyard, The drug-­resistant bacteria that pose the greatest health threats. Nature 543, 15 (2017).     34. W. Wehrli, Rifampin: Mechanisms of action and resistance. Rev. Infect. Dis. 5, S407–S411 (1983).
+    2.     G. Niu, W. Li, Next-­Generation Drug Discovery to Combat Antimicrobial Resistance. Trends Biochem.          35. E. Sancho-­Vaello et al., The structure of the antimicrobial human cathelicidin LL-­37 shows
+           Sci. 44, 961–972 (2019).                                                                                        oligomerization and channel formation in the presence of membrane mimics. Sci. Rep. 10, 17356
+    3.     V. Libis et al., Multiplexed mobilization and expression of biosynthetic gene clusters. Nat. Commun.            (2020).
+           13, 5256 (2022).                                                                                            36. M. W. Musialek, D. Rybaczek, Hydroxyurea-­the good, the bad and the ugly. Genes (Basel) 12, 1096
+    4.     K. Lewis, Platforms for antibiotic discovery. Nat. Rev. Drug Discov. 12, 371–87 (2013).                         (2021).
+    5.     S. Zoffmann et al., Machine learning-­powered antibiotics phenotypic drug discovery. Sci. Rep. 9,           37. A. Koc et al., Hydroxyurea arrests DNA replication by a mechanism that preserves basal dNTP pools.
+           5013 (2019).                                                                                                    J. Biol. Chem. 279, 223–230 (2004).
+    6.     F. Wong et al., Discovery of a structural class of antibiotics with explainable deep learning. Nature       38. C. Carvalho et al., Doxorubicin: The good, the bad and the ugly effect. Curr. Med. Chem. 16,
+           626, 177–185 (2024).                                                                                            3267–3285 (2009).
+    7.     E. O. Johnson et al., Large-­scale chemical-­genetics yields new M. tuberculosis inhibitor classes.         39. D. A. Gewirtz, A critical evaluation of the mechanisms of action proposed for the antitumor effects
+           Nature 571, 72–78 (2019).                                                                                       of the anthracycline antibiotics adriamycin and daunorubicin. Biochem. Pharmacol. 57, 727–741
+    8.     B. E. Poulsen et al., Multiplexed screen identifies a Pseudomonas aeruginosa-­specific small molecule           (1999).
+           targeting the outer membrane protein OprH and its interaction with LPS. bioRxiv [Preprint] (2024).          40. G. Minotti et al., Anthracyclines: Molecular advances and pharmacologic developments in antitumor
+           https://www.biorxiv.org/content/10.1101/2024.03.16.585348v1. (Accessed 20 May 2024).                            activity and cardiotoxicity. Pharmacol. Rev. 56, 185–229 (2004).
+    9.     L. L. Silver, Challenges of antibacterial discovery. Clin. Microbiol. Rev. 24, 71–109.10 (2011).            41. Y. Pommier et al., DNA topoisomerases and their poisoning by anticancer and antibacterial drugs.
+    10.    T. R. Hughes et al., Functional discovery via a compendium of expression profiles. Cell 102,                    Chem. Biol. 17, 421–433 (2010).
+           109–126 (2000).                                                                                             42. J. C. Dabrowiak, W. T. Bradner, Platinum antitumour agents. Prog. Med. Chem. 24, 129–158 (1987).
+    11.    C. Freiberg, H. P. Fischer, N. A. Brunner, Discovering the mechanism of action of novel antibacterial       43. G. Andolina et al., A peptidomimetic antibiotic interacts with the periplasmic domain of LptD from
+           agents through transcriptional profiling of conditional mutants. Antimicrob. Agents Chemother. 49,              Pseudomonas aeruginosa. ACS Chem. Biol. 13, 666–675 (2018).
+           749–759 (2005).                                                                                             44. L. L. Silver, Fosfomycin: Mechanism and resistance. Cold Spring Harb. Perspect. Med. 7, a025262
+    12.    A. O’Rourke et al., Mechanism-­of-­action classification of antibiotics by global transcriptome                 (2017).
+           profiling. Antimicrob. Agents Chemother. 64, e01207-­19 (2020).                                             45. K. Drlica, X. Zhao, DNA gyrase, topoisomerase IV, and the 4-­quinolones. Microbiol. Mol. Biol. Rev. 61,
+    13.    J. L. Espinoza et al., Predicting antimicrobial mechanism-­of-­action from transcriptomes: A                    377–392 (1997).
+           generalizable explainable artificial intelligence approach. PLoS Comput. Biol. 17, e1008857 (2021).         46. M. F. Brown et al., Potent inhibitors of LpxC for the treatment of Gram-­negative infections. J. Med.
+    14.    M. B. Jones et al., Reducing the bottleneck in discovery of novel antibiotics. Microb Ecol. 73,                 Chem. 55, 914–923 (2012).
+           658–667 (2017).                                                                                             47. G. H. Hitchings, J. J. Burchall, Inhibition of folate biosynthesis and function as a basis for
+    15.    J. L. Murray et al., Intrinsic antimicrobial resistance determinants in the superbug Pseudomonas                chemotherapy. Adv. Enzymol. Relat. Areas Mol. Biol. 27, 417–468 (1965).
+           aeruginosa. mBio 6, e01603-­15 (2015).                                                                      48. Y. Imai et al., A new antibiotic selectively kills Gram-­negative pathogens. Nature 576, 459–464
+    16.    B. Hutter et al., Prediction of mechanisms of action of antibacterial compounds by gene expression              (2019).
+           profiling. Antimicrob. Agents Chemother. 48, 2838–2844 (2004).                                              49. A. S. Murkin, K. A. Manning, S. A. Kholodar, Mechanism and inhibition of 1-­deoxy-­D-­xylulose-­5-­
+    17.    H. I. Boshoff et al., The transcriptional responses of Mycobacterium tuberculosis to inhibitors of              phosphate reductoisomerase. Bioorg. Chem. 57, 171–185 (2014).
+           metabolism: Novel insights into drug mechanisms of action. J. Biol. Chem. 279, 40174–40184                  50. C. Estrela et al., Mechanism of action of sodium hypochlorite. Braz. Dent. J. 13, 113–7 (2002).
+           (2004).                                                                                                     51. I. Botos et al., Structural and functional characterization of the LPS transporter LptDE from Gram-­
+    18.    J. P. Novak, R. Sladek, T. J. Hudson, Characterization of variability in large-­scale gene expression           negative pathogens. Structure 24, 965–976 (2016).
+           data: Implications for study design. Genomics 79, 104–113 (2002).                                           52. J. J. Rodriguez-­Herva, J. L. Ramos, Characterization of an OprL null mutant of Pseudomonas putida.
+    19.    P. J. Planet et al., Systematic analysis of DNA microarray data: Ordering and interpreting patterns of          J. Bacteriol. 178, 5836–5840 (1996).
+           gene expression. Genome Res. 11, 1149–1155 (2001).                                                          53. Z. Z. Deris et al., Probing the penetration of antimicrobial polymyxin lipopeptides into gram-­
+    20.    A. Subramanian et al., A Next Generation Connectivity Map: L1000 Platform and the First 1,000,000               negative bacteria. Bioconjug. Chem. 25, 750–760 (2014).
+           Profiles. Cell 171, 1437–1452.e17 (2017).                                                                   54. H. Cho, T. Uehara, T. G. Bernhardt, Beta-­lactam antibiotics induce a lethal malfunctioning of the
+    21.    I. Wiegand, K. Hilpert, R. E. Hancock, Agar and broth dilution methods to determine the minimal                 bacterial cell wall synthesis machinery. Cell 159, 1300–1311 (2014).
+           inhibitory concentration (MIC) of antimicrobial substances. Nat. Protoc. 3, 163–175 (2008).                 55. F. van den Ent, L. A. Amos, J. Lowe, Prokaryotic origin of the actin cytoskeleton. Nature 413, 39–44
+    22.    M. I. Love, W. Huber, S. Anders, Moderated estimation of fold change and dispersion for RNA-­seq                (2001).
+           data with DESeq2. Genome Biol. 15, 550, (2014).                                                             56. S. Li et al., CRISPRi chemical genetics and comparative genomics identify genes mediating drug
+    23.    J. R. Lenhard, Z. P. Bulman, Inoculum effect of beta-­lactam antibiotics. J. Antimicrob. Chemother. 74,         potency in Mycobacterium tuberculosis. Nat. Microbiol. 7, 766–779 (2022).
+           2825–2843 (2019).                                                                                           57. A. Lamsa et al., Rapid inhibition profiling in Bacillus subtilis to identify the mechanism of action of
+    24.    D. M. Livermore, Beta-­lactamases in laboratory and clinical resistance. Clin. Microbiol. Rev. 8,               new antimicrobials. ACS Chem. Biol. 11, 2222–2231 (2016).
+           557–584 (1995).                                                                                             58. P. Nonejuie et al., Bacterial cytological profiling rapidly identifies the cellular pathways targeted by
+    25.    A. J. Manning, M. J. Kuehn, Contribution of bacterial outer membrane vesicles to innate bacterial               antibacterial molecules. Proc. Natl. Acad. Sci. U.S.A. 110, 16169–16174 (2013).
+           defense. BMC Microbiol. 11, 258 (2011).                                                                     59. C. E. Peters et al., Rapid inhibition profiling identifies a keystone target in the nucleotide
+    26.    J. B. Bulitta et al., Two mechanisms of killing of Pseudomonas aeruginosa by tobramycin assessed at             biosynthesis pathway. ACS Chem. Biol. 13, 3251–3258 (2018).
+           multiple inocula via mechanism-­based modeling. Antimicrob. Agents Chemother. 59, 2315–2327                 60. E. O. Johnson, D. T. Hung, A point of inflection and reflection on systems chemical biology. ACS
+           (2015).                                                                                                         Chem. Biol. 14, 2497–2511 (2019).
+    27.    M. R. Loffredo et al., Inoculum effect of antimicrobial peptides. Proc. Natl. Acad. Sci. U.S.A. 118,        61. E. O. Johnson et al., Large-­scale chemical-­genetic strategy enables the design of antimicrobial
+           e2014364118 (2021).                                                                                             combination chemotherapy in Mycobacteria. ACS Infect. Dis. 6, 56–63 (2020).
+    28.    M. J. Munoz-­Davila, Role of old antibiotics in the era of antibiotic resistance. Highlighted               62. R. J. Nichols et al., Phenotypic landscape of a bacterial cell. Cell 144, 143–156 (2011).
+           nitrofurantoin for the treatment of lower urinary tract infections. Antibiotics (Basel) 3, 39–48 (2014).    63. E. Geisinger et al., Antibiotic susceptibility signatures identify potential antimicrobial targets in the
+    29.    H. Jomaa et al., Inhibitors of the nonmevalonate pathway of isoprenoid biosynthesis as antimalarial             Acinetobacter baumannii cell envelope. Nat. Commun. 11, 4522 (2020).
+           drugs. Science 285, 1573–1576 (1999).                                                                       64. D. G. Lee et al., Genomic analysis reveals that Pseudomonas aeruginosa virulence is combinatorial.
+    30.    R. Dutta, M. Inouye, GHKL, an emergent ATPase/kinase superfamily. Trends Biochem. Sci. 25, 24–28                Genome Biol. 7, R90 (2006).
+           (2000).                                                                                                     65. A. A. Shishkin et al., Simultaneous generation of many RNA-­seq libraries in a single reaction. Nat.
+    31.    M. T. Guarnieri et al., The Hsp90 inhibitor radicicol interacts with the ATP-­binding pocket of bacterial       Methods 12, 323–325 (2015).
+           sensor kinase PhoQ. J. Mol. Biol. 379, 82–93 (2008).                                                        66. Y. Y. Zhu et al., Reverse transcriptase template switching: A SMART approach for full-­length cDNA
+    32.    K. D. Corbett, J. M. Berger, Structural basis for topoisomerase VI inhibition by the anti-­Hsp90 drug           library construction. Biotechniques 30, 892–897 (2001).
+           radicicol. Nucleic Acids Res. 34, 4269–4277 (2006).                                                         67. K. P. Romano et al., Series GSE251671. Gene Expression Omnibus. https://www.ncbi.nlm.nih.gov/
+    33.    L. Verbist, The antimicrobial activity of fusidic acid. J. Antimicrob. Chemother. 25, 1–5 (1990).               geo/query/acc.cgi?acc=GSE251671. Deposited 20 December 2023.
+
+
+
+
+12 of 12       https://doi.org/10.1073/pnas.2409747121                                                                                                                                                              pnas.org
+
