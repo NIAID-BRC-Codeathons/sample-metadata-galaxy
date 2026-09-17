@@ -22,6 +22,13 @@ However, it was **subtly and confidently wrong** in a few places — making assu
 
 The agent can do most of the work of assembling metadata from public sources, but it currently makes confident errors that a careful human analyst would catch. The two failure modes above — misreading the paper and propagating upstream labels without checking against the data — are exactly the kinds of gaps that the `analysis-readiness` skill is designed to catch.
 
+It is also worth noting that **we explicitly asked the agent to do this assessment**. The average user will not — they will just start talking about analyzing data and expect the agent to handle the rest. So two reasonable first goals emerge from this case study:
+
+1. **Make the process more honest about what is known vs. not known.** The agent should flag inferred values, conflicts, and unresolved questions to the user rather than presenting them as fact.
+2. **Make it happen automatically.** Metadata construction and validation should kick in when a user starts talking about analyzing data in Orbit, without the user having to know these steps exist or ask for them.
+
+The skills in `skills/` are a first attempt at both goals.
+
 ## Artifacts
 
 - `project1/` — the full agent session: notebook, activity log, GEO data pulls, reconstructed metadata, and the original paper PDF.
