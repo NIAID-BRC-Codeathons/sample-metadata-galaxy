@@ -1,0 +1,10 @@
+element_identifier	Condition	Replicate	Batch 1	Batch 2	Batch 3
+GSM7985294_cip_0p78uM_r1	cip_0p78uM	1	MOC_1779_2	PA14	90min
+GSM7985295_cip_0p78uM_r2	cip_0p78uM	2	MOC_1779_2	PA14	90min
+GSM7985296_cip_0p78uM_r3	cip_0p78uM	3	MOC_1779_2	PA14	90min
+GSM7985297_cip_1p56uM_r1	cip_1p56uM	1	MOC_1779_2	PA14	90min
+GSM7985298_cip_1p56uM_r2	cip_1p56uM	2	MOC_1779_2	PA14	90min
+GSM7985299_cip_1p56uM_r3	cip_1p56uM	3	MOC_1779_2	PA14	90min
+GSM7985465_water_r1	water	1	MOC_1779_2	PA14	90min
+GSM7985466_water_r2	water	2	MOC_1779_2	PA14	90min
+GSM7985467_water_r3	water	3	MOC_1779_2	PA14	90min
