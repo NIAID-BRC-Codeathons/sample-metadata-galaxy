@@ -24,10 +24,10 @@ The skills are designed to fire automatically when a user starts talking about a
 
 ### 2. Case studies (`case_studies/`)
 
-Two case studies comparing agent behavior with and without the skills, using real published data:
+Two papers, each with two bundles — a **naive** run (no skills) and a **with-skills** run — so we can compare agent behavior with and without the skills on the same data:
 
-- **`broad/`** — a known quantity: a PNAS paper from a team member (Romano et al., 2024, [PMC11551328](https://pmc.ncbi.nlm.nih.gov/articles/PMC11551328/), GEO [GSE251671](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE251671)). We asked the agent to reconstruct sample metadata from public resources and checked it against ground truth. The agent was mostly right but subtly and confidently wrong in two places: it misread a water negative control as dosed, and it propagated SRA's single-end mislabeling without flagging that the allegedly single samples had two files with the same number of spots.
-- **A second case study** (in progress) — similar organism and treatment but a study where we do not know the authors, closer to what a naive user experiences. This will let us compare agent behavior with and without the skills on the same kind of data.
+- **`broad/`** — a known quantity: a PNAS paper from a team member (Romano et al., 2024, [PMC11551328](https://pmc.ncbi.nlm.nih.gov/articles/PMC11551328/), GEO [GSE251671](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE251671)). The naive run found the agent was mostly right but subtly and confidently wrong in two places: it misread a water negative control as dosed, and it propagated SRA's single-end mislabeling without flagging that the allegedly single samples had two files with the same number of spots. The with-skills run is not yet done.
+- **A second paper** (in progress) — similar organism and treatment but a study where we do not know the authors, closer to what a naive user experiences. Both bundles pending.
 
 ### 3. Learning feature (in progress)
 
