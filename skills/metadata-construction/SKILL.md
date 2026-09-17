@@ -49,11 +49,20 @@ Ask what they can tell you: biological question, assay, organism, accessions or 
 
 Find everything associated with the study. Cross-reference identifiers in both directions — e.g. BioProject ↔ SRA/GEO/ENA, PubMed/DOI ↔ BioProject/GEO/SRA, BioSample ↔ project and runs, anything in a README or data availability statement. Do not assume the provided files are the complete study.
 
+Practical notes:
+- GEO HTML pages are recaptcha-gated in headless fetches. Use NCBI E-utilities, GEO SOFT files, or GEO FTP instead. If a fetch returns "Checking your browser," stop — that body is not parseable metadata.
+- Save remote responses to files before parsing. Do not pipe remote HTTP content into Python or R — some agent sandboxes refuse this on purpose.
+- One GSM often maps to multiple SRRs (technical replicates, resequencing, split lanes). This is normal — do not treat each SRR as a biological sample.
+
 ### 3. Extract from all available sources
 
 Pull from public records (BioSample, SRA, GEO, ArrayExpress, PubMed, supplementary files), from the data itself (Galaxy dataset metadata, FASTQ headers, file names, read counts, collection structure), and from the user. Map every value to a sample. When a public-record sample ID differs from the user's, record the mapping and flag it.
 
+Record `library_layout` per run, not per series — the paper and GEO series-level metadata may say paired when individual runs are mixed. One run with a different layout is not an error in the data; it is a fact to record.
+
 File-derived values are `observed`. Filename-derived values are `inferred`. Neither is `confirmed`.
+
+If a `sample_id` or `condition_id` looks like it was built by concatenating fields (e.g. `project:pert:dose:strain:time:block`), the formatting is load-bearing — a formatting drift (e.g. dose rounding, case change) will not error, it will silently split replicates. Reconstruct the grammar from author code where available, not from examples. If a published ID has a token you cannot derive from other metadata, it is an intake column, not a comment — record it explicitly.
 
 ### 4. Reconcile across sources
 

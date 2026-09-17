@@ -78,11 +78,15 @@ Check anything that could be wrong — the items below are a floor, not a ceilin
 - reference build, organism, assay, and annotation are compatible;
 - sample count and replication are suitable for the requested inference;
 - any URLs, accessions, or external references resolve and point to the intended resource;
-- no value appears fabricated, templated, or copied from an unrelated study.
+- no value appears fabricated, templated, or copied from an unrelated study;
+- if sample IDs or condition IDs are composite (concatenated from other fields), the components are consistent with the ID — a formatting drift will silently split replicates without erroring;
+- batch composition is analytically valid, not just schema-valid — e.g. a batch missing controls or reference treatments may produce meaningless results even if every column is filled.
 
 ### 4. Test claims against the data
 
 Use the least expensive reliable check appropriate for each claim — e.g. inspect Galaxy dataset metadata, FASTQ headers, read counts, tabular headers, reference identifiers, or resolve URLs and accessions. A similar number of records in two files is supporting evidence for pairing, not proof by itself. Two files labeled "single" may be suspected mates — use that as a hypothesis, but flag it as `inferred` and do not treat it as confirmed until verified.
+
+Do not circularly validate: if you generate an ID with a formula and then check that the same formula reproduces the ID, you have tested nothing. Check against the authors' published IDs or an independent source. The misses are the finding.
 
 ### 5. Classify every issue
 
