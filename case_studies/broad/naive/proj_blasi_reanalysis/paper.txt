@@ -1,0 +1,1249 @@
+                                                                                                                                                   ORIGINAL RESEARCH
+                                                                                                                                                   published: 30 April 2021
+                                                                                                                                          doi: 10.3389/fmicb.2021.626715
+
+
+
+
+                                              Gene Expression Profiling of
+                                              Pseudomonas aeruginosa Upon
+                                              Exposure to Colistin and Tobramycin
+                                              Anastasia Cianciulli Sesso 1† , Branislav Lilić 1† , Fabian Amman 2 , Michael T. Wolfinger 2,3 ,
+                                              Elisabeth Sonnleitner 1 and Udo Bläsi 1*
+                                              1
+                                               Max Perutz Labs, Vienna Biocenter (VBC), Department of Microbiology, Immunobiology and Genetics, University of Vienna,
+                                              Vienna, Austria, 2 Institute for Theoretical Chemistry, University of Vienna, Vienna, Austria, 3 Research Group Bioinformatics
+                                              and Computational Biology, Faculty of Computer Science, University of Vienna, Vienna, Austria
+
+
+                                              Pseudomonas aeruginosa (Pae) is notorious for its high-level resistance toward clinically
+                             Edited by:
+              Giuseppantonio Maisetta,        used antibiotics. In fact, Pae has rendered most antimicrobials ineffective, leaving
+                 University of Pisa, Italy    polymyxins and aminoglycosides as last resort antibiotics. Although several resistance
+                        Reviewed by:          mechanisms of Pae are known toward these drugs, a profounder knowledge of
+                     Dinesh Sriramulu,
+   Independent Researcher, Chennai,
+                                              hitherto unidentified factors and pathways appears crucial to develop novel strategies to
+                                   India      increase their efficacy. Here, we have performed for the first time transcriptome analyses
+                    Katherina Sewald,
+                                              and ribosome profiling in parallel with strain PA14 grown in synthetic cystic fibrosis
+    Fraunhofer Institute for Toxicology
+    and Experimental Medicine (FHG),          medium upon exposure to polymyxin E (colistin) and tobramycin. This approach did not
+                              Germany         only confirm known mechanisms involved in colistin and tobramycin susceptibility but
+                   *Correspondence:           revealed also as yet unknown functions/pathways. Colistin treatment resulted primarily
+                            Udo Bläsi
+                udo.blaesi@univie.ac.at
+                                              in an anti-oxidative stress response and in the de-regulation of the MexT and AlgU
+     † These authors have contributed         regulons, whereas exposure to tobramycin led predominantly to a rewiring of the
+                     equally to this work     expression of multiple amino acid catabolic genes, lower tricarboxylic acid (TCA) cycle
+                                              genes, type II and VI secretion system genes and genes involved in bacterial motility and
+                    Specialty section:
+          This article was submitted to       attachment, which could potentially lead to a decrease in drug uptake. Moreover, we
+            Antimicrobials, Resistance        report that the adverse effects of tobramycin on translation are countered with enhanced
+                    and Chemotherapy,
+                a section of the journal
+                                              expression of genes involved in stalled ribosome rescue, tRNA methylation and type II
+              Frontiers in Microbiology       toxin-antitoxin (TA) systems.
+        Received: 06 November 2020
+                                              Keywords: Pseudomonas aeruginosa, colistin, tobramycin, RNA-Seq, ribosome profiling, Ribo-seq
+           Accepted: 31 March 2021
+            Published: 30 April 2021
+                               Citation:      INTRODUCTION
+              Cianciulli Sesso A, Lilić B,
+Amman F, Wolfinger MT, Sonnleitner E          Pseudomonas aeruginosa (Pae) is an opportunistic pathogen known to cause nosocomial infections
+  and Bläsi U (2021) Gene Expression
+                                              that are particularly detrimental to immunocompromised individuals and to patients suffering
+ Profiling of Pseudomonas aeruginosa
+              Upon Exposure to Colistin
+                                              from cystic fibrosis (CF) (Williams et al., 2010). On the one hand, the pathogenic potential of
+                        and Tobramycin.       Pae is based on its metabolic versatility, permitting fast adaptation to changing environmental
+           Front. Microbiol. 12:626715.       conditions. On the other hand Pae can form biofilms and produce multiple virulence factors (Kerr
+     doi: 10.3389/fmicb.2021.626715           and Snelling, 2009; Gellatly and Hancock, 2013). Pae is characterized by high intrinsic resistance to
+
+
+Frontiers in Microbiology | www.frontiersin.org                                       1                                             April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                      Pae Expression Profile to Colistin/Tobramycin
+
+
+
+a wide variety of antibiotics. It can further develop resistance               through an unknown mechanism (Mlynarcik and Kolar, 2019).
+by acquisition of genetic determinants through horizontal gene                 Additionally, the MexXY-OprM and MexAB-OprM efflux pump
+transfer, as well as by mutational processes affecting “resistance             systems can provide low to moderate polymyxin resistance and
+genes” that are collectively termed the resistome (Wright, 2007;               tolerance respectively (Pamp et al., 2008; Muller et al., 2011;
+Fajardo et al., 2008; Breidenstein et al., 2011; Jaillard et al., 2017).       Poole et al., 2015).
+In this way, Pae has rendered most antibiotics ineffective, leaving                Aminoglycosides are positively charged antibiotics that
+polymyxins and aminoglycosides as last resort antibiotics.                     initially interact with LPS of Gram-negative Bacteria.
+    Polymyxins are polycationic cyclic antimicrobial peptides.                 Aminoglycosides require an energized membrane for
+Owing to their positively charged 2,4-diaminobuteric acid (Dab)                translocation into the cytoplasm. Once inside the cells, they
+moieties they can electrostatically interact with the negatively               bind to 16S rRNA at the A-site of the 30S ribosomal subunit,
+charged lipopolysaccharide (LPS) of the outer membrane (OM)                    disrupting translation and causing the synthesis of aberrant
+of Gram-negative bacteria, causing the displacement of LPS-                    polypeptides. These polypeptides can be inserted into the cell
+stabilizing divalent cations, Ca2+ and Mg2+ . This interaction is              membrane, causing membrane damage, which leads to further
+followed by insertion of the hydrophobic segments of the drug                  intracellular accumulation of aminoglycosides. The established
+into the OM and its penetration via a self-promoted uptake                     autocatalytic loop of membrane damage and their increased
+mechanism. Cell death subsequently occurs by disintegration of                 uptake results in stalling of ribosomes, and in complete inhibition
+the inner membrane (IM) and leakage of cellular components                     of protein synthesis (Krause et al., 2016).
+(El-Sayed Ahmed et al., 2020). Moreover, it has been reported that                 Covalent modifications of the negatively charged moieties
+polymyxins can exert their toxic effects by causing phospholipid               of LPS, 16S rRNA methylation by RNA methyltransferases,
+exchange between the OM and IM (Velkov et al., 2013),                          ribosomal mutations and aminoglycoside modifying enzymes
+inhibition of respiratory enzymes of the NADH oxidase family                   (AMEs) are exploited by Pae to counteract aminoglycosides
+(Deris et al., 2014), binding to bacterial DNA and disrupting                  (Poole, 2005; Garneau-Tsodikova and Labby, 2016; Krause
+its synthesis (Kong et al., 2011) and/or formation of reactive                 et al., 2016; Valderrama-Carmona et al., 2019). The main
+oxygen species (ROS) (Sampson et al., 2012; Yu et al., 2017).                  efflux system responsible for the extrusion of aminoglycosides
+Nevertheless, the mode of bactericidal action of polymyxins                    is MexXY-OprM (Poole, 2005). Its synthesis is controlled by
+in Pae remains controversial. For instance, a recent study                     PA5471, an anti-repressor of the mexXY operon repressor
+(O’Driscoll et al., 2018) indicated that polymyxin E (colistin)                MexZ (Morita et al., 2006; Hay et al., 2013). Additional
+does not exert its antibacterial effect by puncturing the IM or                efflux systems include MexAB-OprM and an ortholog of the
+by inhibiting DNA replication and transcription. In addition, the              EmrE multidrug transporter of Escherichia coli (Poole, 2005;
+exact contribution of polymyxin induced ROS to lethality of Pae                Nasie et al., 2012). Moreover, protein chaperones such as
+is largely inconclusive (Brochmann et al., 2014; Lima et al., 2019).           GroEL/ES, GrpE and HtpX, as well as the AmgR/AmgS TCS
+    In contrast, the regulatory circuits underlying polymyxin                  have been implicated in protecting the cells from polypeptides
+resistance are well understood in Pae. An increased resistance                 arising from drug induced mistranslation (Hinz et al., 2011;
+is conveyed by reduction of the net negative charge of LPS,                    Wu et al., 2015).
+resulting in diminished polymyxin binding (Jeannot et al.,                         A number of studies have confirmed the safety of colistin
+2017; Poirel et al., 2017). The cellular machinery for covalent                for treatment of acute pulmonary infections, while tobramycin
+modification of negatively charged lipid A of LPS with                         was proven effective in suppressing chronic Pae airway infections
+positively charged 4-amino-L-arabinose (Lara4N) is encoded                     in CF patients (Ramsey et al., 1999; Garnacho-Montero et al.,
+by the arn (pmr) operon. This operon is activated by at                        2003). However, in recent years a gradual decrease in baseline
+least five two-component systems (TCS) including PhoP/PhoQ                     susceptibility of Pae to these last resort antibiotics was observed
+(Barrow and Kwon, 2009), PmrA/PmrB (McPhee et al., 2003),                      (Obritsch et al., 2004; Wi et al., 2017; Jain, 2018). As a
+ParR/ParS (Fernández et al., 2010), ColR/ColS and CprR/CprS                    refined understanding of the molecular regulatory circuits that
+(Fernández et al., 2012; Gutu et al., 2013). In addition, the                  contribute to resistance, tolerance and persister cell formation
+cprA gene product was found to be required for polymyxin                       is key to develop new strategies/tools to combat Pae, we have
+resistance conferred by the PhoP/PhoQ, PmrA/PmrB, and                          employed RNA-seq and Ribo-seq in parallel to monitor gene
+CprR/CprS TCSs (Gutu et al., 2013). Furthermore, a number of                   expression responses of the clinical Pae isolate PA14 grown in
+other functions contributing to intrinsic polymyxin resistance                 synthetic cystic fibrosis sputum medium (SCFM) to inhibitory
+have been identified, which mainly affect LPS biosynthesis-                    concentrations of colistin and tobramycin.
+related functions (regulatory functions, metabolism, synthesis                     In addition to arn operon activation, which is known to
+and transport) (Fernández et al., 2013; Zhang et al., 2017;                    result in reduced drug uptake, Pae responds to colistin by
+Sherry and Howden, 2018). Moreover, overproduction of                          launching an anti-oxidative response, and by de-regulating
+spermidine and of the OM protein OprH have been shown                          genes belonging to the MexT and AlgU regulons. Concerning
+to contribute as well to polymyxin susceptibility, as they can                 tobramycin, Pae seemingly goes through metabolic changes
+interact with divalent cation-binding sites of LPS, making them                and envelope remodeling to prevent drug uptake, whereas its
+inaccessible for polymyxin binding (Young et al., 1992; Johnson                ramifications on translational processes are met with the stalled
+et al., 2011). On the other hand, a reduced expression of                      ribosome rescue response and the activation of type II toxin-
+oprD increased cell survival in the presence of polymyxins                     antitoxin (TA) systems.
+
+
+Frontiers in Microbiology | www.frontiersin.org                            2                                       April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                  Pae Expression Profile to Colistin/Tobramycin
+
+
+
+
+MATERIALS AND METHODS                                                       translation, and then harvested by centrifugation at 8,000 g
+                                                                            for 15 min at 0◦ C. The cells were washed in 50 ml ice cold
+Bacterial Strains and Growth Conditions                                     lysis buffer (10 mM MgOAc, 60 mM NH4 Cl, 10 mM TRIS-
+The clinical isolate Pae PA14 (Rahme et al., 1995) was used                 HCl, pH 7.6) and again pelleted by centrifugation at 5000 g
+in all gene expression profiling experiments. Synthetic cystic              for 15 min at 4◦ C. The pellets were re-suspended in 1 ml
+fibrosis sputum medium (SCFM) was prepared as previously                    ice cold lysis buffer containing 0.2% Triton X-100, 100 µg/ml
+described (Palmer et al., 2007) with the modification specified in          chloramphenicol and 100 U/ml DNAse I, frozen in liquid
+Tata et al. (2016). PA14 cells were grown aerobically in 500 ml             nitrogen and cryogenically pulverized by repeated cycles of
+SCFM at 37◦ C. At an OD600 of 1.7, the cultures were treated                grinding in a pre-chilled mortar and freezing in a dry ice/ethanol
+with inhibitory concentrations of colistin (8 µg/ml; Sigma) and             bath. These lysates were centrifuged at 15,000 g for 30 min at
+tobramycin (64 µg/ml; Sigma), respectively, or water was added              4◦ C to remove cellular debris. Hundred µl aliquots of the cleared
+as a control. The cultures reached OD600 of 2 approximately                 lysates were treated with 4 µl of Micrococcal Nuclease (MNase,
+2 h after exposure to the antibiotics, as can be inferred from              NEB) and 6 µl of the RiboLock RNase inhibitor (Thermo
+Supplementary Figure 1. 10 ml samples were withdrawn for                    Scientific) for 1 h at 25◦ C with continuous shaking at 450 rpm.
+RNA-seq analyses, while the remaining culture volume was                    The lysates were then layered onto 10–40% linear sucrose density
+used for the Ribo-seq experiments. The strain PA141algU was                 gradients in lysis buffer and centrifuged at 256,000 g for 3 h
+constructed as described in the Supplementary Text.                         at 4◦ C. Five hundred µl gradient fractions were collected by
+                                                                            continuously monitoring the absorbance at 260 nm. The RNA
+RNA-Seq                                                                     was extracted from fractions containing 70S ribosomes with
+Total RNA was isolated from two biological replicates using                 phenol-chloroform-isoamyl alcohol (25:24:1), and precipitated
+the Trizol method (Ambion) according to the manufacturer’s                  with ethanol. The samples were then treated with DNase I
+instructions. The samples were treated with DNase I (TURBOTM                (TURBOTM DNase, Thermo Scientific) and separated on a 15%
+DNase, Thermo Scientific), followed by phenol-chloroform-                   polyacrylamide gel containing 8M urea. Ribosome protected
+isoamyl alcohol (25:24:1) extraction and ethanol precipitation.             mRNA fragments (ribosomal footprints) ranging in size of 20–40
+Ribosomal RNA was depleted with The Ribo-ZeroTM rRNA                        nucleotides were removed and eluted from the polyacrylamide
+Removal Kit. The libraries were constructed using the NEBNext       R       gel by overnight incubation in elution buffer (0.3 M NaOAc,
+UltraTM Directional RNA Library Prep Kit for Illumina .         R           1 mM EDTA) at 4◦ C, which was followed by an additional
+Hundred bp single end sequence reads were generated using the               round of phenol-chloroform-isoamyl alcohol (25:24:1) extraction
+Illumina HiSeq200 platform at the in house Next Generation                  and ethanol precipitation. The quality of RNA samples was
+Sequencing Facility (VBCF, Vienna, Austria1 ). Quality control              subsequently analyzed with a 2100 Bioanalyzer and an Aligned
+assessment of the raw reads using FastqQC2 obviated further                 RNA 6000 Pico Kit (Aligned Technologies). The RNA was further
+pre-processing. Sequencing adapter removal was performed with               processed into cDNA libraries with NEBNextTM Small RNA
+cutadap (Martin, 2011). Mapping of the samples against the                  Library Prep Set for Illumina and their quality was assessed
+                                                                                                           R
+
+
+
+
+PA14 reference genome (NCBI accession number NC_008463.1)                   with the 2100 Bioanalyzer and a High Sensitivity DNA Kit
+was performed with Segemehl (Hoffmann et al., 2009) with                    (Agilent Technologies). Pipin PrepTM was used to purify the 140–
+default parameters. Reads mapping to rRNA or tRNA genes were                160 bp cDNA products which corresponded to adapter-ligated
+discarded from all data and ignored for all follow-up analyses.             20–40 nucleotide long ribosomal footprints. RNA sequencing
+The mapped sequencing data were prepared for visualization                  and data processing was performed as described above. The raw
+using the ViennaNGS tool box and visualized with the UCSC                   sequencing data were deposited in the ENA under accession
+Genome Browser (Wolfinger et al., 2015). Reads per gene were                number PRJEB41027.
+counted using BEDTools (Quinlan and Hall, 2010) and the Refseq
+annotation of Pae (NC_002516.2). Differential gene expression
+analysis was performed with DESeq (Anders and Huber, 2010).                 RESULTS AND DISCUSSION
+All genes with a fold-change (FC) greater than ±2 and a
+multiple testing adjusted p-value below 0.05 were considered                Quality Assessment and Data Analysis
+to be significantly modulated. The raw sequencing data were                 To determine the effect of colistin and tobramycin on gene
+deposited in the European Nucleotide Archive (ENA) under                    expression, parallel RNA-seq and Ribo-seq experiments were
+accession number PRJEB41029.                                                performed with planktonically grown PA14. The cultures
+                                                                            reached OD600 of 2 approximately 2 h after exposure to the
+Ribo-Seq                                                                    antibiotics, as can be inferred from Supplementary Figure 1.
+Ribosome profiling of elongating ribosomes (Ribo-seq; Ingolia               As a control, total RNA and ribosome protected mRNA
+et al., 2009) was performed with the same cultures as used                  fragments (ribosomal footprints) were isolated from cultures
+for the RNA-seq analyses. Upon culture growth, the cells were               grown without antibiotics. As the number of ribosomal footprint
+treated for 10 min with chloramphenicol (300 µg/ml) to stop                 sequencing reads have been shown to correlate with those
+                                                                            obtained from RNA-seq experiments (Ingolia et al., 2009), we
+1
+    http://www.csf.ac.at                                                    first determined the representative gene expression correlations
+2
+    http://www.bioinformatics.babraham.ac.uk/projects/fastqc/               between RNA-seq and Ribo-seq. The number of RNA-seq and
+
+
+Frontiers in Microbiology | www.frontiersin.org                         3                                      April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                              Pae Expression Profile to Colistin/Tobramycin
+
+
+
+
+  FIGURE 1 | Scatter plots showing the correlation between normalized RNA-seq and Ribo-seq sequencing reads (BaseMean) obtained from two biological replicates
+  of (A) control, (B) colistin, and (C) tobramycin treated samples. ρ – Spearman correlation value.
+
+
+
+Ribo-seq sequencing reads were normalized (BaseMean), and                          exposure to colistin and tobramycin, respectively, whereas that
+the Spearman correlation value (ρ-value) between them was                          number in Ribo-seq amounted to 1124 and 1045 (Figure 2
+assessed for each condition (controls, colistin and tobramycin                     and Supplementary Table 1). The scatter plots depicting the
+treatment). The correlation coefficient between the average Ribo-                  correlation between RNA-seq and Ribo-seq gene FC values are
+seq and RNA-seq BaseMean expression values was 0.68 for the                        shown in Figure 3. Discrepancies in the number of de-regulated
+control, 0.81 for colistin, and 0.91 for tobramycin treated samples,               genes in RNA-seq when compared to Ribo-seq data have been
+respectively (Figure 1). Similar ρ-values have been also reported                  reported before (Blevins et al., 2018), highlighting the importance
+by other studies (Blevins et al., 2018).                                           of parallel application of these methods for assessment of
+    Next, the FC in transcript abundance between antibiotic                        gene expression. Interestingly, the vast majority of genes were
+treated and untreated samples was calculated. The following                        significantly differentially expressed solely at the transcriptional
+criteria were applied for differential gene expression analysis                    or at the translational level by colistin and tobramycin. 1546 genes
+and interpretation: (i) only annotated genes deposited in the                      were de-regulated by colistin exclusively at the transcriptional
+Pseudomonas genome database (Winsor et al., 2016) were                             level, whereas 614 genes were only affected at the translational
+considered for comparison; (ii) genes with a low expression level                  level. In case of tobramycin 2778 genes showed FC values that
+(less than 100 RNA-seq or 50 Ribo-seq reads) were disregarded;                     exceeded ± 2 only in the RNA-seq data, while 274 genes were
+(iii) for all data sets a p-value (adjusted for multiple testing) of               differentially expressed only in the Ribo-seq data. Moreover, 173
+0.05 was set as a threshold for significance and (iv) the change                   and 75 transcripts displayed opposite FC values in the two data
+in FC had to exceed ± 2 for a given gene to be regarded as                         sets after treatment with colistin and tobramycin, respectively
+differentially expressed. When compared with the sequencing                        (Figure 2 and Supplementary Table 1). These results showed
+data acquired from the non-treated samples, 2056 and 3558                          that the differentially abundant transcripts observed with RNA-
+genes were found to be differentially abundant in RNA-seq after                    seq did not highly correlate with the outcome of the Ribo-seq
+
+
+Frontiers in Microbiology | www.frontiersin.org                                4                                           April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                               Pae Expression Profile to Colistin/Tobramycin
+
+
+
+
+  FIGURE 2 | Venn diagram showing the number of transcripts with increased (I), decreased (D) or opposite (O) abundance in RNA-seq and Ribo-seq data obtained
+  after (A) colistin treatment and (B) tobramycin treatment. For significance, only transcripts with a fold-change ≥ 2 or ≤ –2 and a multiple testing adjusted
+  p-value ≤ 0.05 were considered. The corresponding transcripts and ribosomal footprints with increased, decreased and opposite abundance are listed in
+  Supplementary Table 1.
+
+
+
+analyses and vice versa. An explanation for this observation could                  related to transcriptional regulators, RNA processing and
+be that the expression of these genes is post-transcriptionally                     translation, whereas the most down-regulated gene functions are
+regulated. In any case, the patterns of PseudoCAP functional                        involved in energy metabolism, carbon compound catabolism
+class distribution of annotated transcripts with altered expression                 and cell wall/LPS/capsule synthesis. Interestingly, motility
+in response to colistin or tobramycin were similar for the                          and attachment genes were prominently down-regulated by
+transcriptome and translatome data (Figure 4).                                      tobramycin at the transcriptional level, whereas amino acid
+                                                                                    biosynthesis and metabolism genes were apparently more
+                                                                                    negatively affected at the translational level (Figure 4).
+Known Gene Expression Responses to                                                      To find additional players and pathways involved in colistin
+Colistin and Tobramycin                                                             and/or tobramycin resistance in Pae, we next took a closer look
+To validate our data, we first scrutinized an assortment of genes                   at all genes which displayed a ±10 FC in transcript abundance in
+known to be involved in maintenance of intrinsic and/or adaptive                    antibiotic treated samples in the RNA-seq and/or Ribo-seq data
+resistance of Pae toward colistin and tobramycin. In the case                       sets (Supplementary Table 1).
+of colistin, we assessed the expression levels of the oprD, pmrA,
+and pmrB transcripts and of genes involved in the synthesis (i)
+and modification of LPS (such as the arn operon, pagL, lpxO2,                       Colistin Induces Oxidative Stress
+lpxC, and galU), (ii) of spermidine (PA14_63110 – PA14_63120),                      Response Genes
+(iii) of the short-chain dehydrogenase/reductase family protein                     The accepted mode of action of polymyxins, i.e., causing
+CprA (PA14_43311) and (iv) of the MexXY (PA14_38395-AmrB)                           a lesion in the IM, has been challenged by the finding
+and MexAB-OprM efflux pumps. As anticipated, the above                              that even supra-bactericidal colistin concentrations induced
+mentioned genes were up-regulated upon colistin treatment, with                     minor loss of intracellular components (O’Driscoll et al.,
+the exception of oprD whose expression was down-regulated                           2018). However, polymyxins are also known to elicit oxidative
+(Supplementary Table 2).                                                            damage in Bacteria through the production of ROS, such
+    In the case of tobramycin, the abundance of genes known to                      as superoxide O2 − , hydrogenperoxide H2 O2 and hydroxy
+be involved in (i) drug modification (aph), (ii) target binding                     radicals ·OH (El-Sayed Ahmed et al., 2020). Both O2 − and
+inhibition (rsmE), (iii) extrusion (mexXY operon anti-repressor                     H2 O2 can injure proteins that possess iron–sulfur ([Fe–S])
+PA14_72210), (iv) maintenance of the cell membrane (groEL/ES,                       clusters as cofactors. The maintenance of [Fe–S] proteins
+grpE, and htpX) as well as the genes encoding the AmgR/AmgS                         is of importance as they are required for many biological
+(OmpR/EnvZ) TCS were scrutinized. The transcription and/or                          processes, including protein biosynthesis, respiration, central
+translation of all the above mentioned genes was enhanced upon                      metabolism, photosynthesis, nitrogen fixation, DNA repair,
+tobramycin treatment (Supplementary Table 2).                                       RNA modification and gene regulation (Roche et al., 2013;
+    At a glance, energy metabolism-, translation-, and                              Kimura and Suzuki, 2015). Polymyxin induced oxidative
+transcription- functional classes of genes were up-regulated                        damage has been reported for Gram-negative and Gram-
+after colistin exposure. On the other hand, colistin appears                        positive species, including Acinetobacter boumannii (Sampson
+to negatively affect the abundance of mRNAs encoding                                et al., 2012), Pae (Brochmann et al., 2014; Lima et al.,
+functions involved in transport of small molecules, motility and                    2019), Bacillus subtilis, and the natural producer Paenibacillus
+attachment. Moreover, it translationally impaired expression of                     polymyxa (Yu et al., 2019). Studies performed on the Gram-
+membrane protein genes (Figure 4).                                                  positive P. polymyxa provided a detailed explanation of how
+    The functional classes representing the majority of                             polymyxins might lead to ROS production. It has been
+predominantly positively affected genes by tobramycin are                           hypothesized that colistin stimulates the tricarboxylic acid
+
+
+Frontiers in Microbiology | www.frontiersin.org                                 5                                           April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                                 Pae Expression Profile to Colistin/Tobramycin
+
+
+
+
+  FIGURE 3 | Scatter plots showing the correlation between gene expression fold-changes in RNA-seq and Ribo-seq data obtained after (A) colistin treatment and (B)
+  tobramycin treatment. The X-axis corresponds to the RNA-seq data, or transcriptome, and the Y -axis to the Ribo-seq data, or translatome.
+
+
+
+
+  FIGURE 4 | PseudoCAP functional class distribution of annotated genes with altered expression in response to colistin or tobramycin. (A) Up-regulated and (B)
+  down-regulated genes in colistin treated samples. Blue and pink bars indicate the number of de-regulated genes based on the RNA-seq and Ribo-seq data,
+  respectively. (C) Up-regulated and (D) down-regulated genes in tobramycin treated samples. Brown and orange bars indicate the number of de-regulated genes
+  based on the RNA-seq and Ribo-seq data, respectively.
+
+
+
+(TCA) cycle through an increase in the production of isocitrate                      concentration of O2 − surges intracellularly, where it can be
+(icdA), α-ketoglutaric (sucB), and malate (mdh) dehydrogenases,                      converted to H2 O2 by the superoxide dismutase (SOD). The
+which in turn leads to increased NADH production and                                 sodA (Mn-SOD) and sodB (Fe-SOD) genes were up-regulated
+enhanced respiration rates (Yu et al., 2019). Accordingly, the                       in P. polymyxa in the presence of colistin (Yu et al., 2017),
+
+
+Frontiers in Microbiology | www.frontiersin.org                                  6                                            April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                       Pae Expression Profile to Colistin/Tobramycin
+
+
+
+while inactivation of sodB in the Gram-negative bacterium                  TABLE 1 | Gene expression response of PA14 grown in the presence of colistin
+                                                                           versus untreated control.
+A. boumannii augmented its susceptibility to the same drug
+(Heindorf et al., 2014). Moreover, the involvement of sodC                 Gene name      Gene ID         Gene product                  RNA-seq Ribo-seq
+(CuZn-SOD) and catalase encoding katA genes in polymyxin                                                                                  FC1         FC
+resistance was observed in A. boumannii and Staphylococcus
+                                                                           Oxidative stress response genes
+aureus, respectively (Antonic et al., 2013; Pournaras et al., 2014).
+                                                                           ahpF           PA14_01720      Alkyl hydroperoxide            52.542       4.99
+    In our study, exposure of Pae to inhibitory concentration
+                                                                                                          reductase
+of colistin resulted in an up-regulation of genes involved in
+                                                                           katA           PA14_09150      Catalase                        8.45        4.75
+the oxidative stress response (Table 1 and Supplementary
+                                                                           mexI           PA14_09520      RND efflux transporter          2.31        2.5
+Table 1). These genes include aphF (Ochsner et al., 2000b),                mexH           PA14_09530      RND efflux membrane fusion      3.36        ND3
+iscR (PA14_14710) (Romsang et al., 2014), the PA14_21570-                                                 protein
+PA14_21580-PA14_21590-PA14_21600 operon (Farrant et al.,                   mexG           PA14_09540      Hypothetical protein            4.7          4
+2020), and PA14_22320 (Salunkhe et al., 2005). Next, we assessed           PA14_14710     PA14_14710      Rrf2 family protein             9.31        17.2
+whether additional genes required for alleviation of ROS were              PA14_16310     PA14_16310      MFS permease                   22.54        3.98
+differentially expressed upon colistin treatment, but were initially       PA14_21570     PA14_21570      Hypothetical protein           12.84        8.05
+not accounted for due to the set ±10 FC threshold. The                     PA14_21580     PA14_21580      Hypothetical protein           15.15        6.37
+catalase encoding katA and katB genes (Brown et al., 1995; Ma              PA14_21590     PA14_21590      Hypothetical protein           10.72         9
+et al., 1999), as well as the gene encoding their regulator OxyR           PA14_21600     PA14_21600      Hypothetical protein            9.95        6.61
+(Wei et al., 2012) were up-regulated at both the transcriptional           PA14_22320     PA14_22320      Hypothetical protein            10.1        3.97
+and translational level (Table 1 and Supplementary Table 1).               PA14_35160     PA14_35160      Hypothetical protein            4.89        2.74
+However, the alkyl hydroperoxide reductase gene ahpB (Ochsner              soxR           PA14_35170      Redox-sensing activator of      3.86        3.02
+et al., 2000b) and the superoxide dismutase gene sodB (Hassett                                            soxS
+et al., 1993, 1995) were only found to be up-regulated in the              PA14_53300     PA14_53300      Alkyl hydroperoxide            106.45       ND
+RNA-seq data (Table 1 and Supplementary Table 1). Moreover,                                               reductase AhpB
+                                                                           sodB           PA14_56780      Cation-transporting P-type      9.57        ND
+the soxR gene and the majority of genes regulated by the redox-
+                                                                                                          ATPase
+responsive SoxR regulator (mexG, mexH, mexI, PA14_16310,
+                                                                           katB           PA14_61040      Superoxide dismutase            9.26        2.91
+and PA14_35160) (Palma et al., 2005) displayed an increased
+                                                                           oxyR           PA14_70560      LysR family transcriptional     2.43        2.72
+transcript and ribosomal footprint abundance (Table 1 and                                                 regulator
+Supplementary Table 1).                                                    Iron homeostasis genes
+    The toxicity of ROS-generating agents is magnified by ferrous          exbB1          PA14_02500      Transport protein ExbB          –2.93        X4
+ions (Fe2+ ) through the Fenton reaction (Kohanski et al., 2007;           exbD1          PA14_02510      Transport protein ExbD         –10.34        X
+Yeom et al., 2010), wherein H2 O2 is oxidized by Fe2+ to generate          pchA           PA14_09210      Salicylate biosynthesis         –3.35      17.28
+OH radicals. These can inactivate enzymes and cause DNA and                                               isochorismate synthase
+membrane damage, leading to growth arrest and ultimately to                pchB           PA14_09220      Isochorismate-pyruvate          –3.09      13.26
+cell death (Yeom et al., 2010). Thus, Bacteria generally establish                                        lyase
+a tight control on expression of iron homeostasis genes. For               pchC           PA14_09230      Pyochelin biosynthetic          –2.35       6.34
+                                                                                                          protein PchC
+instance, in P. polymyxa the levels of the transcriptional regulator
+                                                                           pchD           PA14_09240      Pyochelin biosynthesis          –6.01       ND
+Fur, which represses iron acquisition genes, are increased upon
+                                                                                                          protein PchD
+colistin treatment (Yu et al., 2017). Fe2+ can be directly taken up
+                                                                           pchR           PA14_09260      Transcriptional regulator       ND          4.48
+from environment or it can be generated through reduction of                                              PchR
+free intracellular ferric (Fe3+ ) ions bound to siderophores such          pchE           PA14_09270      Dihydroaeruginoic acid          ND          6.47
+as pyoveridine (PVD) or pyochelin (PCH), to iron-sulfur ([Fe–S])                                          synthetase
+cluster proteins or to heme (Ochsner et al., 2000a; Ratledge and           pchF           PA14_09280      Pyochelin synthetase            –2.56      11.04
+Dover, 2000; Wandersman and Delepelaire, 2004; Cartron et al.,             pchG           PA14_09290      Pyochelin biosynthetic          –2.25      13.01
+2006). Therefore, we also scrutinized the levels of transcripts                                           protein PchG
+encoding genes for iron acquisition and storage upon exposure              pchH           PA14_09300      ABC transporter                 –3.52       9.05
+to colistin. As judged from the RNA-seq data, the genes required                                          ATP-binding protein
+                                                                           pchI           PA14_09320      ABC transporter                 –2.91      13.46
+for PVD biosynthesis and transport (Lamont and Martin, 2003),
+                                                                                                          ATP-binding protein
+for heme uptake (has locus; Ochsner et al., 2000a), the Feo system
+                                                                           fptA           PA14_09340      Fe(III)-pyochelin outer         –4.70       7.57
+of Fe2+ uptake and the TonB2-ExbB1-ExbD1 complex (Zhao                                                    membrane receptor
+and Poole, 2000), which serves as an energy coupler for active             PA14_20000     PA14_20000      Transmembrane sensor           –11.29        X
+iron transport across the outer membrane, were down-regulated              hasR           PA14_20010      Heme uptake outer              –32.17        X
+(Table 1 and Supplementary Table 1). In addition, the majority                                            membrane receptor HasR
+of these genes was apparently not efficiently translated in neither        hasAp          PA14_20020      Heme acquisition protein      –1282.44       X
+the control nor in the colistin treated samples (≤50 Ribo-seq                                             HasAp
+reads). Visual inspection of their sequencing profiles in the UCSC         hasD           PA14_20030      Transport protein HasD         –38.16        X
+Genome Browser (Wolfinger et al., 2015) revealed a very low                                                                                       (Continued)
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                        7                                             April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                                          Pae Expression Profile to Colistin/Tobramycin
+
+
+
+TABLE 1 | Continued                                                                       TABLE 1 | Continued
+
+Gene name        Gene ID         Gene product                 RNA-seq Ribo-seq            Gene name        Gene ID          Gene product                    RNA-seq Ribo-seq
+                                                                FC1         FC                                                                                FC1         FC
+
+hasE             PA14_20040      Metalloprotease secretion     –56.02        X            nirH             PA14_06680       Hypothetical protein             39.43       ND
+                                 protein                                                  nirG             PA14_06690       Transcriptional regulator        49.08       ND
+hasF             PA14_20050      Outer membrane protein        –27.96        X            nirL             PA14_06700       Heme d1 biosynthesis              37.8       ND
+pvdS             PA14_33260      Extracytoplasmic-function     –12.48        X                                              protein NirL
+                                 sigma-70 factor                                          PA14_06710       PA14_06710       Transcriptional regulator        29.29       ND
+pvdG             PA14_33270      Protein PvdG                  –5.48         X            nirF             PA14_06720       Heme d1 biosynthesis             21.94       ND
+pvdL             PA14_33280      Peptide synthase              –15.82        X                                              protein NirF
+PA14_33420       PA14_33420      Hydrolase                     –1.98         X            nirC             PA14_06730       c-type cytochrome                 62.8       ND
+PA14_33610       PA14_33610      Peptide synthase              –14.69        X            nirM             PA14_06740       Cytochrome c-551                 67.09       ND
+pvdJ             PA14_33630      Protein PvdJ                  –31.99        X            nirS             PA14_06750       Nitrite reductase                24.69       ND
+pvdD             PA14_33650      Pyoverdine synthetase D       –16.41        X            nirQ             PA14_06770       Regulatory protein NirQ          11.98       ND
+fpvA             PA14_33680      Ferripyoverdine receptor      –5.16         X            nirO             PA14_06790       Cytochrome c oxidase              39.7       ND
+pvdE             PA14_33690      Pyoverdine biosynthesis       –4.05         X                                              subunit
+                                 protein PvdE                                             PA14_06800       PA14_06800       Hypothetical protein             119.94      5.39
+pvdF             PA14_33700      Pyoverdine synthetase F       –2.71         X            norC             PA14_06810       Nitric-oxide reductase           87.15       3.2
+pvdO             PA14_33710      Protein PvdO                  –10.04        X                                              subunit C
+pvdN             PA14_33720      Protein PvdN                  –6.41         X            norB             PA14_06830       Nitric-oxide reductase           134.06      3.35
+PA14_33730       PA14_33730      Dipeptidase                   –3.91         X                                              subunit B
+opmQ             PA14_33750      Outer membrane protein         –4.9         X            norD             PA14_06840       Dinitrification protein NorD     328.15      2.77
+PA14_33760       PA14_33760      ABC transporter               –3.12         X            narK1            PA14_13750       Nitrite extrusion protein 1      –59.67       X
+                                 ATP-binding                                              narK2            PA14_13770       Nitrite extrusion protein 2      –22.48       X
+                                 protein/permease                                         narG             PA14_13780       Respiratory nitrate              –2.33        X
+PA14_33780       PA14_33780      Transmembrane sensor          –1.89         X                                              reductase alpha subunit
+pvdA             PA14_33810      L -ornithine N5-oxygenase     –10.84        X            nosL             PA14_20150       NosL protein                     56.67       3.16
+pvdQ             PA14_33820      Penicillin acylase-related    –8.57         X            nosY             PA14_20170       NosY protein                     94.96       3.06
+                                 protein                                                  nosF             PA14_20180       NosF protein                     93.83       3.93
+feoC             PA14_56670      Hypothetical protein          –9.56         X
+                                                                                          nosD             PA14_20190       Copper ABC transporter           34.68       3.5
+feoB             PA14_56680      Ferrous iron transport        –38.95        X                                              periplasmic
+                                 protein B                                                                                  substrate-binding protein
+feoA             PA14_56690      Ferrous iron transport        –68.23        X            nosZ             PA14_20200       Nitrous-oxide reductase          61.22       ND
+                                 protein A
+                                                                                          nosR             PA14_20230       Regulatory protein NosR            73        ND
+MexT regulon genes
+                                                                                          anr              PA14_44490       Transcriptional regulator Anr    –2.36      –2.32
+PA14_22420       PA14_22420      Hypothetical protein          10.58        14.6
+                                                                                          Efflux pump genes
+PA14_22740       PA14_22740      Hypothetical protein          20.99       12.81
+                                                                                          mexJ             PA14_16800       Efflux transmembrane             15.43      22.07
+PA14_28410       PA14_28410      Hypothetical protein          21.19       10.47                                            protein
+mexF             PA14_32390      RND multidrug efflux           2.28        4.37          mexK             PA14_16820       Efflux transmembrane              6.19      12.07
+                                 transporter MexF                                                                           protein
+mexE             PA14_32400      RND multidrug efflux           9.8         4.98          oprJ             PA14_60820       Outer membrane protein            6.19        X
+                                 membrane fusion protein                                                                    OprJ
+                                 MexE
+                                                                                          mexD             PA14_60830       Multidrug efflux RND              4.32       7.02
+PA14_32480       PA14_32480      Hypothetical protein           3.72       4.726                                            transporter MexD
+PA14_32490       PA14_32490      Hypothetical protein           5.96        5.49          mexC             PA14_60850       Multidrug efflux RND              5.32      14.65
+PA14_39060       PA14_39060      Hypothetical protein          28.44       20.56                                            membrane fusion protein
+PA14_39420       PA14_39420      Hypothetical protein          18.31        9.99          Genes known to be up-regulated by polymyxins or in polymyxin
+PA14_41990       PA14_41990      Hypothetical protein           2.26       10.38          resistant Pae strains
+PA14_56620       PA14_56620      Hypothetical protein          31.66        7.99          PA14_24360       PA14_24360       Hypothetical protein             13.58      18.41
+PA14_56640       PA14_56640      MFS transporter               27.52        5.7           PA14_34170       PA14_34170       Hypothetical protein              95.8       49.9
+PA14_64530       PA14_64530      Hypothetical protein          195.2        6.35          PA14_41280       PA14_41280       Beta-lactamase                   111.9      42.62
+Anaerobic respiratory chain genes                                                         PA14_41290       PA14_41290       Hypothetical protein             144.84       X
+nirN             PA14_06650      c-type cytochrome             70.18        ND            PA14_63220       PA14_63220       Hypothetical protein             13.35      39.33
+nirE             PA14_06660      Uroporphyrin-III              69.22        2.2
+                                                                                          1 FC, fold-change, p-value ≤ 0.05.
+                                 c-methyltransferase
+                                                                                          2 Genes with FC ≤ –10 or ≥10 are represented in bold.
+nirJ             PA14_06670      Heme d1 biosynthesis          41.09        ND            3 ND, not differentially expressed, –2 ≤ FC ≤ 2 and/or p-value ≥ 0.05.
+                                 protein NirJ                                             4 X, not efficiently translated in the control and antibiotic treated samples, Ribo-seq
+
+                                                                        (Continued)       BaseMean ≤ 50.
+
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                                       8                                                April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                   Pae Expression Profile to Colistin/Tobramycin
+
+
+
+ribosomal coverage (Supplementary Figure 2), which might be               pathway ANR and the genes of the nar-operon, which encode
+caused by the applied iron rich culturing conditions. For example,        nitrate reductase, a complex that catalyzes the first step of
+siderophore synthesis in Pseudomonas sp. is fully inhibited at >4–        denitrification, were down-regulated after colistin treatment
+10 µM iron (Meyer, 1978; Dumas et al., 2013), a concentration             (Table 1 and Supplementary Table 1). It is possible that the
+far below of what was used in our experimental setup (100 µM              ParR/ParS TCS positively regulates several genes involved
+FeSO4 ). Counterintuitively, the genes for pyochelin synthesis            in anaerobic respiration (nirC, norC, norB, nosZ, and nosL)
+and uptake are apparently translated in the presence of colistin          (Fernández et al., 2010), however the reasons for activating
+(Table 1 and Supplementary Table 1). As pyochelin has a weaker            the anaerobic respiratory chain in presence of colistin remain
+affinity for iron when compared with pyoveridine (Dumas et al.,           to be elucidated.
+2013), ongoing synthesis could be necessary to meet sufficient
+metabolic requirements for iron.                                          Colistin Induced Up-Regulation of the
+    In most Gram-negative Bacteria the ferric uptake regulator
+Fur complexed with Fe2+ is responsible for preventing the
+                                                                          MexT Regulon
+synthesis of PVD and PCH in iron replete conditions (Ochsner              Colistin caused a significant up-regulation of the PA14
+and Vasil, 1996; Vasil and Ochsner, 1999). Analogously to                 genes PA14_22420, PA14_22740, PA14_28410, mexF, mexE,
+P. polymixa, fur was slightly up-regulated in both the RNA-               PA14_32480,         PA14_32490,      PA14_39060,         PA14_39420,
+seq and Ribo-seq data (Supplementary Table 1). Therefore,                 PA14_41990, PA14_56620, PA14_56640, and PA14_64530
+an explanation for the apparent translation of the PCH genes              (Table 1 and Supplementary Table 1), all of which belong to the
+remains elusive.                                                          MexT regulon (Tian et al., 2009a; Hill et al., 2019). MexT is a
+    An     additional    link    between     colistin    resistance       transcriptional regulator of the LysR family known to control the
+and iron homeostasis can be found in the increased                        expression of pathogenicity, virulence and antibiotic resistance
+synthesis of PA14_04180 (Table 1 and Supplementary                        determinants in Pae (Köhler et al., 1997a,b, 1999; Tian et al.,
+Table 1), a putative periplasmic protein with a bacterial                 2009a; Huang et al., 2019). MexT regulates gene expression
+oligonucleotide/oligosaccharide-binding (OB-fold) domain,                 either directly through binding to the promoter region of
+which can bind cationic ligands (Ginalski et al., 2004). Gene             distinct target genes, or indirectly through the activation of the
+PA14_04180 was found to be regulated by the calcium responsive            MexEF-OprN efflux pump (Tian et al., 2009a,b; Olivares et al.,
+TCS CarS/CarR and the ferrous iron responsive BqsS/BqsR TCS               2012). Furthermore, MexT is a redox-responsive transcriptional
+(Kreamer et al., 2012; Guragain et al., 2016). The BqsS/BqsR              activator implicated in diamide stress tolerance, in defense
+system contributes to cationic stress tolerance as it is regulating       against the innate immune system-derived oxidant hypochlorous
+the expression of several genes with known or predicted functions         acid and against nitrosative stress (Fetar et al., 2011; Fargier et al.,
+in polyamine biosynthesis/transport or polymyxin resistance in            2012; Farrant et al., 2020). Thus, the observed activation of MexT
+Pae (i.e., arnB, oprH, and PA14_63110) (Kreamer et al., 2015).            regulated genes might be a result of a defense mechanism being
+Moreover, a periplasmic OB-fold protein OmdA, similar to                  triggered against oxidative stress that arises as a consequence of
+PA14_04180, is controlled by the PmrA/PmrB TCS and was                    colistin activity. As mentioned above, the denitrification pathway
+found to confer resistance to polymyxin B (Pilonieta et al., 2009).       (nir, nor, and nos genes) was up-regulated in the presence
+    In contrast to P. polymyxa (Yu et al., 2019), we did not              of colistin (Table 1 and Supplementary Table 1), hence it is
+notice an up-regulation of TCA cycle genes or drastic changes in          tempting to speculate whether this antibiotic can additionally
+expression of the NADH oxidase family genes (Supplementary                inflict nitrosative stress to Pae. Moreover, Wang et al. (2013)
+Table 1). Alternatively, it has been hypothesized that O2 −               showed that the deletion of parR and parS in Pae strain PAO1
+production could be induced in Gram-negative Bacteria during              negatively impacts the transcript abundance of genes belonging
+transit of polymyxin molecules through the cell envelope                  to the MexT regulon, without affecting the expression levels
+(Kohanski et al., 2007; El-Sayed Ahmed et al., 2020) and via              of mexT.
+inhibition of type II NADH-quinone oxidoreductases (NDH-2)
+(Deris et al., 2014).                                                     Colistin Impacts the AlgU Regulon
+                                                                          Schulz et al. (2015) predicted that the primary regulon of the
+                                                                          alternative sigma factor σ22 (AlgU or AlgT) in PA14 comprises
+Denitrification Pathway Genes Are                                         341 genes, while their mRNA profiling approach uncovered
+De-Regulated in the Presence of Colistin                                  222 genes that were down-regulated in an algU deletion-
+The transcripts encoding for enzymes required for the                     and up-regulated in an algU overexpressing strain, or vice
+denitrification pathway (Schreiber et al., 2007), which include the       versa. Our RNA-seq and Ribo-seq data sets show that colistin
+nitrite reductase encoding nir-operon, the nitric oxide reductase         caused a change in expression at the transcriptional and/or the
+encoding nor-operon and the nitrous dioxide reductase                     translational level of 141 out of those 222 AlgU-dependent genes
+encoding nos-operon, were highly abundant relative to their               (Supplementary Table 3). Envelope stress inducing agents cause
+representation in cells growing in the absence of colistin. Similar       proteolytic degradation of the AlgU anti-sigma factor MucA
+trends in expression were observed in the Ribo-seq data set,              through regulated intramembrane proteolysis (RIP), which leads
+albeit not to the same degree (Table 1 and Supplementary                  to the release of AlgU from the IM, and ultimately to the
+Table 1). Surprisingly, the master regulator of the denitrification       activation of the AlgU regulon (Wood et al., 2006; Damron
+
+
+Frontiers in Microbiology | www.frontiersin.org                       9                                         April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                     Pae Expression Profile to Colistin/Tobramycin
+
+
+
+and Goldberg, 2012). It is possible that the genes controlled by          TABLE 2 | Gene expression response of PA14 grown in the presence of
+                                                                          tobramycin versus untreated control.
+AlgU play a significant role in colistin susceptibility in Pae, as
+polymyxins have long been implicated in triggering envelope               Gene name      Gene ID        Gene product                RNA-seq Ribo-seq
+stress in Gram-negative Bacteria. As the transcription of algU                                                                         FC1        FC
+itself was only slightly increased (2.65- fold) upon exposure to
+colistin (Supplementary Table 1), the regulation of the AlgU              Energy metabolism and tricarboxylic acid cycle cycle
+                                                                          PA14_06800 PA14_06800 Hypothetical protein             18.422           X3
+activity through RIP might explain the observed alterations in
+                                                                          ldh          PA14_19870 Leucine dehydrogenase          –13.38          –2.23
+expression of the AlgU regulon. In view of our studies, we
+                                                                          PA14_19900 PA14_19900 Pyruvate dehydrogenase E1 –104.77                –4.45
+compared the susceptibility toward colistin of PA14 with an                                           component subunit alpha
+isogenic in frame algU deletion mutant. When compared with                pdhB         PA14_19910 Pyruvate dehydrogenase E1 –94.26               –2.53
+the PA14 WT strain, the minimal inhibitory concentration of                                           component. beta chain
+colistin for PA141algU was approximately fourfold reduced                 PA14_19920 PA14_19920 Branched-chain alpha-keto         –78.9            X
+(Supplementary Figure 3), showing that the AlgU-dependent                                             acid dehydrogenase subunit
+                                                                                                      E2
+response counteracts the deleterious effects of colistin. In line
+                                                                          nqrA         PA14_25280 Na(+)-translocating              6.06          ND4
+with our observations, Murray et al. (2015) reported that a                                           NADH-quinone reductase
+transposon insertion in algU affects the fitness of Pae in the                                        subunit A
+presence of polymyxin B.                                                  nqrB         PA14_25305 Na(+)-translocating               ND           –4.6
+                                                                                                      NADH-quinone reductase
+                                                                                                      subunit B
+Colistin Affects Multiple Efflux-Pump                                     nqrC         PA14_25320 Na(+)-translocating             –2.08          –2.66
+Genes                                                                                                 NADH-quinone reductase
+Besides the aforementioned MexXY-OprM, MexAB-OprM,                                                    subunit C
+MexEF-OprN, and MexGHI-OpmD efflux pumps, a strong                        nqrD         PA14_25330 Na(+)-translocating             –5.14          –3.25
+                                                                                                      NADH-quinone reductase
+colistin-dependent induction of the mexCD-oprJ and mexJK
+                                                                                                      subunit D
+operons was observed (Table 1 and Supplementary Table 1).                 nqrE         PA14_25340 Na(+)-translocating             –7.06          –2.51
+Expression of mexCD-oprJ was shown to be enhanced by                                                  NADH-quinone reductase
+polymyxin B in an AlgU-dependent manner (Fraud et al., 2008),                                         subunit E
+whereas the MexJK efflux system has so far not been linked to             nqrF         PA14_25350 Na(+)-translocating              –9.6           ND
+polymyxin susceptibility.                                                                             NADH-quinone reductase
+                                                                                                      subunit F
+                                                                          nuoN         PA14_29850 NADH dehydrogenase             –20.61         –13.71
+Tobramycin Down-Regulates Amino Acid                                                                  subunit N
+Catabolism and Lower Tricarboxylic Acid                                   nuoM         PA14_29860 NADH dehydrogenase              –24.8          –3.99
+                                                                                                      subunit M
+Cycle Genes                                                               nuoL         PA14_29880 NADH dehydrogenase             –25.56          –3.4
+The insertional inactivation of the genes encoding the Nuo                                            subunit L
+and Nqr dehydrogenases was shown to increase tobramycin                   nuoK         PA14_29890 NADH dehydrogenase                –8           –6.97
+resistance of Pae (Schurek et al., 2008; Kindrachuk et al., 2011).                                    subunit K
+It was hypothesized that their inactivation causes a reduction            nuoJ         PA14_29900 NADH dehydrogenase              –5.16         –15.98
+                                                                                                      subunit J
+in the proton motive force and energy production, hence
+                                                                          nuoI         PA14_29920 NADH dehydrogenase              –9.55          –13.6
+limiting the active uptake of tobramycin. The nuo and nqr                                             subunit I
+genes were among the most down-regulated genes in the RNA-                nuoH         PA14_29930 NADH dehydrogenase               –10           –4.88
+seq and Ribo-seq data after tobramycin treatment (Table 2 and                                         subunit H
+Supplementary Table 1).                                                   nuoG         PA14_29940 NADH dehydrogenase             –46.39          –8.11
+    The catalytic activities of the isocitrate dehydrogenase Idh,                                     subunit G
+                                                                          nuoF         PA14_29970 NADH dehydrogenase I           –13.36          –8.16
+the dihydrolipoamide succinyltransferase SucB and the aconitate
+                                                                                                      subunit F
+hydratase PA14_53970 result in an increased NADH content                  nuoE         PA14_29980 NADH dehydrogenase             –13.55          –5.35
+and promote cellular respiration (Kohanski et al., 2007; Meylan                                       subunit E
+et al., 2017). Upon tobramycin treatment, a down-regulation was           icd          PA14_30190 Iisocitrate dehydrogenase       –3.09           ND
+observed for these genes of the lower part of the tricarboxylic           sucD         PA14_43940 Succinyl-CoA synthetase         –9.39          –3.27
+acid (TCA) cycle (idh, sucB, and PA14_53970) (Table 2 and                                             subunit alpha
+Supplementary Table 1). The diminished synthesis of enzymes               sucC         PA14_43950 Succinyl-CoA synthetase         –3.73           ND
+                                                                                                      subunit beta
+of the lower part of TCA cycle upon tobramycin treatment is
+                                                                          lpdG         PA14_43970 Dihydrolipoamide               –16.47          –5.26
+in agreement with a recent study, which suggested that Pae can                                        dehydrogenase
+bypass the decarboxylation steps of the cycle to reduce the NADH          sucB         PA14_44000 Dihydrolipoamide               –10.98          –9.15
+content, thus decreasing energy production. Growth of Pae on                                          succinyltransferase
+glyoxylate as a sole carbon source leads to the activation of this        sucA         PA14_44010 2-oxoglutarate                  –4.27          –4.12
+bypass, and consequently an increase in tobramycin resistance                                         dehydrogenase E1
+(Meylan et al., 2017).                                                                                                                       (Continued)
+
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                      10                                           April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                              Pae Expression Profile to Colistin/Tobramycin
+
+
+
+TABLE 2 | Continued                                                                TABLE 2 | Continued
+
+Gene name        Gene ID         Gene product          RNA-seq Ribo-seq            Gene name     Gene ID         Gene product                      RNA-seq Ribo-seq
+                                                          FC1       FC                                                                               FC1         FC
+
+PA14_53970 PA14_53970 Aconitate hydratase                 –18.05   –8.09           murE          PA14_57410      UDP-N-                             –55.53      –9.29
+Phenylalanine/Tyrosine catabolism                                                                                acetylmuramoylalanyl-D-
+fahA           PA14_38530 Fumarylacetoacetase             –30.98   –2.32                                         glutamate–2.
+maiA           PA14_38550 Maleylacetoacetate              –48.44   –3.57                                         6-diaminopimelate ligase
+                             isomerase                                             rmlC          PA14_68210      dTDP-4-dehydrorhamnose             –12.92      –3.34
+phhB           PA14_53000 Pterin-4-alpha-                 –14.76   –2.47                                         3.5-epimerase
+                             carbinolamine                                         Glycogen metabolism
+                             dehydratase                                           glgA          PA14_36570      Glycogen synthase                  –3.09       –5.06
+phhC           PA14_53010 Aromatic amino acid             –13.94   –2.78
+                                                                                   PA14_36580    PA14_36580      Glycosyl hydrolase                 –19.03     –11.25
+                             aminotransferase
+                                                                                   PA14_36590    PA14_36590      4-alpha-glucanotransferase         –34.5      –21.54
+Arginine catabolism
+                                                                                   PA14_36605    PA14_36605      Maltooligosyl trehalose            –27.97     –10.78
+arcD           PA14_68300 Arginine/ornithine antiporter –49.29      2.29
+                                                                                                                 synthase
+arcA           PA14_68330 Arginine deiminase              –77.18   –2.12
+arcB           PA14_68340 Ornithine                      –137.35   –4.19           PA14_36620    PA14_36620      Hypothetical protein               –44.57     –10.58
+                             carbamoyltransferase                                  PA14_36630    PA14_36630      Glycosyl hydrolase                 –25.56      –6.53
+Leucin/Valine/Isoleucin degradation and biosynthesis                               glgB          PA14_36710      Glycogen branching protein         –38.34     –15.21
+lpdV           PA14_35490 Dihydrolipoamide                –104.5   –6.56           PA14_36730    PA14_36730      Trehalose synthase                 –30.78     –16.68
+                             dehydrogenase                                         PA14_36740    PA14_36740      Hypothetical protein               –4.77       –5.04
+bkdB           PA14_35500 Branched-chain alpha-keto –91.67         –5.51           glgP          PA14_36840      Glycogen phosphorylase             –5.98       –2.93
+                             acid dehydrogenase subunit
+                                                                                   PA14_36850    PA14_36850      Hypothetical protein               –2.26        –2.9
+                             E2
+bkdA2          PA14_35520 2-oxoisovalerate               –104.31   –4.84           Pathogenicity and virulence
+                             dehydrogenase subunit beta                            tssL1         PA14_00925      Hypothetical protein               –17.71        X
+bkdA1          PA14_35530 2-oxoisovalerate                 –5.23     X             tssk1         PA14_00940      Hypothetical protein               –6.38       –4.32
+                             dehydrogenase subunit                                 tssJ1         PA14_00960      Lipoprotein                        –12.26      –3.67
+                             alpha                                                 PA14_00960    PA14_00970      Hypothetical protein               –33.07      –2.84
+gnyR           PA14_38430 Regulatory gene of              –12.88    ND
+                                                                                   pilJ          PA14_05360      Twitching motility protein PilJ    –2.63        ND
+                             gnyRDBHAL cluster. GnyR
+                                                                                   pilK          PA14_05380      Methyltransferase PilK             –2.59        ND
+gnyD           PA14_38440 Citronelloyl-CoA                –30.42   –2.32
+                             dehydrogenase. GnyD                                   chpA          PA14_05390      ChpA                               –11.54      –4.98
+gnyB           PA14_38460 Acyl-CoA                        –27.71     X             PA14_05400    PA14_05400      Methylesterase                     –20.38      –3.72
+                             carboxyltransferase subunit                           PA14_34000    PA14_34000      HsiH3                              –23.95      –5.54
+                             beta                                                  stk1          PA14_42880      Stk1                               –2.19         X
+gnyH           PA14_38470 Gamma-carboxygeranoyl-          –33.85   –3.73           stp1          PA14_42890      Stp1                               –5.56        –3.6
+                             CoA
+                                                                                   PA14_42900    PA14_42900      IcmF2                              –3.59       –2.57
+                             hydratase
+                                                                                   PA14_42910    PA14_42910      DotU2                              –11.99      –3.08
+gnyA           PA14_38480 Alpha subunit of                –26.11     X
+                             geranoyl-CoA carboxylase.                             PA14_42920    PA14_42920      HsiJ2                              –7.75       –3.42
+                             GnyA                                                  PA14_42940    PA14_42940      Lip2.2                             –20.14      –3.56
+ilvA2          PA14_47100 Threonine dehydratase             24.7    7.68           PA14_42950    PA14_42950      Fha2                               –25.63      –5.86
+Peptidoglycan biosynthesis                                                         PA14_42960    PA14_42960      Lip2.2                             –77.39        X
+ddl            PA14_57320 D-alanine–D-alanine ligase     –151.66   –8.63           PA14_42970    PA14_42970      Sfa2                               –13.89      –6.03
+murC           PA14_57330 UDP-N-acetylmuramate–L- –78.75           –9.99           PA14_42980    PA14_42980      ClpV2                              –10.86      –5.68
+                             alanine
+                                                                                   PA14_42990    PA14_42990      HsiH2                              –10.56      –4.18
+                             ligase
+murG           PA14_57340 UDPdiphospho-                    –44.2   –8.27           PA14_43000    PA14_43000      HsiG2                              –14.05       –3.6
+                             muramoylpentapeptide                                  PA14_43020    PA14_43020      Hypothetical protein               –10.04      –3.57
+                             beta-N-acetylglucosaminyl                             PA14_43030    PA14_43030      HsiC2                              –4.85         X
+                             transferase                                           flhB          PA14_45720      Flagellar biosynthesis             –5.62         X
+murD           PA14_57370 UDP-N-acetylmuramoyl-L-          –46.8   –10.56                                        protein FlhB
+                             alanyl-D-glutamate                                    fliR          PA14_45740      Flagellar biosynthesis             –8.13         X
+                             synthetase                                                                          protein FliR
+mraY           PA14_57380 Phospho-N-                      –13.67   –2.18
+                                                                                   fliQ          PA14_45760      Flagellar biosynthesis             –10.6         X
+                             acetylmuramoyl-
+                                                                                                                 protein FliQ
+                             pentapeptide-transferase
+                                                                                   fliP          PA14_45770      Flagellar biosynthesis             –6.41         X
+murF           PA14_57390 UDP-N-                          –11.12     X
+                                                                                                                 protein FliP
+                             acetylmuramoylalanyl-D-
+                             glutamyl-2.6-                                         fliN          PA14_45790      Flagellar motor switch             –2.05         X
+                             diaminopimelate–D-alanyl-D-                                                         protein
+                             alanine                                               flgK          PA14_50360      Flagellar hook-associated          –75.19      –3.47
+                             ligase                                                                              protein FlgK
+
+                                                                (Continued)                                                                                  (Continued)
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                               11                                            April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                                         Pae Expression Profile to Colistin/Tobramycin
+
+
+
+TABLE 2 | Continued                                                                         TABLE 2 | Continued
+
+Gene name        Gene ID         Gene product                  RNA-seq Ribo-seq             Gene name      Gene ID          Gene product                    RNA-seq Ribo-seq
+                                                                 FC1         FC                                                                               FC1         FC
+
+flgJ             PA14_50380      Flagellar rod assembly         –9.17       –4.58           opuCD          PA14_13600       ABC transporter                  –4.73       –4.41
+                                 protein/muramidase FlgJ                                                                    substrate-binding protein
+flgI             PA14_50410      Flagellar basal body P-ring    –6.22         X             nppA2          PA14_41130       ABC transporter                  –1.97         X
+                                 protein                                                                                    substrate-binding protein
+flgH             PA14_50420      Flagellar basal body L-ring    –3.99         X                                             NppA2
+                                 protein                                                    nppB           PA14_41140       Peptidyl nucleoside              –10.23        X
+flgG             PA14_50430      Flagellar basal body rod        ND          2.13                                           antibiotic ABC transporter
+                                 protein FlgG                                                                               permease NppB
+flgF             PA14_50440      Flagellar basal body rod        ND          3.54           nppC           PA14_41150       Peptidyl nucleoside              –30.15      –3.71
+                                 protein FlgF                                                                               antibiotic ABC transporter
+                                                                                                                            permease NppC
+pqsE             PA14_51380      Quinolone signal response      –80.7       –2.98
+                                 protein                                                    nppD           PA14_41160       Peptidyl nucleoside              –22.25      –4.98
+                                                                                                                            antibiotic ABC transporter
+pqsD             PA14_51390      3-oxoacyl-ACP synthase         –90.01      –5.86
+                                                                                                                            ATP-binding protein NppD
+pqsC             PA14_51410      PqsC                           –44.86      –4.06
+                                                                                            fabI           PA14_41170       NADH-dependent                   –21.89      –5.27
+pqsB             PA14_51420      PqsB                           –20.71      –2.34                                           enoyl-ACP reductase
+pqsA             PA14_51430      PqsA                           –3.73         X             phaG           PA14_50680       ShaA                             –44.11      –3.99
+PA14_55780       PA14_55780      Phosphate transporter          –46.70        X             phaF           PA14_50690       ShaB                             –29.33      –3.77
+PA14_55790       PA14_55790      Two-component sensor           –15.49      –2.70           phaE           PA14_50700       ShaC                             –12.23       –2.9
+PA14_55800       PA14_55800      Hypothetical protein           –2.21         X             phaD           PA14_50710       ShaD                             –7.08       –5.88
+PA14_55810       PA14_55810      Hypothetical protein           –2.73       –2.00           phaC           PA14_50720       ShaE                             –8.48       –7.78
+PA14_55820       PA14_55820      Two-component response         –25.16        X             dppC           PA14_58450       Dipeptide ABC transporter        –13.03      –3.55
+                                 regulator                                                                                  permease DppC
+PA14_55840       PA14_55840      Hypothetical protein           –84.76        X             dppD           PA14_58470       Dipeptide ABC transporter        –34.43     –10.45
+PA14_55850       PA14_55850      Hypothetical protein           –68.52        X                                             ATP-binding protein DppD
+PA14_55860       PA14_55860      Pilus assembly protein         –98.84        X             dppF           PA14_58490       Dipeptide ABC transporter        –21.5       –4.19
+PA14_55880       PA14_55880      Hypothetical protein          –105.85        X                                             ATP-binding protein DppF
+cpaF2            PA14_55890      Hypothetical protein          –111.85        X             Transcription and translation
+PA14_55900       PA14_55900      Type II secretion system       –36.82      –9.16           tufB           PA14_08680       Elongation factor Tu             92.01        3.09
+                                 protein                                                    rplC           PA14_08850       50S ribosomal protein L3         27.97        ND
+PA14_55920       PA14_55920      Hypothetical protein           –15.84      –2.00           rplD           PA14_08860       50S ribosomal protein L4         23.35        2.05
+PA14_55930       PA14_55930      Type II secretion system       –2.75        ND             tyrS           PA14_10420       Tyrosyl-tRNA synthetase          37.72       11.48
+                                 protein                                                    orf2           PA14_12350       (dimethylallyl)adenosine         23.15        2.17
+PA14_55940       PA14_55940      Pilus assembly protein         –8.25       –7.96                                           tRNA methylthiotransferase
+pilC             PA14_58760      Type 4 fimbrial biogenesis     –2.41        ND             rimM           PA14_15980       16S rRNA-processing              55.59        5.82
+                                 protein pilC                                                                               protein RimM
+pilD             PA14_58770      Type 4 prepilin peptidase      –11.48       ND             trmD           PA14_15990       tRNA (guanine-N(1)-)-            52.24        4.74
+                                 PilD                                                                                       methyltransferase
+coaE             PA14_58780      Dephospho-CoA kinase            ND          2.48           rpsB           PA14_17060       30S ribosomal protein S2         106.77       2.27
+fimU             PA14_60280      Type 4 fimbrial biogenesis     –2.46        ND             deaD           PA14_27370       ATP-dependent RNA                122.76       2.02
+                                 protein FimU                                                                               helicase
+pilW             PA14_60290      Type 4 fimbrial biogenesis     –11.99        X             infC           PA14_28660       Translation initiation factor    12.93        2.59
+                                 protein PilW                                                                               IF-3
+pilX             PA14_60300      Type 4 fimbrial biogenesis     –9.12         X             yadB           PA14_62510       Glutamyl-Q tRNA(Asp)             34.45        4.5
+                                 protein PilX                                                                               synthetase
+pilY1            PA14_60310      Type 4 fimbrial biogenesis     –4.06        ND             yhbC           PA14_62780       Hypothetical protein             14.37        ND
+                                 protein PilY1                                              smpB           PA14_63060       SsrA-binding protein              12.7        2.36
+pilE             PA14_60320      Type 4 fimbrial biogenesis     –3.43       –2.53           rpmE           PA14_66710       50S ribosomal protein L31        316.32       ND
+                                 protein PilE                                               prfH           PA14_72200       Peptide chain release            491.76       5.65
+PA14_65520       PA14_65520      Hypothetical protein           –21.34      –3.44                                           factor-like protein
+PA14_65540       PA14_65540      Hypothetical protein           –4.26         X             rnpA           PA14_73420       Ribonuclease P                   164.46      16.33
+estA             PA14_67510      Esterase EstA                  –11.29      –2.17           Stringent response and toxin-antitoxin systems
+ABC transporters and Sha antiporter                                                         PA14_01510     PA14_01510       Hypothetical protein             25.78        4.87
+opuCA            PA14_13580      ABC transporter                –28.83      –7.05           PA14_01520     PA14_01520       Hypothetical protein             28.84        4.71
+                                 ATP-binding protein                                        ndk            PA14_14820       Nucleoside diphosphate            6.47        ND
+opuCB            PA14_13590      ABC transporter permease        –6         –4.83                                           kinase
+
+                                                                         (Continued)                                                                                  (Continued)
+
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                                        12                                              April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                                      Pae Expression Profile to Colistin/Tobramycin
+
+
+
+TABLE 2 | Continued                                                                               The genes encoding ABC transporters such as the dipeptide
+                                                                                               permease Dpp, involved in the uptake of kasugamycin in E. coli
+Gene name        Gene ID          Gene product                   RNA-seq Ribo-seq
+                                                                                               (Shiver et al., 2016), the permease Npp, which plays a role in
+                                                                    FC1         FC
+                                                                                               the translocation of the uridyl peptide antibiotic pacidamycin
+obgE             PA14_60445       GTPase ObgE                      15.46       2.42            in Pae (Luckett et al., 2012; Pletzer et al., 2015) and the ATP-
+vapI             PA14_61840       Antitoxin HigA                    9.67       5.8             binding protein OpuC, showed a tobramycin-dependent down-
+rnk              PA14_69630       Nucleoside diphosphate           11.23       2.08            regulation in both, the RNA-seq and Ribo-seq data. Moreover,
+                                  kinase regulator                                             the Na+ /H+ antiporter pha (sha) operon important for the
+spoT             PA14_70470       Guanosine-30 .50 -                9.2        3.64            homeostasis of monovalent cations (Kosono et al., 2005) was also
+                                  bis(diphosphate)
+                                  30 -pyrophosphohydrolase
+                                                                                               strongly down-regulated after exposure to tobramycin (Table 2
+                                                                                               and Supplementary Table 1). The Na+ /H+ Sha antiporter shows
+1 FC, fold-change, p-value ≤ 0.05.
+2 Genes with FC ≤ –10 or ≥10 are represented in bold.
+                                                                                               similarity to the membrane subunits of the respiratory Nuo
+3 X, not efficiently translated in the control and antibiotic treated samples, Ribo-seq        complex and could therefore be of interest for further analysis
+BaseMean ≤ 50.                                                                                 with regard to its potential impact on the proton motive force and
+4 ND, not differentially expressed, –2 ≤ FC ≤ 2 and/or p-value ≥ 0.05.
+                                                                                               thus aminoglycoside uptake (Mathiesen and Hägerhäll, 2003).
+
+   Amino acid catabolism promotes the production of
+intermediate metabolites like fumarate, pyruvate, acetyl-CoA and
+                                                                                               Tobramycin Impacts the Abundance of
+α-ketoglutarate that fuel the TCA cycle, and thus could promote                                Genes Involved in Translation
+aminoglycosides uptake. Indeed, Pae responds to tobramycin by                                  Tobramycin promotes mistranslation, stop codon read-through
+down-regulating genes encoding enzymes required for glycine                                    and ribosome stalling (Aboa et al., 2002; Thompson et al.,
+and serine (glyA2, gcvT2, sdaA), phenylalanine (pheB, pheC,                                    2002; Harms et al., 2003; Vioque and Cruz, 2003). A number
+maiA, fahA), arginine (arcABD) and branched-chain amino acid                                   of genes related to translation were strongly up-regulated in
+(bkdA1A2B-lpdV, gnyRBDHL and ldh) catabolism (Table 2 and                                      the RNA-seq and Ribo-seq data, including the genes encoding
+Supplementary Table 1).                                                                        translation initiation factor 3 (infC), ribosomal proteins (rpsB,
+   Moreover, we also noted that the utilization pathways                                       rplC, rplD), a putative ribosomal maturation factor (yhbC),
+of D-alanine for peptidoglycan synthesis and transport                                         elongation factor EF-Tu (tufB) and ribonuclease P (rnpA)
+(ddl, mraY murC, murG, murD, murE) and for glycogen                                            (Table 2 and Supplementary Table 1).
+metabolism      (PA14_36570,      PA14_36580,       PA14_36590,                                   tRNA modifications can play an important role in the
+PA14_36605, PA14_36620, PA14_36630, glgB, PA14_36730)                                          modulation of antibiotic resistance by regulating translational
+were down-regulated after exposure to tobramycin (Table 2 and                                  processes (Chopra and Reader, 2015). The genes encoding
+Supplementary Table 1).                                                                        the tRNA methyltransferases TrmD, Orf2, and RimM were
+                                                                                               significantly up-regulated by tobramycin (Table 2 and
+Tobramycin Affects the Expression of                                                           Supplementary Table 1). TrmD is involved in the m1G37
+Functions Involved in Pathogenicity,                                                           methylation of proline tRNA (Gamper H.B. et al., 2015;
+Virulence and Transport                                                                        Gamper H. et al., 2015), and recent studies in E. coli and
+The comparative transcriptome and translatome analyses of                                      S. enterica revealed that the translation of several membrane-
+PA14 treated with tobramycin uncovered a significantly reduced                                 associated proteins is controlled by m1G37 methylation
+abundance of several virulence and pathogenicity related genes                                 at proline codons near the start of their respective open
+(Table 2 and Supplementary Table 1). The genes encoding                                        reading frames. TmrD deficient strains exhibit a decrease in
+the type II (xcp locus) and type VI (tss, hsi, and hcp-1 locus)                                membrane protein content resulting in a higher susceptibility to
+secretion systems, the quinolone-based quorum-sensing system                                   aminoglycosides (Masuda et al., 2019).
+(pqs genes) as well as the esterase (estA) were down-regulated                                    Trans-translation is a process adopted by the cell to rescue
+in the RNA-seq and Ribo-seq data sets. Additionally, genes                                     stalled ribosomes that requires the specialized tmRNA SsrA and
+encoding for functions required for motility, attachment, pilus                                the small accessory protein SmpB (Withey and Friedman, 2003;
+and fimbrial assembly (PA14_55780-PA14_55940 including tad                                     Haebel et al., 2004). Pathogenic bacteria lacking this system
+locus, pil, flg, fli, and flh genes) were primarily down-regulated                             display an enhanced sensitivity toward aminoglycosides (de la
+at the transcriptional level. Pae may prevent tobramycin                                       Cruz and Vioque, 2001; Aboa et al., 2002; Morita et al., 2006).
+uptake through the down-regulation of genes of different                                       In this study, several genes encoding effectors of stalled ribosome
+secretion systems, as they are believed to be the entry gates                                  rescue (PA14_72200, tmRNA ssrA and smpB encoding an
+for several structurally unrelated antimicrobial agents (Tzeng                                 accessory protein) were up-regulated after tobramycin exposure
+et al., 2005; Mulcahy et al., 2006). Although insertional                                      (Table 2 and Supplementary Table 1).
+inactivation of pilZ and fimV have been confirmed to confer                                       Furthermore, the gene encoding ObgE, a conserved ribosomal
+low-level tobramycin resistance, it seems interesting to assess                                associated GTPase with unknown function (Verstraeten et al.,
+the contribution of other motility and attachment genes to                                     2015), was up-regulated upon tobramycin treatment (Table 2
+aminoglycoside permeability, such as those of the tad locus                                    and Supplementary Table 1). Verstraeten et al. (2015) showed
+(Schurek et al., 2008).                                                                        that over-expression of obgE confers tobramycin and ofloxacin
+
+
+Frontiers in Microbiology | www.frontiersin.org                                           13                                       April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                                Pae Expression Profile to Colistin/Tobramycin
+
+
+
+
+  FIGURE 5 | Depiction of novel functions/pathways revealed in this study that are de-regulated upon (A) colistin and (B) tobramycin treatment. Major
+  genes/pathways that are down-regulated and up-regulated based on the RNA-seq and/or Ribo-seq data are highlighted in rose and green, respectively. Positive-
+  and negative regulation of gene expression is denoted by arrows and blocked lines, respectively. RIP - regulated intramembrane proteolysis.
+
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                                 14                                           April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                      Pae Expression Profile to Colistin/Tobramycin
+
+
+
+tolerance to Pae and E. coli. They further reported that in                of the AlgU regulon and an up-regulation of the MexT regulon
+E. coli Obg-mediated tolerance requires activation of the type I           taking on a previously undescribed roles in defense against
+hokB-sokB TA system. Although a hokB ortholog is not present               polymyxin antibiotics (Figure 5).
+in Pae, we found multiple genes associated with type II TA                     The transcriptome and translatome studies further indicated
+systems including HigA (VapI) and ParE-ParD (PA14_01510-                   that the expression of multiple amino acid catabolism genes,
+PA14_01520) that are up-regulated in the presence of tobramycin            lower TCA cycle genes, type II and VI secretion system genes
+(Table 2 and Supplementary Table 1).                                       and genes involved in motility and attachment are rewired in
+                                                                           response to tobramycin, presumably to reduce drug uptake.
+Comparison With Previous                                                   Moreover, we discussed that the adverse effects of tobramycin
+Transcriptome Studies                                                      on translation are countered through the expression of functions
+When compared with previous Pae transcriptome studies                      involved in stalled ribosome rescue, tRNA methylation and type
+performed in the presence of polymyxins and tobramycin                     II TA systems. These findings might aid toward the optimization
+(Cummins et al., 2009; Fernández et al., 2010; Kindrachuk                  of strategies to increase the efficacy of these last resort drugs
+et al., 2011; Murray et al., 2015; Han et al., 2019; Ben Jeddou            against Pae (Figure 5).
+et al., 2020) this study revealed a larger number of de-regulated              Moreover; our results implicate a number of hypothetical
+genes. Despite some variances, overlaps concerning de-regulated            genes of unknown function in colistin and tobramycin resistance
+genes exist. The arn operon, the speD2-speE2 (PA14_63110-                  (Supplementary Table 1). Deciphering their roles could be the
+PA14_63120) genes, the mexAB-oprN, the mexC, the mexXY                     basis for future research to elucidate additional mechanisms of
+(PA14_38395 and amrB), the galU, the cprA (PA14_43311) and                 action and resistance to colistin and tobramycin.
+the genes of unknown function PA2358 (PA14_34170), PA1797
+(PA14_41280), PA14_41290 and PA4782 (PA14_63220) were also                 DATA AVAILABILITY STATEMENT
+previously found to be de-regulated in response to polymyxins
+or in Pae strains harboring mutations that impact polymyxin                The datasets presented in this study can be found in
+resistance (Cummins et al., 2009; Fernández et al., 2010; Murray           online repositories. The names of the repository/repositories
+et al., 2015; Han et al., 2019; Ben Jeddou et al., 2020) (Table 1          and accession number(s) can be found in the article/
+and Supplementary Table 1). Kindrachuk et al. (2011) reported              Supplementary Material.
+that bacteriostatic and bactericidal concentrations of tobramycin
+stimulate the expression of several heat shock genes and genes
+encoding transcriptional regulators, whereas genes involved in             AUTHOR CONTRIBUTIONS
+energy metabolism (i.e., nuo, nqr, and suc genes), motility and
+attachment (i.e., pil and flg genes) were down-regulated. Our              ACS, BL, ES, and UB conceived and designed the experiments.
+RNA-seq and Ribo-seq results closely mirror these previous                 ACS and BL performed the experiments. ACS, BL, FA, MW, and
+findings (Figure 4 and Supplementary Table 1).                             UB analyzed the data. ACS, BL, and UB wrote the manuscript.
+   The transcriptional repression of iron homeostasis- (i.e., has,         All the authors contributed to the article and approved the
+pvd, pch, fpt, fpv) and sulfonate utilization genes (ssu) (Tralau          submitted version.
+et al., 2007) and an up-regulation of the denitrification pathway
+genes (nir, nor, nos) upon exposure to polymyxin B has been                FUNDING
+reported for PA14 grown in Mueller–Hinton broth (Ben Jeddou
+et al., 2020). However, this study did not reveal a positive effect        The work was supported by the Austrian Science Fund (www.
+on expression of oxidative stress response genes by polymyxin              fwf.ac.at/en) through project P33617-B (UB and ES). ACS and
+B. On the other hand, transcription of PA14_24360, ahpF, and               BL were supported through the FWF funded doctoral program
+ahpB was seemingly induced when PA14 was exposed to synthetic              RNA-Biology W-1207.
+antimicrobial peptide dendrimers (Ben Jeddou et al., 2020).
+
+                                                                           ACKNOWLEDGMENTS
+CONCLUSION
+                                                                           We are grateful to Petra Pusic and Marlena Rozner for their help
+In this study, SCFM was used for culturing Pae, a medium                   with the RNA-seq and Ribo-seq experiments.
+that approximates the environment in the lungs of CF patients
+(Palmer et al., 2007). To the best of our knowledge, no other
+gene profiling study has offered a more comprehensive view of              SUPPLEMENTARY MATERIAL
+Pae’s cellular responses to colistin and tobramycin, and especially
+                                                                           The Supplementary Material for this article can be found
+under these culturing conditions.
+                                                                           online at: https://www.frontiersin.org/articles/10.3389/fmicb.
+   Although the potential of colistin to instigate ROS production
+                                                                           2021.626715/full#supplementary-material
+in Pae is known, this study revealed for the first time its impact
+on the expression of distinct oxidative stress response genes.             Supplementary Figure 1 | Activity of (A) 8 µg/ml colistin and (B) 64 µg/ml
+Moreover, the study disclosed a colistin-dependent de-regulation           tobramycin on growth of Pseudomonas aeruginosa PA14. The arrows represent
+
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                       15                                           April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                                               Pae Expression Profile to Colistin/Tobramycin
+
+
+
+the points at which antibiotics were added to growing cultures (OD600 of 1.7).                 dilutions of colistin (concentration 4–64 µg/ml). The cultures were shaken at 37◦C
+Error bars indicate standard deviations obtained from two biological replicates.               for 20 h and the pictures were taken. The minimal inhibitory concentrations (MICs;
+                                                                                               marked by red edging) correspond to the lowest concentration of colistin that
+Supplementary Figure 2 | Superimposition of the (A) tonB2-exbB1-exbD1, (B)                     visibly impeded growth. Control, no colistin added. (B) Graphical representation of
+feo, (C) has, and (D) pvd genes with the ribosome profiling data. In pink – open               the results shown in (A). The outcome of the duplicate assay was identical.
+reading frames (ORF) of corresponding genes located on the negative strand of
+PA14 genomic DNA; in orange – ORFs of corresponding genes located on the                       Supplementary Table 1 | RNA-seq and Ribo-seq differential gene expression
+positive strand of PA14 genomic DNA; in light green – mapped ribosomal                         analysis of Pae treated with colistin or tobramycin versus untreated control.
+footprints obtained from control samples, in dark green – mapped ribosomal                     Supplementary Table 2 | Changes in transcript and ribosomal footprint
+footprints obtained from colistin treated samples.                                             abundance of genes which contribute to polymyxin and aminoglycoside
+                                                                                               resistance/susceptibility in Pae after exposure to colistin and tobramycin.
+Supplementary Figure 3 | Increased susceptibility of PA141algU toward colistin.
+(A) The microdilution assay was performed in duplicate with strains PA14 and                   Supplementary Table 3 | Changes in transcript and ribosomal footprint
+PA141algU, aerobically grown in SCFM medium to an OD600 of ∼2.0. Then,                         abundance of genes belonging to the AlgU regulon in Pae (Schulz et al., 2015) in
+0.5 ml of the culture was mixed with 1.5 ml of SCFM medium, containing serial                  the presence of 8 µg/ml colistin.
+
+
+
+
+REFERENCES                                                                                     Deris, Z. Z., Akter, J., Sivanesan, S., Roberts, K. D., Thompson, P. E., Nation,
+                                                                                                  R. L., et al. (2014). A secondary mode of action of polymyxins against Gram-
+Aboa, T., Ueda, K., Sunohara, T., Ogawa, K., and Aiba, H. (2002). SsrA-mediated                   negative bacteria involves the inhibition of NADH-quinone oxidoreductase
+   protein tagging in the presence of miscoding drugs and its physiological role in               activity. J. Antibiot. 67, 147–151. doi: 10.1038/ja.2013.111
+   Escherichia coli. Genes Cells 7, 629–638. doi: 10.1046/j.1365-2443.2002.00549.x             Dumas, Z., Ross-Gillespie, A., and Kümmerli, R. (2013). Switching between
+Anders, S., and Huber, W. (2010). Differential expression analysis for sequence                   apparently redundant iron-uptake mechanisms benefits bacteria in changeable
+   count data. Genome Biol. 11:R106. doi: 10.1186/gb-2010-11-10-r106                              environments. Proc. R. Soc. B Biol. Sci. 280, 20131055. doi: 10.1098/rspb.2013.
+Antonic, V., Stojadinovic, A., Zhang, B., Izadjoo, M. J., and Alavi, M. (2013).                   1055
+   Pseudomonas aeruginosa induces pigment production and enhances virulence                    El-Sayed Ahmed, M. A. E.-G., Zhong, L.-L., Shen, C., Yang, Y., Doi, Y., and
+   in a white phenotypic variant of Staphylococcus aureus. Infect. Drug Resist. 6,                Tian, G.-B. (2020). Colistin and its Role in the Era of Antibiotic Resistance: an
+   175–186. doi: 10.2147/IDR.S49039                                                               extended review (2000-2019). Emerg. Microbes Infect. 9, 868-885. doi: 10.1080/
+Barrow, K., and Kwon, D. H. (2009). Alterations in two-component regulatory                       22221751.2020.1754133
+   systems of phoPQ and pmrAB are associated with polymyxin B resistance in                    Fajardo, A., Martínez-Martín, N., Mercadillo, M., Galán, J. C., Ghysels, B., Matthijs,
+   clinical isolates of Pseudomonas aeruginosa. Antimicrob. Agents Chemother. 53,                 S., et al. (2008). The Neglected Intrinsic Resistome of Bacterial Pathogens. PLoS
+   5150–5154. doi: 10.1128/AAC.00893-09                                                           One 3:e1619. doi: 10.1371/journal.pone.0001619
+Ben Jeddou, F., Falconnet, L., Luscher, A., Siriwardena, T., Reymond, J. L.,                   Fargier, E., Mac Aogáin, M., Mooij, M. J., Woods, D. F., Morrissey, J. P., Dobson,
+   Van Delden, C., et al. (2020). Adaptive and mutational responses to peptide                    A. D. W., et al. (2012). MexT Functions as a Redox-Responsive Regulator
+   dendrimer antimicrobials in Pseudomonas aeruginosa. Antimicrob. Agents                         Modulating Disulfide Stress Resistance in Pseudomonas aeruginosa. J. Bacteriol.
+   Chemother. 64, e02040-19. doi: 10.1128/AAC.02040-19                                            194, 3502–3511. doi: 10.1128/JB.06632-11
+Blevins, W. R., Tavella, T., Moro, S. G., Blasco-Moreno, B., Closa-Mosquera, A.,               Farrant, K. V., Spiga, L., Davies, J. C., and Williams, H. D. (2020). Response
+   Diez, J., et al. (2018). Using ribosome profiling to quantify differences in protein           of Pseudomonas aeruginosa to the innate immune system-derived oxidants
+   expression: a case study in Saccharomyces cerevisiae oxidative stress conditions.              hypochlorous acid and hypothiocyanous acid. bioRxiv. [Preprint]. doi: 10.1101/
+   bioRxiv [Preprint]. 501478. doi: 10.1101/501478                                                2020.01.09.900639
+Breidenstein, E. B. M., de la Fuente-Núñez, C., and Hancock, R. E. W. (2011).                  Fernández, L., Álvarez-Ortega, C., Wiegand, I., Olivares, J., Kocíncová, D.,
+   Pseudomonas aeruginosa: all roads lead to resistance. Trends Microbiol. 19,                    Lam, J. S., et al. (2013). Characterization of the polymyxin B resistome of
+   419–426. doi: 10.1016/j.tim.2011.04.005                                                        Pseudomonas aeruginosa. Antimicrob. Agents Chemother. 57, 110–119. doi: 10.
+Brochmann, R. P., Toft, A., Ciofu, O., Briales, A., Kolpen, M., Hempel, C., et al.                1128/AAC.01583-12
+   (2014). Bactericidal effect of colistin on planktonic Pseudomonas aeruginosa                Fernández, L., Gooderham, W. J., Bains, M., McPhee, J. B., Wiegand, I., and
+   is independent of hydroxyl radical formation. Int. J. Antimicrob. Agents 43,                   Hancock, R. E. W. (2010). Adaptive resistance to the “last hope” antibiotics
+   140–147. doi: 10.1016/j.ijantimicag.2013.10.015                                                polymyxin B and colistin in Pseudomonas aeruginosa is mediated by the novel
+Brown, S. M., Howell, M. L., Vasil, M. L., Anderson, A. J., and Hassett, D. J. (1995).            two-component regulatory system ParR-ParS. Antimicrob. Agents Chemother.
+   Cloning and characterization of the katB gene of Pseudomonas aeruginosa                        54, 3372–3382. doi: 10.1128/AAC.00242-10
+   encoding a hydrogen peroxide-inducible catalase: purification of KatB, cellular             Fernández, L., Jenssen, H., Bains, M., Wiegand, I., Gooderham, W. J., and Hancock,
+   localization, and demonstration that it is essential for optimal resistance to                 R. E. W. (2012). The two-component system CprRS senses cationic peptides
+   hydrogen p. J. Bacteriol. 177, 6536–6544. doi: 10.1128/jb.177.22.6536-6544.                    and triggers adaptive resistance in Pseudomonas aeruginosa independently of
+   1995                                                                                           ParRS. Antimicrob. Agents Chemother. 56, 6212–6222. doi: 10.1128/AAC.015
+Cartron, M. L., Maddocks, S., Gillingham, P., Craven, C. J., and Andrews, S. C.                   30-12
+   (2006). Feo - Transport of ferrous iron into bacteria. BioMetals 19, 143–157.               Fetar, H., Gilmour, C., Klinoski, R., Daigle, D. M., Dean, C. R., and Poole, K. (2011).
+   doi: 10.1007/s10534-006-0003-2                                                                 mexEF-oprN multidrug efflux operon of Pseudomonas aeruginosa: regulation
+Chopra, S., and Reader, J. (2015). tRNAs as antibiotic targets. Int. J. Mol. Sci. 16,             by the MexT activator in response to nitrosative stress and chloramphenicol.
+   321–349. doi: 10.3390/ijms16010321                                                             Antimicrob. Agents Chemother. 55, 508–514. doi: 10.1128/AAC.008
+Cummins, J., Reen, F. J., Baysse, C., Mooij, M. J., and O’Gara, F. (2009).                        30-10
+   Subinhibitory concentrations of the cationic antimicrobial peptide colistin                 Fraud, S., Campigotto, A. J., Chen, Z., and Poole, K. (2008). MexCD-
+   induce the pseudomonas quinolone signal in Pseudomonas aeruginosa.                             OprJ multidrug efflux system of Pseudomonas aeruginosa: involvement
+   Microbiology 155, 2826–2837. doi: 10.1099/mic.0.025643-0                                       in chlorhexidine resistance and induction by membrane-damaging agents
+Damron, F. H., and Goldberg, J. B. (2012). Proteolytic regulation of alginate                     dependent upon the AlgU stress response sigma factor. Antimicrob. Agents
+   overproduction in Pseudomonas aeruginosa. Mol. Microbiol. 84, 595–607. doi:                    Chemother. 52, 4478–4482. doi: 10.1128/AAC.01072-08
+   10.1111/j.1365-2958.2012.08049.x                                                            Gamper, H. B., Masuda, I., Frenkel-Morgenstern, M., and Hou, Y. M. (2015).
+de la Cruz, J., and Vioque, A. (2001). Increased sensitivity to protein synthesis                 Maintenance of protein synthesis reading frame by EF-P and m 1 G37-tRNA.
+   inhibitors in cells lacking tmRNA. RNA 7, 1708–1716.                                           Nat. Commun. 6:7226. doi: 10.1038/ncomms8226
+
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                                           16                                                April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                                              Pae Expression Profile to Colistin/Tobramycin
+
+
+
+Gamper, H., Masuda, I., Frenkel-Morgenstern, M., and Hou, Y.-M. (2015). The                        factors in Pseudomonas aeruginosa. Nat. Commun. 10:2931 . doi: 10.1038/
+   UGG Isoacceptor of tRNAPro Is Naturally Prone to Frameshifts. Int. J. Mol. Sci.                 s41467-019-10778-w
+   16, 14866–14883. doi: 10.3390/ijms160714866                                                 Ingolia, N. T., Ghaemmaghami, S., Newman, J. R. S., and Weissman, J. S.
+Garnacho-Montero, J., Garcia-Garmendia, J. L., Barrero-Almodovar, A., Jimenez-                     (2009). Genome-wide analysis in vivo of translation with nucleotide resolution
+   Jimenez, F. J., Perez-Paredes, C., and Ortiz-Leyba, C. (2003). Impact of adequate               using ribosome profiling. Science 324, 218–223. doi: 10.1126/science.116
+   empirical antibiotic therapy on the outcome of patients admitted to the                         8978
+   intensive care unit with sepsis. Crit. Care Med. 31, 2742–2751. doi: 10.1097/               Jaillard, M., van Belkum, A., Cady, K. C., Creely, D., Shortridge, D., Blanc, B.,
+   01.CCM.0000098031.24329.10                                                                      et al. (2017). Correlation between phenotypic antibiotic susceptibility and the
+Garneau-Tsodikova, S., and Labby, K. J. (2016). Mechanisms of resistance to                        resistome in Pseudomonas aeruginosa. Int. J. Antimicrob. Agents 50, 210–218.
+   aminoglycoside antibiotics: overview and perspectives. Medchemcomm 7, 11–                       doi: 10.1016/j.ijantimicag.2017.02.026
+   27. doi: 10.1039/c5md00344j                                                                 Jain, S. (2018). Emergence of Colistin Resistance among Gram Negative Bacteria
+Gellatly, S. L., and Hancock, R. E. W. (2013). Pseudomonas aeruginosa: new insights                in Urinary Tract Infections from Super Specialty Hospital of North India. Int. J.
+   into pathogenesis and host defenses. Pathog. Dis. 67, 159–173. doi: 10.1111/                    Infect. Dis. 73:133. doi: 10.1016/j.ijid.2018.04.3716
+   2049-632X.12033                                                                             Jeannot, K., Bolard, A., and Plésiat, P. (2017). Resistance to polymyxins in Gram-
+Ginalski, K., Kinch, L., Rychlewski, L., and Grishin, N. V. (2004). BOF: a novel                   negative organisms. Int. J. Antimicrob. Agents 49, 526–535. doi: 10.1016/j.
+   family of bacterial OB-fold proteins. FEBS Lett. 567, 297–301. doi: 10.1016/j.                  ijantimicag.2016.11.029
+   febslet.2004.04.086                                                                         Johnson, L., Mulcahy, H., Kanevets, U., Shi, Y., and Lewenza, S. (2011). Surface-
+Guragain, M., King, M. M., Williamson, K. S., Pérez-Osorio, A. C., Akiyama, T.,                    localized spermidine protects the Pseudomonas aeruginosa: outer membrane
+   Khanam, S., et al. (2016). The Pseudomonas aeruginosa PAO1 two-component                        from antibiotic treatment and oxidative stress. J. Bacteriol. 194, 813–826. doi:
+   regulator CarSR regulates calcium homeostasis and calcium induced virulence                     10.1128/JB.05230-11
+   factor production through its regulatory targets CarO and CarP. J. Bacteriol.               Kerr, K. G., and Snelling, A. M. (2009). Pseudomonas aeruginosa: a formidable and
+   198, 951–963. doi: 10.1128/JB.00963-15                                                          ever-present adversary. J. Hosp. Infect. 73, 338–344. doi: 10.1016/j.jhin.2009.04.
+Gutu, A. D., Sgambati, N., Strasbourger, P., Brannon, M. K., Jacobs, M. A., Haugen,                020
+   E., et al. (2013). Polymyxin resistance of Pseudomonas aeruginosa phoQ mutants              Kimura, S., and Suzuki, T. (2015). Iron-sulfur proteins responsible for RNA
+   is dependent on additional two-component regulatory systems. Antimicrob.                        modifications. Biochim. Biophys. Acta Mol. Cell Res. 1853, 1272–1283. doi:
+   Agents Chemother. 57, 2204–2215. doi: 10.1128/AAC.02353-12                                      10.1016/j.bbamcr.2014.12.010
+Haebel, P. W., Gutmann, S., and Ban, N. (2004). Dial tm for rescue: tmRNA engages              Kindrachuk, K. N., Fernández, L., Bains, M., and Hancock, R. E. W. (2011).
+   ribosomes stalled on defective mRNAs. Curr. Opin. Struct. Biol. 14, 58–65.                      Involvement of an ATP-dependent protease, PA0779/AsrA, in inducing heat
+   doi: 10.1016/j.sbi.2004.01.010                                                                  shock in response to tobramycin in Pseudomonas aeruginosa. Antimicrob.
+Han, M.-L., Zhu, Y., Creek, D. J., Lin, Y.-W., Gutu, A. D., Hertzog, P., et al. (2019).            Agents Chemother. 55, 1874–1882. doi: 10.1128/AAC.00935-10
+   Comparative Metabolomics and Transcriptomics Reveal Multiple Pathways                       Kohanski, M., Dwyer, D., Hayete, B., Lawrence, C., and Collins, J. (2007). A
+   Associated with Polymyxin Killing in Pseudomonas aeruginosa. mSystems 4,                        common mechanism of cellular death induced by bactericidal antibiotics. Cell
+   e00149-18. doi: 10.1128/msystems.00149-18                                                       130, 797–810.
+Harms, J. M., Bartels, H., Schlünzen, F., and Yonath, A. (2003). Antibiotics acting            Köhler, T., Epp, S. F., Curty, L. K., and Pechère, J. C. (1999). Characterization
+   on the translational machinery. J. Cell Sci. 116, 1391–1393. doi: 10.1242/jcs.                  of MexT, the regulator of the MexE-MexF-OprN multidrug efflux system of
+   00365                                                                                           Pseudomonas aeruginosa. J. Bacteriol. 181, 6300–6305. doi: 10.1128/jb.181.20.
+Hassett, D. J., Schweizer, H. P., and Ohman, D. E. (1995). Pseudomonas                             6300-6305.1999
+   aeruginosa sodA and sodB mutants defective in manganese- and iron-cofactored                Köhler, T., Michéa-Hamzehpour, M., Henze, U., Gotoh, N., Curty, L. K., and
+   superoxide dismutase activity demonstrate the importance of the iron-                           Pechère, J. C. (1997a). Characterization of MexE-MexF-OprN, a positively
+   cofactored form in aerobic metabolism. J. Bacteriol. 177, 6330–6337. doi: 10.                   regulated multidrug efflux system of Pseudomonas aeruginosa. Mol. Microbiol.
+   1128/jb.177.22.6330-6337.1995                                                                   23, 345–354. doi: 10.1046/j.1365-2958.1997.2281594.x
+Hassett, D. J., Woodruff, W. A., Wozniak, D. J., Vasil, M. L., Cohen, M. S.,                   Köhler, T., Michea-Hamzehpour, M., Plesiat, P., Kahr, A. L., and Pechere, J. C.
+   and Ohman, D. E. (1993). Cloning and characterization of the Pseudomonas                        (1997b). Differential selection of multidrug efflux systems by quinolones in
+   aeruginosa sodA and sodB genes encoding manganese- and iron-cofactored                          Pseudomonas aeruginosa. Antimicrob. Agents Chemother. 41, 2540–2543. doi:
+   superoxide dismutase: demonstration of increased manganese superoxide                           10.1128/aac.41.11.2540
+   dismutase activity in alginate-producing bact. J. Bacteriol. 175, 7658–7665.                Kong, L., Liu, Z., Hu, X., and Liu, S. (2011). Interaction of polymyxin B with
+   doi: 10.1128/jb.175.23.7658-7665.1993                                                           ds-DNA, and determination of DNA or polymyxin B via resonance Rayleigh
+Hay, T., Fraud, S., Lau, C. H. F., Gilmour, C., and Poole, K. (2013).                              scattering and resonance non-linear scattering spectra. Microchim. Acta 173,
+   Antibiotic Inducibility of the mexXY Multidrug Efflux Operon of Pseudomonas                     207–213. doi: 10.1007/s00604-011-0547-x
+   aeruginosa: involvement of the MexZ Anti-Repressor ArmZ. PLoS One                           Kosono, S., Haga, K., Tomizawa, R., Kajiyama, Y., Hatano, K., Takeda, S.,
+   8:e56858. doi: 10.1371/journal.pone.0056858                                                     et al. (2005). Characterization of a multigene-encoded sodium/hydrogen
+Heindorf, M., Kadari, M., Heider, C., Skiebe, E., and Wilharm, G. (2014). Impact of                antiporter (Sha) from Pseudomonas aeruginosa: its involvement in
+   Acinetobacter baumannii superoxide dismutase on motility, virulence, oxidative                  pathogenesis. J. Bacteriol. 187, 5242–5248. doi: 10.1128/JB.187.15.5242-5248.
+   stress resistance and susceptibility to antibiotics. PLoS One 9:e101033. doi:                   2005
+   10.1371/journal.pone.0101033                                                                Krause, K. M., Serio, A. W., Kane, T. R., and Connolly, L. E. (2016).
+Hill, I. T., Tallo, T., Dorman, M. J., and Dove, S. L. (2019). Loss of RNA chaperone               Aminoglycosides: an overview. Cold Spring Harb. Perspect. Med. 6:a027029.
+   Hfq unveils a toxic pathway in Pseudomonas aeruginosa. J. Bacteriol. 201,                       doi: 10.1101/cshperspect.a027029
+   e00232–19. doi: 10.1128/JB.00232-19                                                         Kreamer, N. N., Costa, F., and Newman, D. K. (2015). The ferrous iron-responsive
+Hinz, A., Lee, S., Jacoby, K., and Manoil, C. (2011). Membrane proteases and                       BqsRS two-component system activates genes that promote cationic stress
+   aminoglycoside antibiotic resistance. J. Bacteriol. 193, 4790–4797. doi: 10.1128/               tolerance. MBio 6, e02549. doi: 10.1128/mBio.02549-14
+   JB.05133-11                                                                                 Kreamer, N. N. K., Wilks, J. C., Marlow, J. J., Coleman, M. L., and Newman,
+Hoffmann, S., Otto, C., Kurtz, S., Sharma, C. M., Khaitovich, P., Vogel, J., et al.                D. K. (2012). BqsR/BqsS Constitute a Two-Component System That Senses
+   (2009). Fast mapping of short sequences with mismatches, insertions and                         Extracellular Fe(II) in Pseudomonas aeruginosa. J Bacteriol. 194, 1195–1204.
+   deletions using index structures. PLoS Comput. Biol. 5:e1000502. doi: 10.1371/                  doi: 10.1128/JB.05634-11
+   journal.pcbi.1000502                                                                        Lamont, I. L., and Martin, L. W. (2003). Identification and characterization of
+Huang, H., Shao, X., Xie, Y., Wang, T., Zhang, Y., Wang, X., et al. (2019).                        novel pyoverdine synthesis genes in Pseudomonas aeruginosa. Microbiology 149,
+   An integrated genomic regulatory network of virulence-related transcriptional                   833–842. doi: 10.1099/mic.0.26085-0
+
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                                           17                                                April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                                                Pae Expression Profile to Colistin/Tobramycin
+
+
+
+Lima, M. R., Ferreira, G. F., Nunes Neto, W. R., Monteiro, J. D. M., Santos,                  Ochsner, U. A., and Vasil, M. L. (1996). Gene repression by the ferric uptake
+   ÁR. C., Tavares, P. B., et al. (2019). Evaluation of the interaction between                  regulator in Pseudomonas aeruginosa: cycle selection of iron-regulated genes.
+   polymyxin B and Pseudomonas aeruginosa biofilm and planktonic cells: reactive                 Proc. Natl. Acad. Sci. U. S. A. 93, 4409–4414. doi: 10.1073/pnas.93.9.4409
+   oxygen species induction and zeta potential. BMC Microbiol 19:115. doi: 10.                O’Driscoll, N. H., Cushnie, T. P. T., Matthews, K. H., and Lamb, A. J. (2018).
+   1186/s12866-019-1485-8                                                                        Colistin causes profound morphological alteration but minimal cytoplasmic
+Luckett, J. C. A., Darch, O., Watters, C., AbuOun, M., Wright, V., Paredes-Osses, E.,            membrane perforation in populations of Escherichia coli and Pseudomonas
+   et al. (2012). A novel virulence strategy for Pseudomonas aeruginosa mediated                 aeruginosa. Arch. Microbiol. 200, 793–802. doi: 10.1007/s00203-018-1485-3
+   by an autotransporter with arginine-specific aminopeptidase activity. PLoS                 Olivares, J., Alvarez-Ortega, C., Linares, J. F., Rojo, F., Köhler, T., and Martínez,
+   Pathog. 8:e1002854. doi: 10.1371/journal.ppat.1002854                                         J. L. (2012). Overproduction of the multidrug efflux pump MexEF-OprN does
+Ma, J. F., Ochsner, U. A., Klotz, M. G., Nanayakkara, V. K., Howell, M. L., Johnson,             not impair Pseudomonas aeruginosa fitness in competition tests, but produces
+   Z., et al. (1999). Bacterioferritin A modulates catalase A (KatA) activity and                specific changes in bacterial regulatory networks. Environ. Microbiol. 14, 1968–
+   resistance to hydrogen peroxide in Pseudomonas aeruginosa. J. Bacteriol. 181,                 1981. doi: 10.1111/j.1462-2920.2012.02727.x
+   3730–3742. doi: 10.1128/jb.181.12.3730-3742.1999                                           Palma, M., Zurita, J., Ferreras, J. A., Worgall, S., Larone, D. H., Shi, L., et al. (2005).
+Martin, M. (2011). Cutadapt removes adapter sequences from high-throughput                       Pseudomonas aeruginosa SoxR does not conform to the archetypal paradigm for
+   sequencing reads. EMBnet J. 17:10. doi: 10.14806/ej.17.1.200                                  SoxR-dependent regulation of the bacterial oxidative stress adaptive response.
+Masuda, I., Matsubara, R., Christian, T., Rojas, E. R., Yadavalli, S. S., Zhang, L.,             Infect. Immun. 73, 2958–2966. doi: 10.1128/IAI.73.5.2958-2966.2005
+   et al. (2019). tRNA Methylation Is a Global Determinant of Bacterial Multi-drug            Palmer, K. L., Aye, L. M., and Whiteley, M. (2007). Nutritional cues control
+   Resistance. Cell Syst. 8, 302–314. doi: 10.1016/j.cels.2019.03.008                            Pseudomonas aeruginosa multicellular behavior in cystic fibrosis sputum.
+Mathiesen, C., and Hägerhäll, C. (2003). The “antiporter module” of respiratory                  J. Bacteriol. 189, 8079–8087. doi: 10.1128/JB.01138-07
+   chain Complex I includes the MrpC/NuoK subunit - A revision of the modular                 Pamp, S. J., Gjermansen, M., Johansen, H. K., and Tolker-Nielsen, T. (2008).
+   evolution scheme. FEBS Lett. 549, 7–13. doi: 10.1016/S0014-5793(03)00767-1                    Tolerance to the antimicrobial peptide colistin in Pseudomonas aeruginosa
+McPhee, J. B., Lewenza, S., and Hancock, R. E. W. (2003). Cationic antimicrobial                 biofilms is linked to metabolically active cells, and depends on the pmr and
+   peptides activate a two-component regulatory system, PmrA-PmrB, that                          mexAB-oprM genes. Mol. Microbiol. 68, 223–240. doi: 10.1111/j.1365-2958.
+   regulates resistance to polymyxin B and cationic antimicrobial peptides in                    2008.06152.x
+   Pseudomonas aeruginosa. Mol. Microbiol. 50, 205–217. doi: 10.1046/j.1365-                  Pilonieta, M. C., Erickson, K. D., Ernst, R. K., and Detweiler, C. S. (2009). A
+   2958.2003.03673.x                                                                             protein important for antimicrobial peptide resistance, YdeI/OmdA, is in the
+Meyer, J. M. (1978). The Fluorescent Pigment of Pseudomonas fluorescens:                         periplasm and interacts with OmpD/NmpC. J. Bacteriol. 191, 7243–7252. doi:
+   biosynthesis, Purification and Physicochemical Properties. J. Gen. Microbiol.                 10.1128/JB.00688-09
+   107, 319–328.                                                                              Pletzer, D., Braun, Y., Dubiley, S., Lafon, C., Köhler, T., Page, M. G. P., et al. (2015).
+Meylan, S., Porter, C. B. M., Yang, J. H., Belenky, P., Gutierrez, A., Lobritz, M. A.,           The Pseudomonas aeruginosa PA14 ABC transporter NppA1A2BCD is required
+   et al. (2017). Carbon Sources Tune Antibiotic Susceptibility in Pseudomonas                   for uptake of peptidyl nucleoside antibiotics. J. Bacteriol. 197, 2217–2228. doi:
+   aeruginosa via Tricarboxylic Acid Cycle Control. Cell Chem. Biol. 24, 195–206.                10.1128/JB.00234-15
+   doi: 10.1016/j.chembiol.2016.12.015                                                        Poirel, L., Jayol, A., and Nordmanna, P. (2017). Polymyxins: antibacterial activity,
+Mlynarcik, P., and Kolar, M. (2019). Molecular mechanisms of polymyxin                           susceptibility testing, and resistance mechanisms encoded by plasmids or
+   resistance and detection of mcr genes. Biomed. Pap. 163, 28–38. doi: 10.5507/                 chromosomes. Clin. Microbiol. Rev. 30, 557–596. doi: 10.1128/CMR.00064-16
+   bp.2018.070                                                                                Poole, K. (2005). Aminoglycoside resistance in Pseudomonas aeruginosa.
+Morita, Y., Sobel, M. L., and Poole, K. (2006). Antibiotic inducibility of the                   Antimicrob. Agents Chemother. 49, 479–487. doi: 10.1128/AAC.49.2.479-487.
+   MexXY multidrug efflux system of Pseudomonas aeruginosa: involvement of                       2005
+   the antibiotic-inducible PA5471 gene product. J. Bacteriol. 188, 1847–1855.                Poole, K., Lau, C. H. F., Gilmour, C., Hao, Y., and Lam, J. S. (2015).
+   doi: 10.1128/JB.188.5.1847-1855.2006                                                          Polymyxin susceptibility in Pseudomonas aeruginosa linked to the MexXY-
+Mulcahy, H., O’Callaghan, J., O’Grady, E. P., Adams, C., and O’Gara, F. (2006).                  OprM multidrug efflux system. Antimicrob. Agents Chemother. 59, 7276–7289.
+   The posttranscriptional regulator RsmA plays a role in the interaction between                doi: 10.1128/AAC.01785-15
+   Pseudomonas aeruginosa and human airway epithelial cells by positively                     Pournaras, S., Poulou, A., Dafopoulou, K., Chabane, Y. N., Kristo, I., Makris,
+   regulating the type III secretion system. Infect. Immun. 74, 3012–3015. doi:                  D., et al. (2014). Growth retardation, reduced invasiveness, and impaired
+   10.1128/IAI.74.5.3012-3015.2006                                                               colistin-mediated cell death associated with colistin resistance development
+Muller, C., Plésiat, P., and Jeannot, K. (2011). A two-component regulatory system               in Acinetobacter baumannii. Antimicrob. Agents Chemother. 58, 828–832. doi:
+   interconnects resistance to polymyxins, aminoglycosides, fluoroquinolones,                    10.1128/AAC.01439-13
+   and β-lactams in Pseudomonas aeruginosa. Antimicrob. Agents Chemother. 55,                 Quinlan, A. R., and Hall, I. M. (2010). BEDTools: a flexible suite of utilities for
+   1211–1221. doi: 10.1128/AAC.01252-10                                                          comparing genomic features. Bioinformatics 26, 841–842.
+Murray, J. L., Kwon, T., Marcotte, E. M., and Whiteley, M. (2015). Intrinsic                  Rahme, L. G., Stevens, E. J., Wolfort, S. F., Shao, J., Tompkins, R. G., and Ausubel,
+   antimicrobial resistance determinants in the superbug pseudomonas                             F. M. (1995). Common virulence factors for bacterial pathogenicity in plants
+   aeruginosa. MBio 6, e01603-15. doi: 10.1128/mBio.01603-15                                     and animals. Science 268, 1899–1902. doi: 10.1126/science.7604262
+Nasie, I., Steiner-Mordoch, S., and Schuldiner, S. (2012). New substrates on the              Ramsey, B. W., Pepe, M. S., Quan, J. M., Otto, K. L., Montgomery, A. B., Williams-
+   block: clinically relevant resistances for EmrE and homologues. J. Bacteriol. 194,            Warren, J., et al. (1999). Intermittent administration of inhaled tobramycin
+   6766–6770. doi: 10.1128/JB.01318-12                                                           in patients with cystic fibrosis. N. Engl. J. Med. 340, 23–30. doi: 10.1056/
+Obritsch, M. D., Fish, D. N., MacLaren, R., and Jung, R. (2004). National                        NEJM199901073400104
+   surveillance of antimicrobial resistance in Pseudomonas aeruginosa isolates                Ratledge, C., and Dover, L. G. (2000). Iron Metabolism in Pathogenic Bacteria.
+   obtained from intensive care unit patients from 1993 to 2002. Antimicrob.                     Annu. Rev. Microbiol. 54, 881–941. doi: 10.1146/annurev.micro.54.1.881
+   Agents Chemother. 48, 4606–4610. doi: 10.1128/AAC.48.12.4606-4610.                         Roche, B., Aussel, L., Ezraty, B., Mandin, P., Py, B., and Barras, F. (2013). Reprint
+   2004                                                                                          of: iron/sulfur proteins biogenesis in prokaryotes: formation, regulation and
+Ochsner, U. A., Johnson, Z., and Vasil, M. L. (2000a). Genetics and regulation of                diversity. Biochim. Biophys. Acta Bioenerg. 1827, 923–937. doi: 10.1016/j.bbabio.
+   two distinct haem-uptake systems, phu and has, in Pseudomonas aeruginosa.                     2013.05.001
+   Microbiology 146, 185–198. doi: 10.1099/00221287-146-1-185                                 Romsang, A., Duang-Nkern, J., Leesukon, P., Saninjuk, K., Vattanaviboon, P., and
+Ochsner, U. A., Vasil, M. L., Alsabbagh, E., Parvatiyar, K., and Hassett, D. J.                  Mongkolsuk, S. (2014). The iron-sulphur cluster biosynthesis regulator IscR
+   (2000b). Role of the Pseudomonas aeruginosa oxyR-recG operon in oxidative                     contributes to iron homeostasis and resistance to oxidants in Pseudomonas
+   stress defense and DNA repair: oxyR-dependent regulation of katB-ankB, ahpB,                  aeruginosa. PLoS One 9:e86763. doi: 10.1371/journal.pone.0086763
+   and ahpC-ahpF. J. Bacteriol. 182, 4533–4544. doi: 10.1128/JB.182.16.4533-4544.             Salunkhe, P., Salunkhe, P., To, T., To, T., Buer, J., Buer, J., et al. (2005). Genome-
+   2000                                                                                          Wide Transcriptional Profiling of the Steady-State Response of Pseudomonas
+
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                                          18                                                  April 2021 | Volume 12 | Article 626715
+Cianciulli Sesso et al.                                                                                                                  Pae Expression Profile to Colistin/Tobramycin
+
+
+
+   aeruginosa to Hydrogen Peroxide. Society 187, 2565–2572. doi: 10.1128/JB.187.                 Wang, D., Seeve, C., Pierson, L. S., and Pierson, E. A. (2013). Transcriptome
+   8.2565                                                                                           profiling reveals links between ParS/ParR, MexEF-OprN, and quorum sensing
+Sampson, T. R., Liu, X., Schroeder, M. R., Kraft, C. S., Burd, E. M., and Weiss, D. S.              in the regulation of adaptation and virulence in Pseudomonas aeruginosa. BMC
+   (2012). Rapid killing of Acinetobacter baumannii by polymyxins is mediated by                    Genomics 14:618. doi: 10.1186/1471-2164-14-618
+   a hydroxyl radical death pathway. Antimicrob Agents Chemother 56, 5642–5649.                  Wei, Q., Le Minh, P. N., Dö Tsch, A., Hildebrand, F., Panmanee, W., Elfarash, A.,
+   doi: 10.1128/AAC.00756-12                                                                        et al. (2012). Global regulation of gene expression by OxyR in an important
+Schreiber, K., Krieger, R., Benkert, B., Eschbach, M., Arai, H., Schobert, M., et al.               human opportunistic pathogen. Nucleic Acids Res. 40, 4320–4333. doi: 10.1093/
+   (2007). The anaerobic regulatory network required for Pseudomonas aeruginosa                     nar/gks017
+   nitrate respiration. J. Bacteriol. 189, 4310–4314. doi: 10.1128/JB.00240-07                   Wi, Y. M., Choi, J. Y., Lee, J. Y., Kang, C. I., Chung, D. R., Peck, K. R., et al. (2017).
+Schulz, S., Eckweiler, D., Bielecka, A., Nicolai, T., Franke, R., Dötsch, A., et al.                Emergence of colistin resistance in Pseudomonas aeruginosa ST235 clone in
+   (2015). Elucidation of Sigma Factor-Associated Networks in Pseudomonas                           South Korea. Int. J. Antimicrob. Agents 49, 767–769. doi: 10.1016/j.ijantimicag.
+   aeruginosa Reveals a Modular Architecture with Limited and Function-Specific                     2017.01.023
+   Crosstalk. PLoS Pathog. 11:e1004744. doi: 10.1371/journal.ppat.1004744                        Williams, B. J., Dehnbostel, J., and Blackwell, T. S. (2010). Pseudomonas aeruginosa:
+Schurek, K. N., Marr, A. K., Taylor, P. K., Wiegand, I., Semenec, L., Khaira, B. K.,                host defence in lung diseases. Respirology 15, 1037–1056. doi: 10.1111/j.1440-
+   et al. (2008). Novel genetic determinants of low-level aminoglycoside resistance                 1843.2010.01819.x
+   in Pseudomonas aeruginosa. Antimicrob. Agents Chemother. 52, 4213–4219.                       Winsor, G. L., Griffiths, E. J., Lo, R., Dhillon, B. K., Shay, J. A., and Brinkman,
+   doi: 10.1128/AAC.00507-08                                                                        F. S. L. (2016). Enhanced annotations and features for comparing thousands of
+Sherry, N., and Howden, B. (2018). Emerging Gram negative resistance to                             Pseudomonas genomes in the Pseudomonas genome database. Nucleic Acids Res.
+   last-line antimicrobial agents fosfomycin, colistin and ceftazidime-avibactam–                   44, D646-53. doi: 10.1093/nar/gkv1227
+   epidemiology, laboratory detection and treatment implications. Expert Rev.                    Withey, J. H., and Friedman, D. I. (2003). A Salvage Pathway for Protein Synthesis:
+   Anti. Infect. Ther. 16, 289–306. doi: 10.1080/14787210.2018.1453807                              tmRNA and Trans -Translation. Annu. Rev. Microbiol. 57, 101–123. doi: 10.
+Shiver, A. L., Osadnik, H., Kritikos, G., Li, B., Krogan, N., Typas, A., et al. (2016). A           1146/annurev.micro.57.030502.090945
+   Chemical-Genomic Screen of Neglected Antibiotics Reveals Illicit Transport of                 Wolfinger, M. T., Fallmann, J., Eggenhofer, F., and Amman, F. (2015). ViennaNGS:
+   Kasugamycin and Blasticidin S. PLoS Genet. 12:e1006124. doi: 10.1371/journal.                    a toolbox for building efficient next-generation sequencing analysis pipelines.
+   pgen.1006124                                                                                     F1000Res. 4:50. doi: 10.12688/f1000research.6157.2
+Tata, M., Wolfinger, M. T., Amman, F., Roschanski, N., Dötsch, A., Sonnleitner,                  Wood, L. F., Leech, A. J., and Ohman, D. E. (2006). Cell wall-inhibitory antibiotics
+   E., et al. (2016). RNASeq Based Transcriptional Profiling of Pseudomonas                         activate the alginate biosynthesis operon in Pseudomonas aeruginosa: roles of
+   aeruginosa PA14 after Short- and Long-Term Anoxic Cultivation in Synthetic                       σ22 (AlgT) and the AlgW and Prc proteases. Mol. Microbiol. 62, 412–426.
+   Cystic Fibrosis Sputum Medium. PLoS One 11:e0147811. doi: 10.1371/journal.                       doi: 10.1111/j.1365-2958.2006.05390.x
+   pone.0147811                                                                                  Wright, G. D. (2007). The antibiotic resistome: the nexus of chemical and genetic
+Thompson, J., O’Connor, M., Mills, J. A., and Dahlberg, A. E. (2002). The protein                   diversity. Nat. Rev. Microbiol. 5, 175–186. doi: 10.1038/nrmicro1614
+   synthesis inhibitors, oxazolidinones and chloramphenicol, cause extensive                     Wu, X., Held, K., Zheng, C., Staudinger, B. J., Chavez, J. D., Weisbrod, C. R., et al.
+   translational inaccuracy in vivo. J. Mol. Biol. 322, 273–279. doi: 10.1016/S0022-                (2015). Dynamic proteome response of Pseudomonas aeruginosa to tobramycin
+   2836(02)00784-2                                                                                  antibiotic treatment. Mol. Cell. Proteomics 14, 2126–2137. doi: 10.1074/mcp.
+Tian, Z.-X., Fargier, E., Mac Aogá in, M., Adams, C., and Wang, Y.-P. (2009a).                      M115.050161
+   Transcriptome profiling defines a novel regulon modulated by the LysR-type                    Yeom, J., Imlay, J. A., and Park, W. (2010). Iron homeostasis affects antibiotic-
+   transcriptional regulator MexT in Pseudomonas aeruginosa. Nucleic Acids Res.                     mediated cell death in Pseudomonas species. J. Biol. Chem. 285, 22689–22695.
+   37, 7546–7559. doi: 10.1093/nar/gkp828                                                           doi: 10.1074/jbc.M110.127456
+Tian, Z. X., Mac Aogáin, M., O’Connor, H. F., Fargier, E., Mooij, M. J., Adams,                  Young, M. L., Bains, M., Bell, A., and Hancock, R. E. W. (1992). Role
+   C., et al. (2009b). MexT modulates virulence determinants in Pseudomonas                         of Pseudomonas aeruginosa outer membrane protein OprH in polymyxin
+   aeruginosa independent of the MexEF-OprN efflux pump. Microb. Pathog. 47,                        and gentamicin resistance: isolation of an OprH-deficient mutant by gene
+   237–241. doi: 10.1016/j.micpath.2009.08.003                                                      replacement techniques. Antimicrob. Agents Chemother. 36, 2566–2568. doi:
+Tralau, T., Vuilleumier, S., Thibault, C., Campbell, B. J., Hart, C. A., and Kertesz,               10.1128/AAC.36.11.2566
+   M. A. (2007). Transcriptomic analysis of the sulfate starvation response                      Yu, Z., Zhu, Y., Fu, J., Qiu, J., and Yin, J. (2019). Enhanced NADH metabolism
+   of Pseudomonas aeruginosa. J. Bacteriol. 189, 6743–6750. doi: 10.1128/JB.                        involves colistin-induced killing of Bacillus subtilis and Paenibacillus polymyxa.
+   00889-07                                                                                         Molecules 24:387. doi: 10.3390/molecules24030387
+Tzeng, Y. L., Ambrose, K. D., Zughaier, S., Zhou, X., Miller, Y. K., Shafer, W. M.,              Yu, Z., Zhu, Y., Qin, W., Yin, J., and Qiu, J. (2017). Oxidative stress induced by
+   et al. (2005). Cationic antimicrobial peptide resistance in Neisseria meningitidis.              polymyxin E is involved in rapid killing of Paenibacillus polymyxa. Biomed Res.
+   J. Bacteriol. 187, 5387–5396. doi: 10.1128/JB.187.15.5387-5396.2005                              Int. 2017, 1–12.
+Valderrama-Carmona, P., Cuartas, J. H., Carolina Castaño, D., and Corredor,                      Zhang, Y. F., Han, K., Chandler, C. E., Tjaden, B., Ernst, R. K., and Lory, S. (2017).
+   M. (2019). The Role of Pseudomonas aeruginosa RNA Methyltransferases                             Probing the sRNA regulatory landscape of P. aeruginosa: post-transcriptional
+   in Antibiotic Resistance,” in Pseudomonas Aeruginosa - An Armory Within.                         control of determinants of pathogenicity and antibiotic susceptibility. Mol.
+   London: IntechOpen.                                                                              Microbiol. 106, 919–937. doi: 10.1111/mmi.13857
+Vasil, M. L., and Ochsner, U. A. (1999). The response of Pseudomonas aeruginosa                  Zhao, Q., and Poole, K. (2000). A second tonB gene in Pseudomonas aeruginosa
+   to iron: genetics, biochemistry and virulence. Mol. Microbiol. 34, 399–413.                      is linked to the exbB and exbD genes. FEMS Microbiol. Lett. 184, 127–132.
+   doi: 10.1046/j.1365-2958.1999.01586.x                                                            doi: 10.1111/j.1574-6968.2000.tb09002.x
+Velkov, T., Roberts, K. D., Nation, R. L., Thompson, P. E., and Li, J. (2013).
+   Pharmacology of polymyxins: new insights into an ’old class of antibiotics.                   Conflict of Interest: The authors declare that the research was conducted in the
+   Future Microbiol. 8, 711–724. doi: 10.2217/fmb.13.39                                          absence of any commercial or financial relationships that could be construed as a
+Verstraeten, N., Knapen, W. J., Kint, C. I., Liebens, V., Van den Bergh, B.,                     potential conflict of interest.
+   Dewachter, L., et al. (2015). Obg and Membrane Depolarization Are Part of a
+   Microbial Bet-Hedging Strategy that Leads to Antibiotic Tolerance. Mol. Cell                  Copyright © 2021 Cianciulli Sesso, Lilić, Amman, Wolfinger, Sonnleitner and Bläsi.
+   59, 9–21. doi: 10.1016/j.molcel.2015.05.011                                                   This is an open-access article distributed under the terms of the Creative Commons
+Vioque, A., and Cruz, J. (2003). Trans -translation and protein synthesis inhibitors.            Attribution License (CC BY). The use, distribution or reproduction in other forums
+   FEMS Microbiol. Lett. 218, 9–14. doi: 10.1111/j.1574-6968.2003.tb11491.x                      is permitted, provided the original author(s) and the copyright owner(s) are credited
+Wandersman, C., and Delepelaire, P. (2004). Bacterial Iron Sources: from                         and that the original publication in this journal is cited, in accordance with accepted
+   Siderophores to Hemophores. Annu. Rev. Microbiol. 58, 611–647. doi: 10.1146/                  academic practice. No use, distribution or reproduction is permitted which does not
+   annurev.micro.58.030603.123811                                                                comply with these terms.
+
+
+
+
+Frontiers in Microbiology | www.frontiersin.org                                             19                                                  April 2021 | Volume 12 | Article 626715
+
