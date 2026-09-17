@@ -1,0 +1,12 @@
+pert_id,pert_iname,pharmaceutical_class,pert_target,pert_mechanism,pert_submechanism,pert_type,vehicle
+ami,Amikacin,Aminoglycoside,30S ribosomal subunit,Protein synthesis,Protein synthesis,poscon,water
+cip,Ciprofloxacin,Fluoroquinolone,GyrA/ParC,DNA synthesis,DNA synthesis,poscon,water
+col,Colistin,Polymyxin,LPS,Membrane Integrity,LPS binder,poscon,water
+fosfo,Fosfomycin,Phosphonic acid,MurA,Cell wall synthesis,Cell wall biogenesis,poscon,water
+dmso,DMSO,,,Negative control,Negative control,negcon,dmso
+water,Water,,,Negative control,Negative control,negcon,water
+pa0918,PA-0918,unknown,,,,test,dmso
+fosmido,Fosmidomycin,Phosphonic acid,Dxr,Membrane Integrity,Isoprenoid synthesis,poscon,water
+ara,Arabinose,,,Genetic depletion,CRISPRi induction,poscon,water
+tet,Tetracycline,Tetracycline,30S ribosomal subunit,Protein synthesis,Protein synthesis,poscon,water
+pol7080,POL7080,Peptidomimetic,LptD,Membrane Integrity,LPS transport,poscon,water
