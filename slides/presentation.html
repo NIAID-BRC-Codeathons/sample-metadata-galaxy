@@ -165,6 +165,21 @@
     transition: width 0.3s ease;
     z-index: 100;
   }
+  @media print {
+    @page { size: landscape; margin: 0; }
+    html, body { height: auto; overflow: visible; }
+    .slides-container { height: auto; overflow: visible; }
+    .slide {
+      display: flex !important;
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      page-break-after: always;
+      break-after: page;
+      overflow: hidden;
+    }
+    .nav, .progress-bar { display: none !important; }
+  }
 </style>
 </head>
 <body>
