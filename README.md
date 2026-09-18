@@ -26,8 +26,8 @@ The skills are designed to fire automatically when a user starts talking about a
 
 Two papers, each with two bundles — a **naive** run (no skills) and a **with-skills** run — so we can compare agent behavior with and without the skills on the same data:
 
-- **`broad/`** — a known quantity: a PNAS paper from a team member (Romano et al., 2024, [PMC11551328](https://pmc.ncbi.nlm.nih.gov/articles/PMC11551328/), GEO [GSE251671](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE251671)). The naive run found the agent was mostly right but subtly and confidently wrong in two places: it misread a water negative control as dosed, and it propagated SRA's single-end mislabeling without flagging that the allegedly single samples had two files with the same number of spots. The with-skills run is not yet done.
-- **A second paper** (in progress) — similar organism and treatment but a study where we do not know the authors, closer to what a naive user experiences. Both bundles pending.
+- **`livny/`** — a known quantity: a PNAS paper from a team member (Romano et al., 2024, [PMC11551328](https://pmc.ncbi.nlm.nih.gov/articles/PMC11551328/), GEO [GSE251671](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE251671)). The naive run found the agent was mostly right but subtly and confidently wrong in two places: it misread a water negative control as dosed, and it propagated SRA's single-end mislabeling without flagging that the allegedly single samples had two files with the same number of spots. The with-skills run is in progress.
+- **`blasi/`** — a naive-user scenario: a *Front. Microbiol.* paper (Cianciulli Sesso et al., 2021) we don't know the authors of, same organism and treatment context but a different lab and assay. Closer to what a naive user experiences. The naive run is done; the with-skills run is pending.
 
 ### 3. Learning feature (in progress)
 

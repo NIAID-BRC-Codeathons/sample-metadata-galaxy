@@ -1,4 +1,4 @@
-# Case Study: Broad — Reproducing a Known Quantity
+# Case Study: Livny — Reproducing a Known Quantity
 
 Assess the agent's ability to reconstruct sample metadata from public resources for a published study where the ground truth is known. The paper came from a team member, so we could check the agent's output against the real answer.
 
@@ -17,6 +17,7 @@ Each paper gets two bundles — a **naive** run (no skills) and a **with-skills*
 
 - `project1v2/` — the canonical run. The agent reconstructed metadata from GEO/SRA/the paper, built intake templates and a validator, then attempted to run the analysis in Galaxy (custom reference, patched workflow, 9-sample smoke test). The smoke run failed on a DESeq2 issue and a GTF/STAR gene-loss bug.
 - `project1-metadata-only/` — an earlier, shorter session that stopped at metadata construction. This is the session where we identified the confident errors documented below.
+- `livny/` — a reanalysis of a single arm of the same experiment (colistin 3 µM vs water, n=3) using DESeq2 rather than the paper's z-score framework. A deliberate methodological deviation to test the agent on a narrower question with different tooling.
 
 ## What we found (naive run)
 
