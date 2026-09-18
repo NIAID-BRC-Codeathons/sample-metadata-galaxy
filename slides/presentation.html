@@ -128,6 +128,12 @@
     gap: 20px;
   }
   .three-col .card { margin: 0; }
+  .four-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .four-col .card { margin: 0; }
   .nav {
     position: fixed;
     bottom: 20px;
@@ -356,6 +362,7 @@
   <div class="slide-num">9</div>
   <h2>With Skills: What Changes</h2>
   <p>Re-running the Broad case study with the skills enabled. <em>(Results pending &mdash; this run has not yet been completed.)</em></p>
+  <p>The run takes longer &mdash; the agent asks more questions, and they're good ones. It double-checks experimental design and possible gaps in information. For example, it realized there are actually <strong>two different negative controls</strong> (water and DMSO) and asked which to use &mdash; a question it didn't ask in the naive run.</p>
   <p>Instead of silently filling gaps, the construction skill records <strong>where every value came from</strong> and <strong>how confident it is</strong>:</p>
   <div class="two-col">
     <div class="card green">
@@ -400,8 +407,8 @@ layout:
 <!-- Slide 10: Self-Refining -->
 <div class="slide">
   <div class="slide-num">10</div>
-  <h2>A Self-Refining System</h2>
-  <p>The skills are a prototype &mdash; essentially suggestions the agent follows. The system should also <strong>learn from its own failures</strong> and feed those lessons back.</p>
+  <h2>A Self-Refining System <span style="font-size:1rem; color:var(--muted); font-weight:normal;">(seed &mdash; not yet built)</span></h2>
+  <p>The skills are a prototype &mdash; essentially suggestions the agent follows. The system should also <strong>learn from its own failures</strong> and feed those lessons back. This is a seed started here, not a finished feature.</p>
   <div class="two-col">
     <div>
       <div class="flow" style="flex-direction:column; align-items:stretch; gap:10px;">
@@ -430,25 +437,54 @@ layout:
   </div>
 </div>
 
-<!-- Slide 11: Future Directions -->
+<!-- Slide 11: Improving Orbit Itself -->
 <div class="slide">
   <div class="slide-num">11</div>
-  <h2>Future Directions</h2>
+  <h2>Improving Orbit Itself</h2>
+  <p>Building these skills surfaced issues in the harness along the way. We fixed them and shipped them in <a href="https://github.com/galaxyproject/loom/releases/tag/v0.7.0" style="color:var(--green);">Loom v0.7.0</a>.</p>
   <div class="three-col">
+    <div class="card green">
+      <span class="tag green">Anthropic-compatible APIs</span>
+      <h3>Support for ARGO & other gateways</h3>
+      <p style="font-size:0.95rem;">Loom now talks to Anthropic-compatible gateways (institutional proxies, LiteLLM) by picking an API shape next to the base URL. A gateway that serves no model list is still usable, and connection failures say what actually went wrong instead of "fetch failed."</p>
+    </div>
+    <div class="card green">
+      <span class="tag green">Evidence gate</span>
+      <h3>Can't fake a finished step</h3>
+      <p style="font-size:0.95rem;">The agent can no longer quietly mark a plan step done while Galaxy still says the run is in flight. A new evidence gate watches for that contradiction and records it &mdash; the override is yours to give with a reason, not something the model can grant itself.</p>
+    </div>
+    <div class="card green">
+      <span class="tag green">PR #470</span>
+      <h3>Vendored skills from agentic-plugins</h3>
+      <p style="font-size:0.95rem;"><a href="https://github.com/galaxyproject/loom/pull/470" style="color:var(--green);">PR open</a> to vendor skill content from <code>galaxyproject/agentic-plugins</code> at a pinned commit &mdash; replacing three drifted approaches with one build-time step. This opens a clear route to <strong>adding our skills to Orbit for all users automatically by default</strong>, not as an opt-in plugin.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 12: Future Directions -->
+<div class="slide">
+  <div class="slide-num">12</div>
+  <h2>Future Directions</h2>
+  <div class="four-col">
     <div class="card green">
       <span class="tag green">Eval suite</span>
       <h3>Measure what works</h3>
-      <p style="font-size:1rem;">A formal set of studies with known ground truth, run with and without the skills, scored on metadata accuracy, gap detection, and whether inferred values are honestly labeled. This lets us quantify improvement and identify which checks make the greatest difference.</p>
+      <p style="font-size:0.95rem;">A formal set of studies with known ground truth, run with and without the skills, scored on metadata accuracy, gap detection, and whether inferred values are honestly labeled. This lets us quantify improvement and identify which checks make the greatest difference.</p>
     </div>
-    <div class="card amber">
-      <span class="tag amber">Skills &rarr; harness rules</span>
+    <div class="card green">
+      <span class="tag green">Skills &rarr; harness rules</span>
       <h3>Enforce, don't just suggest</h3>
-      <p style="font-size:1rem;">The skills that prove most impactful &mdash; based on the eval suite &mdash; migrate from suggestions into rules in the Orbit harness itself, so they are enforced rather than optional.</p>
+      <p style="font-size:0.95rem;">The skills that prove most impactful &mdash; based on the eval suite &mdash; migrate from suggestions into rules in the Orbit harness itself, so they are enforced rather than optional.</p>
     </div>
-    <div class="card">
-      <span class="tag">Upstream feedback</span>
+    <div class="card green">
+      <span class="tag green">Upstream feedback</span>
       <h3>Fix it at the source</h3>
-      <p style="font-size:1rem;">Self-feedback could identify systemic issues upstream (e.g. SRA mislabeling) and pass those along at data submission time. Lessons learned could be repurposed to prepare data for submission so future submissions start more complete.</p>
+      <p style="font-size:0.95rem;">Self-feedback could identify systemic issues upstream (e.g. SRA mislabeling) and pass those along at data submission time to NCBI and similar repositories.</p>
+    </div>
+    <div class="card green">
+      <span class="tag green">Submission prep</span>
+      <h3>Prepare data before submission</h3>
+      <p style="font-size:0.95rem;">The same framework could be used by submitters to flag potential issues affecting AI/machine-readability <em>before</em> submission &mdash; so future submissions start more complete and secondary analysis is easier for everyone.</p>
     </div>
   </div>
 </div>
@@ -457,7 +493,7 @@ layout:
 
 <div class="nav">
   <button id="prev" onclick="prevSlide()">&#8592; Prev</button>
-  <span class="counter" id="counter">1 / 11</span>
+  <span class="counter" id="counter">1 / 12</span>
   <button id="next" onclick="nextSlide()">Next &#8594;</button>
 </div>
 
