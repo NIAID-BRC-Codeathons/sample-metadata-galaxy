@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Metadata That Survives Analysis in Galaxy</title>
+<style>
+  :root {
+    --bg: #1a1a2e;
+    --surface: #16213e;
+    --accent: #0f3460;
+    --accent2: #e94560;
+    --text: #eaeaea;
+    --muted: #8892b0;
+    --green: #64ffda;
+    --amber: #ffd166;
+    --red: #ef476f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .slides-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 60px;
+    overflow-y: auto;
+  }
+  .slide.active { display: flex; }
+  .slide-num {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  h1 { font-size: 2.6rem; margin-bottom: 12px; line-height: 1.15; }
+  h2 { font-size: 2rem; margin-bottom: 20px; color: var(--green); }
+  h3 { font-size: 1.15rem; margin-bottom: 8px; margin-top: 16px; color: var(--amber); }
+  p { font-size: 1.15rem; margin-bottom: 12px; max-width: none; }
+  ul { font-size: 1.05rem; margin-left: 24px; margin-bottom: 12px; max-width: none; }
+  li { margin-bottom: 6px; }
+  .subtitle { font-size: 1.25rem; color: var(--muted); margin-bottom: 8px; }
+  .meta { font-size: 0.95rem; color: var(--muted); margin-top: 20px; }
+  .card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 10px 0;
+    border-left: 4px solid var(--accent2);
+  }
+  .card.green { border-left-color: var(--green); }
+  .card.amber { border-left-color: var(--amber); }
+  .card.red { border-left-color: var(--red); }
+  .card h3 { margin-top: 0; }
+  .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--green);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .tag.red { background: rgba(239,71,111,0.15); color: var(--red); }
+  .tag.amber { background: rgba(255,209,102,0.15); color: var(--amber); }
+  .tag.green { background: rgba(100,255,218,0.15); color: var(--green); }
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .flow-box {
+    background: var(--accent);
+    padding: 12px 18px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 140px;
+  }
+  .flow-box h4 { font-size: 0.95rem; margin: 0; color: var(--green); }
+  .flow-box p { font-size: 0.8rem; margin: 2px 0 0; color: var(--muted); }
+  .arrow { color: var(--accent2); font-size: 1.3rem; }
+  .placeholder {
+    border: 2px dashed var(--muted);
+    border-radius: 10px;
+    padding: 28px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin: 16px 0;
+  }
+  code {
+    background: rgba(100,255,218,0.1);
+    color: var(--green);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .two-col .card { margin: 0; }
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  .three-col .card { margin: 0; }
+  .nav {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    z-index: 100;
+  }
+  .nav button {
+    background: var(--accent);
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .nav button:hover { background: var(--surface); }
+  .nav button:disabled { opacity: 0.3; cursor: default; }
+  .nav .counter {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-width: 50px;
+    text-align: center;
+  }
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--accent2);
+    transition: width 0.3s ease;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<div class="slides-container" id="slides">
+
+<!-- Slide 1: Title -->
+<div class="slide active">
+  <div class="slide-num">1</div>
+  <span class="tag green">NIAID-BRCs AI Codeathon 2.0</span>
+  <h1>Sample Metadata That Survives Analysis in Galaxy</h1>
+  <p class="subtitle">Making metadata construction, validation, and Galaxy input mapping automatic &mdash; so the most naive user follows a good path that reduces risk and makes uncertainty transparent.</p>
+  <div class="meta">
+    Danielle Callan &middot; Dannon Baker<br>
+    September 16&ndash;18, 2026 &middot; Argonne National Laboratory
+  </div>
+</div>
+
+<!-- Slide 2: Problem -->
+<div class="slide">
+  <div class="slide-num">2</div>
+  <h2>The Problem</h2>
+  <p>Attempting an analysis with incomplete, poorly structured, dispersed, or absent sample metadata can cause <strong>confident but subtly wrong</strong> results with unpredictable consequences and magnitude of impact.</p>
+  <div class="card red">
+    <span class="tag red">What goes wrong</span>
+    <ul>
+      <li>Sample metadata is often missing, incomplete, or not structured in a way that maps to Galaxy data types</li>
+      <li>The agent can help &mdash; but it makes confident errors: misreading papers, propagating upstream label errors, presenting inferred values as fact</li>
+      <li>Users don't know to ask the right questions, and the agent doesn't volunteer what it's uncertain about</li>
+      <li>Errors propagate silently into the analysis, where they become hard to distinguish from real biological signal</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Slide 3: Orbit -->
+<div class="slide">
+  <div class="slide-num">3</div>
+  <h2>Where We Work: Orbit</h2>
+  <p><strong>Orbit</strong> is an AI-powered desktop environment for biological analysis, built on <strong>Loom</strong> (the agent brain) and <strong>Galaxy</strong> (the execution engine).</p>
+  <div class="card green">
+    <ul>
+      <li><strong>Loom</strong> is the brain &mdash; it plans, reasons, and drives the notebook</li>
+      <li><strong>Galaxy</strong> is the primary execution path &mdash; workflows, tools, reproducible runs</li>
+      <li><strong>Skills</strong> are modular instructions the agent fetches on demand, driven by frontmatter that tells it <em>when</em> to use them</li>
+      <li>The <strong>notebook</strong> is the durable record &mdash; plans, decisions, results, and evidence persist there</li>
+    </ul>
+  </div>
+  <p>Skills fire automatically based on what the user asks &mdash; the user doesn't need to know they exist.</p>
+</div>
+
+<!-- Slide 4: Broad Case Study -->
+<div class="slide">
+  <div class="slide-num">4</div>
+  <h2>Case Study: A Known Quantity</h2>
+  <p>We asked the agent to reconstruct sample metadata from public resources for a <strong>published PNAS paper from a team member</strong> &mdash; so we could check its output against ground truth.</p>
+  <div class="card">
+    <span class="tag">The paper</span>
+    <p style="font-size:1.05rem; margin-bottom:6px;">Romano et al., <em>PNAS</em> 2024 &mdash; "Perturbation-specific transcriptional mapping for unbiased target elucidation of antibiotics"</p>
+    <p style="font-size:0.95rem; color:var(--muted);">GEO GSE251671 &middot; 1,059 samples &middot; SRA PRJNA1055047 &middot; 1,310 runs &middot; <em>P. aeruginosa</em> PA14</p>
+  </div>
+  <p>The agent was <strong>mostly able</strong> to reconstruct the metadata. It located the study, pulled sample attributes, and assembled a structured record without much prompting.</p>
+  <p>But the sample sheet it produced <strong>required archeology from someone with intimate knowledge</strong> of the study to verify &mdash; and it was subtly and confidently wrong in two places.</p>
+</div>
+
+<!-- Slide 5: Two Errors -->
+<div class="slide">
+  <div class="slide-num">5</div>
+  <h2>Two Confident Errors</h2>
+  <div class="two-col">
+    <div class="card red">
+      <span class="tag red">Error 1: Water dosed</span>
+      <h3>Negative control dosage misread</h3>
+      <p style="font-size:1rem;">The agent recorded a dosage of ~0.05 for the negative control, which was just <strong>water</strong>. Water is not dosed. This was a misread of the paper, presented as fact without flagging it as uncertain.</p>
+    </div>
+    <div class="card red">
+      <span class="tag red">Error 2: Single vs. paired</span>
+      <h3>Upstream mislabeling propagated</h3>
+      <p style="font-size:1rem;">The agent labeled many samples as "single" when they were actually paired. This was an upstream SRA error &mdash; but the allegedly single samples each had <strong>two files with the same number of spots</strong>, strong evidence of paired-end data. The agent propagated the label without questioning it against the data.</p>
+    </div>
+  </div>
+  <p style="margin-top:16px; font-size:1.05rem;">Both errors are the kind a careful human analyst would catch. The agent didn't flag them because it had no instruction to check inferred values against the data or surface uncertainty.</p>
+</div>
+
+<!-- Slide 6: Learning from This -->
+<div class="slide">
+  <div class="slide-num">6</div>
+  <h2>Learning From the Process</h2>
+  <p>We asked the agent to do this assessment. <strong>The average user won't</strong> &mdash; they'll just start talking about analyzing data and expect the agent to handle the rest.</p>
+  <p>Two goals emerged:</p>
+  <div class="two-col">
+    <div class="card green">
+      <span class="tag green">Goal 1</span>
+      <h3>Make the process honest</h3>
+      <p style="font-size:1rem;">Flag inferred values, conflicts, and unresolved questions to the user rather than presenting them as fact.</p>
+    </div>
+    <div class="card green">
+      <span class="tag green">Goal 2</span>
+      <h3>Make it automatic</h3>
+      <p style="font-size:1rem;">Metadata construction and validation should kick in when a user starts talking about analyzing data &mdash; without knowing these steps exist.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 7: Three Skills -->
+<div class="slide">
+  <div class="slide-num">7</div>
+  <h2>Three Skills, In Order</h2>
+  <div class="flow">
+    <div class="flow-box">
+      <h4>metadata-construction</h4>
+      <p>Build the metadata</p>
+    </div>
+    <span class="arrow">&rarr;</span>
+    <div class="flow-box">
+      <h4>analysis-readiness</h4>
+      <p>Validate it</p>
+    </div>
+    <span class="arrow">&rarr;</span>
+    <div class="flow-box">
+      <h4>galaxy-input-modeling</h4>
+      <p>Map to Galaxy</p>
+    </div>
+    <span class="arrow">&rarr;</span>
+    <div class="flow-box">
+      <h4>Galaxy execution</h4>
+      <p>Run the analysis</p>
+    </div>
+  </div>
+  <p>Each skill is self-contained, discovered by Orbit via frontmatter, and fires automatically based on what the user asks. The user never needs to know they exist.</p>
+  <p>The chain has a <strong>hard gate</strong>: analysis does not proceed until readiness declares the study ready or ready with warnings.</p>
+</div>
+
+<!-- Slide 8: Skills Detail -->
+<div class="slide">
+  <div class="slide-num">8</div>
+  <h2>What Each Skill Does</h2>
+  <div class="three-col">
+    <div class="card green">
+      <span class="tag green">1. metadata-construction</span>
+      <h3>Build structured metadata from all available sources</h3>
+      <ul>
+        <li><strong>Public data:</strong> track down metadata from NCBI, EBI, GEO, linked publications <em>before</em> asking the user</li>
+        <li><strong>User's own data:</strong> interview them for the experimental design</li>
+        <li>Every value gets provenance: <code>reported</code>, <code>observed</code>, <code>inferred</code>, <code>conflicting</code>, or <code>unknown</code></li>
+        <li>Produces a provenance YAML + a tabular sample sheet</li>
+      </ul>
+    </div>
+    <div class="card amber">
+      <span class="tag amber">2. analysis-readiness</span>
+      <h3>Validate against the data and the intended analysis</h3>
+      <ul>
+        <li>Open-ended scope &mdash; anything that could undermine validity, not a fixed checklist</li>
+        <li>Tests claims against the actual data (read counts, file contents, URL resolution)</li>
+        <li>Classifies issues as blocking, warning, or informational</li>
+        <li>Declares <code>ready</code>, <code>ready_with_warnings</code>, or <code>blocked</code></li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">3. galaxy-input-modeling</span>
+      <h3>Convert validated metadata to the right Galaxy structure</h3>
+      <ul>
+        <li>Inspects the live tool/workflow input contract &mdash; never guesses from memory</li>
+        <li>Chooses: dataset, list, paired, list:paired, nested, or sample sheet</li>
+        <li>Verifies collection shape and contents, not just job completion</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 9: Results (Placeholder) -->
+<div class="slide">
+  <div class="slide-num">9</div>
+  <h2>With Skills: What Changes</h2>
+  <p>Re-running the Broad case study with the skills enabled. <em>(Results pending &mdash; this run has not yet been completed.)</em></p>
+  <p>Instead of silently filling gaps, the construction skill records <strong>where every value came from</strong> and <strong>how confident it is</strong>:</p>
+  <div class="two-col">
+    <div class="card green">
+      <span class="tag green">Water control &mdash; uncertainty flagged</span>
+      <h3>Negative control dosage</h3>
+      <pre style="font-size:0.82rem; color:var(--green); overflow-x:auto; margin:0; line-height:1.4;">sample_id: GSM7985465
+condition: water
+pert_dose:
+  value: 0.05
+  provenance: inferred
+  source: >
+    Paper: "compounds in 0.5% (v/v)
+    water (or DMSO) in Lysogeny
+    Broth"
+  confidence: low
+  notes: >
+    0.5% is the vehicle volume, not
+    a dose. Water is the negative
+    control. Flagged to user: this
+    value does not make sense for
+    a water control.</pre>
+    </div>
+    <div class="card green">
+      <span class="tag green">Library layout &mdash; conflict flagged</span>
+      <h3>Single vs. paired</h3>
+      <pre style="font-size:0.82rem; color:var(--green); overflow-x:auto; margin:0; line-height:1.4;">sample_id: GSM7985294
+layout:
+  reported: paired
+    source: paper (methods: "paired-
+      end sequencing")
+  observed: single
+    source: SRA run data
+  provenance: conflicting
+  notes: >
+    Paper says all paired-end but
+    SRA run data says single for
+    this sample. Flagged to user.</pre>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Self-Refining -->
+<div class="slide">
+  <div class="slide-num">10</div>
+  <h2>A Self-Refining System</h2>
+  <p>The skills are a prototype &mdash; essentially suggestions the agent follows. The system should also <strong>learn from its own failures</strong> and feed those lessons back.</p>
+  <div class="two-col">
+    <div>
+      <div class="flow" style="flex-direction:column; align-items:stretch; gap:10px;">
+        <div class="flow-box" style="min-width:auto;">
+          <h4>Agent encounters a failure mode</h4>
+        </div>
+        <div style="text-align:center; color:var(--accent2); font-size:1.3rem;">&darr;</div>
+        <div class="flow-box" style="min-width:auto;">
+          <h4>Pushes finding to shared DB</h4>
+        </div>
+        <div style="text-align:center; color:var(--accent2); font-size:1.3rem;">&darr;</div>
+        <div class="flow-box" style="min-width:auto;">
+          <h4>Harvested to improve skills</h4>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Where the lessons go</h3>
+      <ul>
+        <li><strong>Improve future skills</strong> &mdash; failure patterns become new checks</li>
+        <li><strong>Improve the harness itself</strong> &mdash; the most impactful suggestions become rules in Orbit, not just skills</li>
+        <li><strong>Inform upstream submission</strong> &mdash; systemic issues (like SRA mislabeling) can be flagged to NCBI at data submission time</li>
+        <li>Uses a similar mechanism to user feedback &mdash; the agent already has a feedback channel</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 11: Future Directions -->
+<div class="slide">
+  <div class="slide-num">11</div>
+  <h2>Future Directions</h2>
+  <div class="three-col">
+    <div class="card green">
+      <span class="tag green">Eval suite</span>
+      <h3>Measure what works</h3>
+      <p style="font-size:1rem;">A formal set of studies with known ground truth, run with and without the skills, scored on metadata accuracy, gap detection, and whether inferred values are honestly labeled. This lets us quantify improvement and identify which checks make the greatest difference.</p>
+    </div>
+    <div class="card amber">
+      <span class="tag amber">Skills &rarr; harness rules</span>
+      <h3>Enforce, don't just suggest</h3>
+      <p style="font-size:1rem;">The skills that prove most impactful &mdash; based on the eval suite &mdash; migrate from suggestions into rules in the Orbit harness itself, so they are enforced rather than optional.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Upstream feedback</span>
+      <h3>Fix it at the source</h3>
+      <p style="font-size:1rem;">Self-feedback could identify systemic issues upstream (e.g. SRA mislabeling) and pass those along at data submission time. Lessons learned could be repurposed to prepare data for submission so future submissions start more complete.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="nav">
+  <button id="prev" onclick="prevSlide()">&#8592; Prev</button>
+  <span class="counter" id="counter">1 / 11</span>
+  <button id="next" onclick="nextSlide()">Next &#8594;</button>
+</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + total;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+    progress.style.width = ((current + 1) / total * 100) + '%';
+    slides[current].scrollTop = 0;
+  }
+
+  function nextSlide() { if (current < total - 1) showSlide(current + 1); }
+  function prevSlide() { if (current > 0) showSlide(current - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prevSlide(); }
+    if (e.key === 'Home') showSlide(0);
+    if (e.key === 'End') showSlide(total - 1);
+  });
+
+  showSlide(0);
+</script>
+
+</body>
+</html>
